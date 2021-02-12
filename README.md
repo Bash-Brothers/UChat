@@ -21,7 +21,7 @@ Once it's done running, simply run the following command to run our app!
 npm start
 ```
 
-Created by:
+Created by:  
 Yan Hauw  
 Sudhanshu Agrawal  
 Milo Kearney  

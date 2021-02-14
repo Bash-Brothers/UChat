@@ -1,0 +1,95 @@
+.container {
+	display: flex;
+	flex-direction: row;
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	background-color: #C4C4C4;
+	height: 1440px;
+	width: 330px;
+	padding-top: 50px;
+}
+
+.menu-button {
+	display: flex;
+	height: 50px;
+	width: 330px;
+	text-align: left;
+	background-color: #C4C4C4;
+	text-indent: 30px;
+	outline: 1px solid grey;
+	line-height: 50px;
+}
+
+.menu-button:hover {
+	cursor:pointer;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	padding-top: 50px;
+	background-color: #EEE;
+	text-indent: 50px;
+	font-weight: bold;
+	text-align: left;
+
+}
+
+.navigation {
+	position: fixed;
+	display: flex;
+	flex-row: row wrap;
+	justify-content: flex-end;
+	background: #ACA8A8;
+	width: 100%;
+	height: 50px;
+}
+
+.main{
+    width: 100%;
+}
+
+.category-header {
+	font-weight: bold;
+	text-align: left;
+	text-indent: 130px;
+	line-height: 80px;
+	height: 80px;
+	font-size: 30px;
+}
+
+.field-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	height: 55px;
+}
+
+.setting-name {
+	font-weight: bold;
+	text-align: left;
+	text-indent: 30px;
+	line-height: 55px;
+	height: 55px;
+	width: 200px;
+}
+
+.setting-current {
+	font-weight: normal;
+	text-align: left;
+	line-height: 55px;
+	height: 55px;
+	width: 500px;
+}
+
+.setting-edit {
+	font-weight: normal;
+	text-align: left;
+	line-height: 55px;
+	height: 55px;
+	width: 40px;
+}

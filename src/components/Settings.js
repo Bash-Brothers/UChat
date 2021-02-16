@@ -72,6 +72,7 @@ function Appearance() {
 		</div>
 	);
 }
+
 function Navigation() {
 	return (
 		<div className = "navigation">
@@ -80,7 +81,15 @@ function Navigation() {
 	)
 }
 
-
+//props gets the page from Settings' state and returns the relevant div - conditional rendering
+function CurPage(props){
+	const page = props.page;
+	switch(page){
+		case 1:
+			return <Appearance />;
+	}
+	return <General />;
+}
 
 export default class Settings extends Component {
 	constructor(props) {
@@ -94,58 +103,30 @@ export default class Settings extends Component {
 		this.setState({
 			page: i,
 		});
-		console.log(this.state.page)
 	}
-	render() {
-		switch (this.state.page) {
-			case 0:
-				return (
-					<div className = "main">
-						<Navigation />
-						<div className = "container">
-							<div className = "menu">
-								<div 
-									className = "menu-button"
-									onClick={() => this.handleClick(0)}
-								>
-									General
-								</div>
-								<div 
-									className = "menu-button"
-									onClick={() => this.handleClick(1)}
-								>	
-									Appearance
-								</div>
-							</div>
-							<General />
-						</div>
-					</div>
-				);
-			case 1:
-				return (
-					<div className = "main">
-						<Navigation />
-						<div className = "container">
-							<div className = "menu">
-								<div 
-									className = "menu-button"
-									onClick={() => this.handleClick(0)}
-								>
-									General
-								</div>
-								<div 
-									className = "menu-button"
-									onClick={() => this.handleClick(1)}
-								>	
-									Appearance
-								</div>
-							</div>
-							<Appearance />
-						</div>
-					</div>
-				);
 
-		}
+	render() {
+		return (
+			<div className = "main">
+				<div className = "container">
+					<div className = "menu">
+						<div 
+							className = "menu-button"
+							onClick={() => this.handleClick(0)}
+						>
+							General
+						</div>
+						<div 
+							className = "menu-button"
+							onClick={() => this.handleClick(1)}
+						>	
+							Appearance
+						</div>
+					</div>
+					<CurPage page={this.state.page}/>
+				</div>
+			</div>
+		);
 		
 	}
 }

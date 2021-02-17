@@ -1,0 +1,25 @@
+.login{
+    height: 95vh;
+    display: flex;
+    margin-top: 5vh;
+    justify-content: center;
+    flex-direction: column;
+    align-items:center;
+    background-color: lightgray;
+}
+
+.loginform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: indianred;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#loginlogo{
+    height: 25vh;
+    border: solid black 3px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}

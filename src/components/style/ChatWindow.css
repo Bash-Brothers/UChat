@@ -1,0 +1,83 @@
+.chatWindow{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: row;
+    height: 90vh;
+}
+
+.contactsList{
+    background-color: #C4C4C4;
+    height: 95vh;
+    width: 25%;
+    overflow-y: scroll;
+}
+
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    background-color: rgb(223, 144, 144);
+    border: 2px black solid;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 50px;
+}
+
+.contact:hover{
+    cursor: pointer;
+    background-color: white;
+}
+
+.curChat{
+    background-color: white;
+    overflow-y: scroll;
+    height: 95vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    border-left: solid black 2px;
+    border-right: solid black 2px;
+}
+
+.inputField{
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    height: 5vh;
+    margin-top: 5px;
+}
+
+.messages{
+    display: flex;
+    flex-direction: column-reverse;
+    font-size: larger;
+}
+
+.received{
+    padding: 4px;
+    margin-top: 10px;
+    margin-left: 1%;
+    background-color: lightgray;
+    max-width: 79%;
+    border-radius: 5px;
+    border: solid grey 2px;
+    /*display: inline-block;*/
+}
+
+.sent{
+    margin-left: 20%;
+    margin-top: 10px;
+    background-color: lightgray;
+    max-width: 79%;
+    padding: 4px;
+    border-radius: 5px;
+    border: solid grey 2px;
+    /*display: inline-block;*/
+}

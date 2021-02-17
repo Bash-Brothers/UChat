@@ -16,22 +16,31 @@ function General() {
 						Name
 					</div>
 					<div className = "setting-current">
-						Kevin Huang
+						<form>
+                            <input
+                            type="text" 
+                            class="settings-input"
+                            value="current setting"
+                            />
+                        </form>
 					</div>
-					<div className = "setting-edit">
-						Edit
-					</div>
+					<div className = "setting-padding" />
+
 				</div>
 				<div className = "field-text">
 					<div className = "setting-name">
 						Email Address
 					</div>
 					<div className = "setting-current">
-						kevinhuang2k@gmail.com
+						<form>
+                            <input
+                            type="text" 
+                            class="settings-input"
+                            value="current setting"
+                            />
+                        </form>
 					</div>
-					<div className = "setting-edit">
-						Edit
-					</div>
+                <div className = "setting-padding" />
 				</div>
 			</div>
 		</div>
@@ -51,34 +60,35 @@ function Appearance() {
 						Site Theme
 					</div>
 					<div className = "setting-current">
-						Current Setting
+						<form>
+                            <input
+                            type="text" 
+                            class="settings-input"
+                            value="current setting"
+                            />
+                        </form>
 					</div>
-					<div className = "setting-edit">
-						Edit
-					</div>
+					<div className = "setting-padding" />
+
 				</div>
 				<div className = "field-text">
 					<div className = "setting-name">
 						Setting Name
 					</div>
 					<div className = "setting-current">
-						Current Setting
+						<form>
+                            <input
+                            type="text" 
+                            class="settings-input"
+                            value="current setting"
+                            />
+                        </form>
 					</div>
-					<div className = "setting-edit">
-						Edit
-					</div>
+					<div className = "setting-padding" />
 				</div>
 			</div>
 		</div>
 	);
-}
-
-function Navigation() {
-	return (
-		<div className = "navigation">
-			Test
-		</div>
-	)
 }
 
 //props gets the page from Settings' state and returns the relevant div - conditional rendering
@@ -105,19 +115,20 @@ export default class Settings extends Component {
 		});
 	}
 
+
 	render() {
 		return (
 			<div className = "main">
 				<div className = "container">
 					<div className = "menu">
 						<div 
-							className = "menu-button"
+							className = {(this.state.page === 0) ? "menu-button-active" : "menu-button"}
 							onClick={() => this.handleClick(0)}
 						>
 							General
 						</div>
 						<div 
-							className = "menu-button"
+							className = {(this.state.page === 1) ? "menu-button-active" : "menu-button"}
 							onClick={() => this.handleClick(1)}
 						>	
 							Appearance

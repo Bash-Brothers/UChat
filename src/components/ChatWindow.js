@@ -58,11 +58,16 @@ export default class ChatWindow extends Component {
                 <div className="curChat">
                     <div className="inputField">
                         <form onSubmit={this.handleSubmit}>
-                            <label>
-                                Message:
-                                <input type="text"/>
-                            </label>
-                            <input type="submit" value="Submit" />
+                            <input 
+                                type="text"
+                                class="message-input"
+                                placeholder="Type a message..."
+                            />
+                            <input 
+                                type="submit" 
+                                value="Send"
+                                class="message-send" 
+                            />
                         </form>
                     </div>
                     <div className="messages"> 

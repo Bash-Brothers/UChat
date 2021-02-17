@@ -8,7 +8,7 @@
 	flex-direction: column;
 	background-color: #C4C4C4;
 	height: 95vh;
-	width: 25%;
+	width: 13%;
 	margin-top: 5vh;
 }
 
@@ -19,12 +19,26 @@
 	text-align: left;
 	background-color: #C4C4C4;
 	text-indent: 30px;
-	outline: 1px solid grey;
 	line-height: 50px;
+}
+
+.menu-button-active {
+	display: flex;
+	height: 50px;
+	width: 100%;
+	text-align: left;
+	background-color: #E4E4E4;
+	text-indent: 30px;
+	line-height: 50px;
+}
+
+.menu-button-active:hover {
+	cursor:pointer;
 }
 
 .menu-button:hover {
 	cursor:pointer;
+	background-color: #D4D4D4;
 }
 
 .content {
@@ -32,8 +46,7 @@
 	flex-direction: column;
 	flex: 1 1 auto;
 	margin-top: 5vh;
-	background-color: #EEE;
-	text-indent: 50px;
+	background-color: #FFF;
 	font-weight: bold;
 	text-align: left;
 
@@ -73,13 +86,26 @@
 	text-align: left;
 	line-height: 55px;
 	height: 55px;
-	width: 500px;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }
 
-.setting-edit {
+.setting-padding {
 	font-weight: normal;
 	text-align: left;
 	line-height: 55px;
 	height: 55px;
 	width: 40px;
+}
+
+.settings-input {
+   	width: 100%;
+  	padding: 12px 20px;
+  	border: none;
+}
+
+.settings-input:hover {
+	cursor: pointer;
 }

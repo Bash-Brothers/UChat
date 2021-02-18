@@ -1,4 +1,6 @@
-.login{
+
+
+.signup{
     height: 95vh;
     display: flex;
     margin-top: 5vh;
@@ -8,13 +10,14 @@
     background-color: lightgray;
 }
 
-.loginform{
+.signupform{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: indianred;
     padding: 10px;
     border-radius: 10px;
+    width: 35vh;
 }
 
 #loginlogo{

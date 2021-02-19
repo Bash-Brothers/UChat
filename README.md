@@ -1,5 +1,7 @@
 # Bash Brothers - CS 97 Project - Chat app for students and academia
 
+The app is deployed at http://amanoberoi.com/chatapp/
+
 To run this repository on your local computer, open the terminal/command line and navigate to the directory you wish to download the repository to.
 Then type this into your terminal or command line:
 ```

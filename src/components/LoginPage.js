@@ -15,6 +15,7 @@ export default function LoginPage(props) {
                     <div className="link"><a href ="#">Forgot username/password?</a></div>
                     <div className="link"><a href="#">Don't have an account? Click here to sign up.</a></div>
                 </form>
+                <div id="contact" className="link">Need help with your account or have feedback? <a href ="#">Contact us</a></div>
              </div> 
         )
 }

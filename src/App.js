@@ -4,6 +4,7 @@ import Settings from './components/Settings.js';
 import ChatWindow from './components/ChatWindow.js';
 import LoginPage from './components/LoginPage.js';
 import About from './components/About.js';
+import SignupPage from './components/SignupPage.js';
 
 
 // looks at the current page (from App's state) and renders the relevant page
@@ -13,7 +14,7 @@ function CurPage(props) {
     case 0:
       return <LoginPage />;
     case 1:
-      return <LoginPage />;
+      return <SignupPage />;
     case 2:
       return <About />;
     case 3:

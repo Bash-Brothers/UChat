@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import './style/SignupPage.css';
 import egg from '../images/paul.jpg';

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import './style/Settings.css';
-
+import icon_edit from '../images/icon_edit.svg';
 
 
 function General() {
@@ -15,15 +15,13 @@ function General() {
 					<div className = "setting-name">
 						Name
 					</div>
-					<div className = "setting-current">
-						<form>
-                            <input
-                            type="text" 
-                            class="settings-input"
-                            value="current setting"
-                            />
-                        </form>
-					</div>
+					<form>
+                        <input
+                    	    type="text" 
+                	        class="settings-input"
+            	            value="current setting"
+                        />
+                    </form>
 					<div className = "setting-padding" />
 
 				</div>
@@ -31,15 +29,13 @@ function General() {
 					<div className = "setting-name">
 						Email Address
 					</div>
-					<div className = "setting-current">
-						<form>
-                            <input
-                            type="text" 
+					<form>
+                        <input
+                 	        type="text" 
                             class="settings-input"
                             value="current setting"
-                            />
-                        </form>
-					</div>
+                        />
+                    </form>
                 <div className = "setting-padding" />
 				</div>
 			</div>
@@ -59,31 +55,26 @@ function Appearance() {
 					<div className = "setting-name">
 						Site Theme
 					</div>
-					<div className = "setting-current">
-						<form>
-                            <input
+					<form>
+                        <input
                             type="text" 
                             class="settings-input"
                             value="current setting"
-                            />
-                        </form>
-					</div>
+                        />
+                    </form>
 					<div className = "setting-padding" />
-
 				</div>
 				<div className = "field-text">
 					<div className = "setting-name">
 						Setting Name
 					</div>
-					<div className = "setting-current">
-						<form>
-                            <input
+					<form>
+                        <input
                             type="text" 
                             class="settings-input"
                             value="current setting"
-                            />
-                        </form>
-					</div>
+                        />
+                    </form>
 					<div className = "setting-padding" />
 				</div>
 			</div>

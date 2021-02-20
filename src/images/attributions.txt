@@ -1,0 +1,6 @@
+edit: https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=3&page=1&position=3&related_id=1159633&origin=search
+chat: https://www.flaticon.com/free-icon/chat_589708?term=chat&page=1&position=2&page=1&position=2&related_id=589708&origin=style
+info: https://www.flaticon.com/free-icon/information_157933?term=info&page=1&position=8&page=1&position=8&related_id=157933&origin=search
+login: https://www.flaticon.com/free-icon/enter_1828391?term=login&page=1&position=3&page=1&position=3&related_id=1828391&origin=search
+register: https://www.flaticon.com/free-icon/add_992651?term=add&page=1&position=2&page=1&position=2&related_id=992651&origin=search
+settings: https://www.flaticon.com/free-icon/settings_2099058?term=settings&page=1&position=2&page=1&position=2&related_id=2099058&origin=search

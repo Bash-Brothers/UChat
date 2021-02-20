@@ -9,7 +9,7 @@ export default function SignupPage(props) {
                 <form className="signupform" onSubmit="">
                     <p>Username*:</p>
                     <input type="text" name="" placeholder="" />
-                    <p>Email ID*:</p>
+                    <p>Email Address*:</p>
                     <input type="text" name="" placeholder="" />
                     <p>Password*:</p>
                     <input type="password" name="" placeholder="" />

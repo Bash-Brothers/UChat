@@ -7,9 +7,9 @@
 	display: flex;
 	flex-direction: column;
 	background-color: #C4C4C4;
-	height: 95vh;
+	height: 96vh;
 	width: 13%;
-	margin-top: 5vh;
+	margin-top: 4vh;
 }
 
 .menu-button {
@@ -27,7 +27,7 @@
 	height: 50px;
 	width: 100%;
 	text-align: left;
-	background-color: #E4E4E4;
+	background-color: #DADADA;
 	text-indent: 30px;
 	line-height: 50px;
 }
@@ -38,14 +38,14 @@
 
 .menu-button:hover {
 	cursor:pointer;
-	background-color: #D4D4D4;
+	background-color: #D0D0D0;
 }
 
 .content {
 	display: flex;
 	flex-direction: column;
 	flex: 1 1 auto;
-	margin-top: 5vh;
+	margin-top: 4vh;
 	background-color: #FFF;
 	font-weight: bold;
 	text-align: left;
@@ -81,29 +81,22 @@
 	width: 200px;
 }
 
-.setting-current {
-	font-weight: normal;
-	text-align: left;
-	line-height: 55px;
-	height: 55px;
-	width: 50%;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-}
-
 .setting-padding {
 	font-weight: normal;
 	text-align: left;
 	line-height: 55px;
 	height: 55px;
-	width: 40px;
+	width: 200px;
 }
 
 .settings-input {
-   	width: 100%;
+   	width: 400px;
   	padding: 12px 20px;
-  	border: none;
+  	border: solid lightgrey 1px;
+  	background-image: url('../../images/icon_edit.svg');
+  	background-size: 20px 20px;
+  	background-position: 98% 50%;
+  	background-repeat: no-repeat;
 }
 
 .settings-input:hover {

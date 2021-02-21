@@ -54,6 +54,18 @@ export default class ChatWindow extends Component {
                     <div className="contact">
                         contactName
                     </div>
+                    <div className="contact">
+                        contactName
+                    </div>
+                    <div className="contact">
+                        contactName
+                    </div>
+                    <div className="contact">
+                        contactName
+                    </div>
+                    <div className="contact">
+                        contactName
+                    </div>
                 </div>
                 <div className="curChat">
                     <div className="inputField">

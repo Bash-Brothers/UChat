@@ -108,3 +108,35 @@
     width: 2vh;
     vertical-align: middle;
 }
+
+.contactsList::-webkit-scrollbar {
+  width: 10px;
+}
+
+.contactsList::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+.contactsList::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+.contactsList::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.messages::-webkit-scrollbar {
+  width: 10px;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: #33cadb; 
+}
+ 
+.messages::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

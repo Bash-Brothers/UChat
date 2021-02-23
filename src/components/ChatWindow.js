@@ -89,6 +89,66 @@ export default class ChatWindow extends Component {
                         <div className="sent">
                             You just sent this message to another user
                         </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
                     </div>
                 </div>
             </div>

@@ -119,6 +119,7 @@
  
 .contactsList::-webkit-scrollbar-thumb {
   background: #888; 
+
 }
 
 .contactsList::-webkit-scrollbar-thumb:hover {

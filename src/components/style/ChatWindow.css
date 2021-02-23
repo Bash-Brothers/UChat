@@ -50,9 +50,11 @@
     color: white;
     display: flex;
     justify-content: center;
-    height: 5vh;
-    margin-top: 5px;
+    height: 6vh;
+    line-height: 6vh;
 }
+
+
 
 .messages{
     overflow-y: scroll;
@@ -88,9 +90,21 @@
 .message-input {
     padding: 12px 20px;
     border-radius: 25px;
-    flex-grow: 1;
+    width: 60vw;
+    height: 2vh;
+    vertical-align: middle;
 }
 
 .message-send {
-    border-radius: 25px;
+    background-image: url('../../images/icon_send.svg');
+    background-repeat: no-repeat;
+    background-color: white;
+    padding: 2vh 2vh;
+    border: black;
+    background-size: 3vh 3vh;
+    background-position: 50% 50%;
+    filter: invert(1);
+    height: 2vh;
+    width: 2vh;
+    vertical-align: middle;
 }

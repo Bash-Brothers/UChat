@@ -13,7 +13,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 console.log("- Client created")
  
 var app = express();
-app.set('views', path.join(__dirname, '../frontendsrc/components/'));
+app.set('views', path.join(__dirname, '../frontsrc/components/'));
 app.set("view engine", "js");
 app.use(bodyParser.urlencoded({ extended: true }));
 

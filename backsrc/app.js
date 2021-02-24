@@ -3,7 +3,8 @@ var express = require("express"),
     passport = require("passport"),
     bodyParser = require("body-parser"),
     LocalStrategy = require("passport-local"),
-    MongoClient = require('mongodb').MongoClient;       
+    MongoClient = require('mongodb').MongoClient;     
+    path = require('path');  
 
 
 // the link to the database along with username and password for the db - can be copied off Mongo's connection page 
@@ -13,7 +14,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 console.log("- Client created")
  
 var app = express();
-app.set('views', path.join(__dirname, '../frontsrc/components/'));
+var viewPath = path.join(__dirname, '../frontsrc/components/')
+app.set('views', viewPath);
 app.set("view engine", "js");
 app.use(bodyParser.urlencoded({ extended: true }));
 

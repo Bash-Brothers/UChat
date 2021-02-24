@@ -7,3 +7,5 @@ settings: https://www.flaticon.com/free-icon/settings_2099058?term=settings&page
 Contact us: https://www.flaticon.com/free-icon/online-question_1034162?related_id=1034162&origin=pack
 search: https://www.flaticon.com/free-icon/loupe_709592?term=search&page=1&position=3&page=1&position=3&related_id=709592&origin=search&origin=tag
 searchbarbutton: https://www.flaticon.com/free-icon/search_149852?term=search&page=1&position=4&page=1&position=4&related_id=149852&origin=search&origin=tag
+send: https://www.flaticon.com/free-icon/send_736212?term=send&page=1&position=4&page=1&position=4&related_id=736212&origin=search
+notification: https://www.flaticon.com/free-icon/notification_633816?term=notifications&page=1&position=5&page=1&position=5&related_id=633816&origin=search

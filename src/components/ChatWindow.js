@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import './style/ChatWindow.css';
-
+import IconSend from '../images/icon_send.svg';
 export default class ChatWindow extends Component {
     render() {
         return (
@@ -77,12 +77,72 @@ export default class ChatWindow extends Component {
                             />
                             <input 
                                 type="submit" 
-                                value="Send"
                                 class="message-send" 
+                                value=""
                             />
                         </form>
                     </div>
                     <div className="messages"> 
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
+                        <div className="received">
+                            You just recieved this message from another user
+                        </div>
+                        <div className="sent">
+                            You just sent this message to another user
+                        </div>
                         <div className="received">
                             You just recieved this message from another user
                         </div>

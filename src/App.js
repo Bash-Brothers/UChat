@@ -10,6 +10,8 @@ import IconSettings from './images/icon_settings.svg';
 import IconInfo from './images/icon_info.svg';
 import IconRegister from './images/icon_register.svg';
 import IconChat from './images/icon_chat.svg';
+import IconNotif from './images/icon_notif.svg';
+
 
 
 // looks at the current page (from App's state) and renders the relevant page
@@ -32,6 +34,43 @@ function CurPage(props) {
   return <LoginPage />;
 }
 
+// render the notifications menu if the user has clicked on the notifications button
+function RenderNotifs(props) {
+  const status = props.status;
+  if (status) {
+    return (
+      <div class="notifications">
+        <div class="notifications-content">
+          notification
+        </div>
+        <div class="notifications-content">
+          notification
+        </div>
+        <div class="notifications-content">
+          notification
+        </div>
+        <div class="notifications-content">
+          notification
+        </div>
+        <div class="notifications-content">
+          notification
+        </div>
+        <div class="notifications-content">
+          notification
+        </div>
+        <div class="notifications-content">
+          notification
+        </div>
+        <div class="notifications-content">
+          notification
+        </div>
+      </div>
+      )
+  }
+  return (null);
+}
+
+
 //changed App from a function a class 
 class App extends Component {
   constructor(props) {
@@ -39,6 +78,7 @@ class App extends Component {
     this.state = {
       curPage: 0,
       loggedIn: true,
+      showNotif: false,
     };
     /*this.CurNav = this.CurNav.bind(this);
     this.mainNav = this.mainNav.bind(this);
@@ -59,6 +99,11 @@ class App extends Component {
     })
   }
 
+  handleNotifClick() {
+    this.setState({
+      showNotif: !this.state.showNotif,
+    })
+  }
   /*LogInNav() {
     return (
       <div className="navigation">
@@ -113,21 +158,25 @@ class App extends Component {
     return (
       <div className="App">
         <div className="navigation">
-        <div className="navButton" onClick={() => this.handleClick(0)}>
-          <img src={IconLogin} id="loginicon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(1)}>
-          <img src={IconRegister} id="registericon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(2)}>
-          <img src={IconInfo} id="infoicon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(3)}>
-          <img src={IconSettings} id="settignsicon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(4)}>
-          <img src={IconChat} id="chaticon" width="30" height="30"/>
-        </div>
+          <div className="navButton" onClick={() => this.handleClick(0)}>
+            <img src={IconLogin} id="loginicon" width="30" height="30"/>
+          </div>
+          <div className="navButton" onClick={() => this.handleClick(1)}>
+            <img src={IconRegister} id="registericon" width="30" height="30"/>
+          </div>
+          <div className="navButton" onClick={() => this.handleClick(2)}>
+            <img src={IconInfo} id="infoicon" width="30" height="30"/>
+          </div>
+          <div className="navButton" onClick={() => this.handleClick(3)}>
+            <img src={IconSettings} id="settignsicon" width="30" height="30"/>
+         </div>
+          <div className="navButton" onClick={() => this.handleClick(4)}>
+            <img src={IconChat} id="chaticon" width="30" height="30"/>
+          </div>
+          <div className="notifButton" onClick={() => this.handleNotifClick()}>
+            <img src={IconNotif} id="notificon" width="30" height="30"/>
+          </div>
+          <RenderNotifs status={this.state.showNotif} />
       </div>
         <CurPage page={this.state.curPage} />
       </div>

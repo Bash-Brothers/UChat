@@ -1,8 +1,6 @@
 
 var express = require("express"),
-    passport = require("passport"),
     bodyParser = require("body-parser"),
-    LocalStrategy = require("passport-local"),
     MongoClient = require('mongodb').MongoClient;     
     path = require('path');  
 

@@ -5,11 +5,16 @@ import ChatWindow from './components/ChatWindow.js';
 import LoginPage from './components/LoginPage.js';
 import About from './components/About.js';
 import SignupPage from './components/SignupPage.js';
+import ContactUsPage from './components/ContactUsPage.js';
+import SearchPage from './components/SearchPage.js';
 import IconLogin from './images/icon_login.svg';
 import IconSettings from './images/icon_settings.svg';
 import IconInfo from './images/icon_info.svg';
 import IconRegister from './images/icon_register.svg';
 import IconChat from './images/icon_chat.svg';
+import IconContactUs from './images/icon_contactus.svg';
+import IconSearch from './images/icon_search.svg';
+
 
 
 // looks at the current page (from App's state) and renders the relevant page
@@ -27,7 +32,10 @@ function CurPage(props) {
     case 4:
       return <ChatWindow />;
     case 5:
-      return <ChatWindow />;
+      return <SearchPage />;
+    case 6:
+      return <ContactUsPage />;
+      
   }
   return <LoginPage />;
 }
@@ -127,6 +135,12 @@ class App extends Component {
         </div>
         <div className="navButton" onClick={() => this.handleClick(4)}>
           <img src={IconChat} id="chaticon" width="30" height="30"/>
+        </div>
+        <div className="navButton" onClick={() => this.handleClick(5)}>
+          <img src={IconSearch} id="chaticon" width="30" height="30"/>
+        </div>
+        <div className="navButton" onClick={() => this.handleClick(6)}>
+          <img src={IconContactUs} id="chaticon" width="30" height="30"/>
         </div>
       </div>
         <CurPage page={this.state.curPage} />

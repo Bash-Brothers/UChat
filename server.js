@@ -12,9 +12,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 console.log("- Client created")
  
 var app = express();
-var viewPath = path.join(__dirname, '../frontsrc/components/')
-app.set('views', viewPath);
-app.set("view engine", "js");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(require("express-session")({
@@ -26,7 +24,7 @@ console.log("- Server created")
 
 // Showing home page
 app.get("/", function (req, res) {
-    res.render("home");
+    console.log("you shouldn't be here")
 });
 
 // // Showing secret page
@@ -34,15 +32,6 @@ app.get("/", function (req, res) {
 //     res.render("secret");
 // });
 
-// Showing secret page
-app.get("/chat", function (req, res) {
-    res.render("ChatWindow");
-});
-
-// Showing signup form
-app.get("/signup", function (req, res) {
-    res.render("SignupPage");
-});
 
 // Handling new user signup
 app.post("/signup", function (req, res) {
@@ -59,12 +48,12 @@ app.post("/signup", function (req, res) {
 });
 
 //Showing login form
-app.get("/LoginPage", function (req, res) {
-    res.render("LoginPage");
+app.get("/login", function (req, res) {
+    console.log("Shouldn't be here")
 });
 
 // Handling user login - if we use passport, this can go in the custom callback function
-app.post("/LoginPage", async(req, res) => {
+app.post("/login", async(req, res) => {
     var username = req.body.username;
     var password = req.body.password;
 
@@ -187,7 +176,7 @@ async function addUser(name, username, password)
 
 function main()
 {
-    var port = process.env.PORT || 3000;
+    var port = process.env.PORT || 5000;
     app.listen(port, function () {
         console.log("Server Has Started!");
     });

@@ -1,31 +1,32 @@
 {
-  "name": "login_construction",
+  "name": "chatapp",
   "version": "1.0.0",
-  "description": "trying to make a login page",
-  "main": "index.js",
+  "description": "Chat App for CS97",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongodb": "^3.6.3",
+    "yarn": "^1.22.10"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/milo-ucla/login_construction.git"
+    "url": "git+https://github.com/TheDarkLord247/chatapp.git"
   },
-  "author": "milo",
+  "author": "Milo, Sudhanshu, Aman, Yan, Kevin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/milo-ucla/login_construction/issues"
+    "url": "https://github.com/TheDarkLord247/chatapp/issues"
   },
-  "homepage": "https://github.com/milo-ucla/login_construction#readme",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "mongoose": "^5.11.16",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.1.0",
-    "socket.io": "^3.1.1"
-  },
-  "devDependencies": {}
+  "homepage": "https://github.com/TheDarkLord247/chatapp#readme"
 }

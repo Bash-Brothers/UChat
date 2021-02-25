@@ -15,8 +15,7 @@ export default function SignupPage(props) {
                     <input type="password" name="password" placeholder="" />
                     <p>Re-enter Password*:</p>
                     <input type="password" name="" placeholder="" />
-                    <button><p>Submit<p></button>
-                    /*<p><input type="submit" name="" value="Create Account"/></p>*/
+                    <p><button>Submit</button></p>
                 </form>
                 <div id="contact" className="link">Need help with your account or have feedback? <a href ="#">Contact us</a></div>
              </div> 

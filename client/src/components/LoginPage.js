@@ -12,7 +12,6 @@ export default function LoginPage(props) {
                     <p>Password:</p>
                     <input type="password" name="password" placeholder="" />
                     <p><button>login</button></p>
-                    /**<p><input type="submit" name="" value="Login"/></p>**/
                     <div className="link"><a href ="/">Forgot username/password?</a></div>
                     <div className="link"><a href="/signup">Don't have an account? Click here to sign up.</a></div>
                 </form>

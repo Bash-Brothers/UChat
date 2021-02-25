@@ -86,6 +86,9 @@ class App extends Component {
       curPage: 0,
       loggedIn: true,
       showNotif: false,
+      response: '',
+      post: '',
+      responseToPost:'',
     };
     /*this.CurNav = this.CurNav.bind(this);
     this.mainNav = this.mainNav.bind(this);
@@ -93,6 +96,35 @@ class App extends Component {
   }
   //curPage values: Log in page: 0, Sign up page: 1, About page: 2, Settings page: 3, Chats page: 4
   //loggedIn state variable is to make sure someone is logged in before they can click on settings or chats
+
+  callApi = async () => {
+    const response = await fetch('/');
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    
+    return body;
+  };
+
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ response: res.express }))
+      .catch(err => console.log(err));
+  }
+
+  handleSubmit = async e => {
+    e.preventDefault();
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ post: this.state.post }),
+    });
+    const body = await response.text();
+    
+    this.setState({ responseToPost: body });
+  };
+
 
   handleClick(i) {
     this.setState({

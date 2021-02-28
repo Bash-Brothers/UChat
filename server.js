@@ -36,18 +36,22 @@ app.post("/signup", async function (req, res) {
     var password = req.body.password
     var password_confirm = req.body.password_confirm;
 
+    var successCode = 0;
     if(username.length == 0 || password.length == 0)
     {
         console.log("Username and Password must be non-empty");
-        // set some react app state for the code 2 
-        res.redirect("/signup");
+        successCode = 2;
     }
 
     if (password_confirm != password)
     {
         console.log("Passwords do not match");
-        // set some react app state for the code 3
-        res.redirect("/signup")
+        successCode = 3;
+    }
+
+    if (successCode != 0)
+    {
+        return res.json({successCode: successCode});
     }
 
     console.log("new user: ")
@@ -55,19 +59,22 @@ app.post("/signup", async function (req, res) {
     console.log("   username = ", username);
     console.log("   password = ", password);
 
-    var successCode = await addUser(name, username, password);
-    if (successCode == 0)
-    {
-        console.log("successCode = ", successCode, " \n successful registration confirmed, redirecting to login");
-        // set some react app state for the code 0
-        res.redirect("/login");
-    }
-    else
-    {
-        console.log("succesCode = ", successCode, " \n registration unsuccessful, redirecting back to signup");
-        // set some react app state for the code 1
-        res.redirect("/signup");
-    }
+    successCode = await addUser(name, username, password);
+    return res.json({successCode: successCode});
+
+
+    // if (successCode == 0)
+    // {
+    //     console.log("successCode = ", successCode, " \n successful registration confirmed, redirecting to login");
+    //     // set some react app state for the code 0
+    //     res.redirect("/login");
+    // }
+    // else
+    // {
+    //     console.log("succesCode = ", successCode, " \n registration unsuccessful, redirecting back to signup");
+    //     // set some react app state for the code 1
+    //     res.redirect("/signup");
+    // }
     
 
 });

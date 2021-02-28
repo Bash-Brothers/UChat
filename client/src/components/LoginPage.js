@@ -15,7 +15,6 @@ export default class LoginPage extends React.Component
         this.setState({[event.target.name]: event.target.value});
     }
 
-
     handleSubmit =  async (event) => {
         event.preventDefault();
         const result = await fetch("/login", 
@@ -33,12 +32,12 @@ export default class LoginPage extends React.Component
         // when successCode = 0, the user is logged in so we change state.isLoggedIn
         // the successCode also has other states such as for "user not found", "incorrect pwd"
         // so we can either getElementById or something similar to change the display according to that
+        event.target.reset(); // clear out form entries
         this.setState({isLoggedIn: !res.successCode});
         };
 
     render()
     {
-        console.log("isLoggedIn =========== ", this.state.isLoggedIn);
         if(this.state.isLoggedIn)
         {
             return <Redirect to='/chats' />;

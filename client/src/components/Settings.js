@@ -19,7 +19,7 @@ function General() {
                         <input
                     	    type="text" 
                 	        class="settings-input"
-            	            value="current setting"
+            	            placeholder="current setting"
                         />
                     </form>
 					<div className = "setting-padding" />
@@ -33,7 +33,7 @@ function General() {
                         <input
                  	        type="text" 
                             class="settings-input"
-                            value="current setting"
+                            placeholder="current setting"
                         />
                     </form>
                 <div className = "setting-padding" />
@@ -59,7 +59,7 @@ function Appearance() {
                         <input
                             type="text" 
                             class="settings-input"
-                            value="current setting"
+                            placeholder="current setting"
                         />
                     </form>
 					<div className = "setting-padding" />
@@ -72,7 +72,7 @@ function Appearance() {
                         <input
                             type="text" 
                             class="settings-input"
-                            value="current setting"
+                            placeholder="current setting"
                         />
                     </form>
 					<div className = "setting-padding" />

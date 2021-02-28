@@ -17,8 +17,8 @@ export default class ChatWindow extends Component {
                             <form onSubmit={this.handleSubmit}>
                                 <input
                                     type="text"
-                                    class="search-input"
-                                    placeholder="Search friends"
+                                    class="searchbar-input"
+                                    placeholder="Search friends..."
                                 />
                                 <input
                                     type="submit"

@@ -114,22 +114,6 @@ class App extends Component {
       .then(res => this.setState({ response: res.express }))
       .catch(err => console.log(err));
   }
-
-  handleSubmit = async e => {
-    e.preventDefault();
-    const response = await fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ post: this.state.post }),
-    });
-    const body = await response.text();
-
-    this.setState({ responseToPost: body });
-  };
-
-
   handleClick(i) {
     this.setState({
       curPage: i,
@@ -164,7 +148,7 @@ class App extends Component {
               <Route path="/login">
                 <LoginPage/>
               </Route>
-              <Route path="/chats">
+              <Route exact path="/chats">
                 <ChatWindow/>
               </Route>
               <Route path="/search">

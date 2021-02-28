@@ -87,9 +87,24 @@ app.post("/login", async(req, res) => {
 
 
     successCode = await loginUser(username, password);      // loginUser does all the checking
+
     console.log("successCode = ", successCode)
+    if (successCode == 0)       
+    {
+        console.log("- Successful login confirmed"); 
+
+        console.log("cookie before trying to update: ", req.session.username);
+        req.session.username = username;
+        console.log("cookie username after update = ", req.session.username);
+
+        res.redirect("/chats");
+    }
+    else if (successCode==1 || successCode == 2)
+    {
+        console.log("- Unsuccessful login confirmed");
+        res.redirect("/login");
+    }
     
-    return res.json({successCode: successCode});
 })
 
 function isLoggedIn(req, res, next) 

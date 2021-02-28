@@ -1,0 +1,58 @@
+
+.searchpage{
+    height: 96vh;
+    display: flex;
+    margin-top: 4vh;
+    justify-content: center;
+    flex-direction: column;
+    align-items:center;
+    background-color: lightgray;
+    position: relative;
+}
+
+/* #loginlogo{
+    height: 25vh;
+    border: solid black 3px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+} */
+
+.search{
+    background-color: indigo;
+    color: white;
+    font-size: larger;
+    top: 300px;
+    position: fixed;
+    padding: 0px;
+    border-radius: 30px;
+    
+}
+
+.search-input {
+    /* background-color: white; */
+    background-color: rgb(202, 202, 202);
+    color: white; 
+    height: 5%; 
+    width: 40%;
+    border-radius: 10px;
+    position: absolute;
+    top: 30%;
+    right: 35%;
+    padding: 2px 0px 2px 30px;
+
+}
+
+.search-send {
+    background-color: rgb(133, 133, 133);
+    color: black; 
+    height: 5%;
+    width: 4%;
+    border-radius: 25px;
+    position: absolute;
+    top: 30%;
+    left: 65%;
+}
+
+input[type="search"] {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

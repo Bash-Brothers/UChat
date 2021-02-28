@@ -1,0 +1,14 @@
+#loginlogo{
+    height: 25vh;
+    border: solid black 3px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.intro{
+    background-color: orange;
+    color: white;
+    font-size: larger;
+    padding: 20px;
+    border-radius: 30px;
+}

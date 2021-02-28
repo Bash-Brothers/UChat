@@ -1,45 +1,33 @@
 {
-  "homepage": "http://TheDarkLord247.github.io/chatapp",
   "name": "chatapp",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Chat App for CS97",
+  "main": "server.js",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongodb": "^3.6.3",
+    "nodemon": "^2.0.7",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.2",
-    "web-vitals": "^1.1.0"
+    "yarn": "^1.22.10"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheDarkLord247/chatapp.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "Milo, Sudhanshu, Aman, Yan, Kevin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheDarkLord247/chatapp/issues"
   },
-  "devDependencies": {
-    "gh-pages": "^3.1.0"
-  }
+  "homepage": "https://github.com/TheDarkLord247/chatapp#readme"
 }

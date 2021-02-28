@@ -197,21 +197,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className="navigation">
-        <div className="navButton" onClick={() => this.handleClick(0)}>
-          <img src={IconLogin} id="loginicon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(1)}>
-          <img src={IconRegister} id="registericon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(2)}>
-          <img src={IconInfo} id="infoicon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(3)}>
-          <img src={IconSettings} id="settignsicon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(4)}>
-          <img src={IconChat} id="chaticon" width="30" height="30"/>
-        </div>
         <div className="navButton" onClick={() => this.handleClick(5)}>
           <img src={IconSearch} id="chaticon" width="30" height="30"/>
         </div>

@@ -5,10 +5,19 @@
     height: 90vh;
 }
 
+.sidebar{
+  height: 96vh;
+  width: 13%;
+}
+
+.searchorcreate{
+  background-color: white;
+  height: 4vh;
+}
 .contactsList{
     background-color: #C4C4C4;
-    height: 96vh;
-    width: 13%;
+    height: 92vh;
+    width: 100%;
     overflow-y: auto;
 }
 
@@ -54,6 +63,15 @@
     line-height: 6vh;
 }
 
+.inputField2{
+  width: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
 
 
 .messages{
@@ -85,6 +103,14 @@
     border-radius: 5px;
     border: solid grey 2px;
     /*display: inline-block;*/
+}
+
+.search-input {
+  padding: 12px 20px;
+  border-radius: 0px;
+  width: 10vw;
+  height: 2vh;
+  vertical-align: middle;
 }
 
 .message-input {

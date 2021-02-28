@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import './style/LoginPage.css';
 import egg from '../images/paul.jpg';
 
-export default function LoginPage(props) {
+export default function LoginPage() {
         return (
             <div className="login">
                 <img src={egg} id="loginlogo"/>

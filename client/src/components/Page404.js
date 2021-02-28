@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import './style/Test.css';
+import './style/Page404.css';
 import egg from '../images/paul.jpg';
 
-export default function Test(props) {
+export default function Page404(props) {
         return (
             <div className="login">
                 <img src={egg} id="loginlogo"/>
                 <div className="intro">
-                    Test page unlocked!
+                    Uh oh, this page doesn't exist
                 </div>
              </div> 
         )

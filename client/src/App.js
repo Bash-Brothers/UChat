@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import './App.css';
 import Settings from './components/Settings.js';
 import ChatWindow from './components/ChatWindow.js';
@@ -9,6 +9,8 @@ import SignupPage from './components/SignupPage.js';
 import ContactUsPage from './components/ContactUsPage.js';
 import SearchPage from './components/SearchPage.js';
 import Test from './components/Test.js';
+import Nav from './components/Nav.js';
+import Page404 from './components/Page404.js';
 
 import IconLogin from './images/icon_login.svg';
 import IconSettings from './images/icon_settings.svg';
@@ -39,7 +41,7 @@ function CurPage(props) {
       return <SearchPage />;
     case 6:
       return <ContactUsPage />;
-      
+
   }
   return <LoginPage />;
 }
@@ -75,7 +77,7 @@ function RenderNotifs(props) {
           notification
         </div>
       </div>
-      )
+    )
   }
   return (null);
 }
@@ -90,7 +92,7 @@ class App extends Component {
       showNotif: false,
       response: '',
       post: '',
-      responseToPost:'',
+      responseToPost: '',
     };
     /*this.CurNav = this.CurNav.bind(this);
     this.mainNav = this.mainNav.bind(this);
@@ -103,7 +105,7 @@ class App extends Component {
     const response = await fetch('/');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-    
+
     return body;
   };
 
@@ -123,7 +125,7 @@ class App extends Component {
       body: JSON.stringify({ post: this.state.post }),
     });
     const body = await response.text();
-    
+
     this.setState({ responseToPost: body });
   };
 
@@ -145,88 +147,44 @@ class App extends Component {
       showNotif: !this.state.showNotif,
     })
   }
-  /*LogInNav() {
-    return (
-      <div className="navigation">
-        <div className="navButton" onClick={() => this.handleClick(3)}>
-          Settings
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(4)}>
-          Chats
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(0)}>
-          Log Out
-        </div>
-      </div>
-    )
-  }
-  
-  mainNav() {
-    return (
-      <div className="navigation">
-        <div className="navButton" onClick={() => this.handleClick(0)}>
-          Log In
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(2)}>
-          About
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(1)}>
-          Sign Up
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(5)}>
-          Temp Log In
-        </div>
-      </div>
-    )
-  }
-
-  CurNav() {
-    switch (this.state.curPage) {
-      case 0:
-      case 1:
-      case 2:
-        return <this.mainNav />
-      case 3:
-      case 4:
-      case 5:
-        return <this.LogInNav />
-    }
-    return <this.mainNav />
-  }
-  */
 
   render() {
-
     return (
       <div className="App">
-        <div className="navigation">
-        <div className="navButton" onClick={() => this.handleClick(5)}>
-          <img src={IconSearch} id="chaticon" width="30" height="30"/>
-        </div>
-        <div className="navButton" onClick={() => this.handleClick(6)}>
-          <img src={IconContactUs} id="chaticon" width="30" height="30"/>
-        </div>
-          <div className="navButton" onClick={() => this.handleClick(0)}>
-            <img src={IconLogin} id="loginicon" width="30" height="30"/>
+        <Router>
+          <div>
+            <Nav />
+            <Switch>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/signup">
+                <SignupPage />
+              </Route>
+              <Route path="/login">
+                <LoginPage/>
+              </Route>
+              <Route path="/chats">
+                <ChatWindow/>
+              </Route>
+              <Route path="/search">
+                <SearchPage/>
+              </Route>
+              <Route path="/contactus">
+                <ContactUsPage/>
+              </Route>
+              <Route path="/settings">
+                <Settings/>
+              </Route>
+              <Route path="/search">
+                <SearchPage />
+              </Route>
+              <Route path="/">
+                <LoginPage />
+              </Route>
+            </Switch>
           </div>
-          <div className="navButton" onClick={() => this.handleClick(1)}>
-            <img src={IconRegister} id="registericon" width="30" height="30"/>
-          </div>
-          <div className="navButton" onClick={() => this.handleClick(2)}>
-            <img src={IconInfo} id="infoicon" width="30" height="30"/>
-          </div>
-          <div className="navButton" onClick={() => this.handleClick(3)}>
-            <img src={IconSettings} id="settignsicon" width="30" height="30"/>
-         </div>
-          <div className="navButton" onClick={() => this.handleClick(4)}>
-            <img src={IconChat} id="chaticon" width="30" height="30"/>
-          </div>
-          <div className="notifButton" onClick={() => this.handleNotifClick()}>
-            <img src={IconNotif} id="notificon" width="30" height="30"/>
-          </div>
-          <RenderNotifs status={this.state.showNotif} /> 
-      </div>
-        <CurPage page={this.state.curPage} />
+        </Router>
       </div>
     )
   }

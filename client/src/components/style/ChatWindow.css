@@ -9,7 +9,7 @@
     background-color: #C4C4C4;
     height: 96vh;
     width: 13%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .contact{

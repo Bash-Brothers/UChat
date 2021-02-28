@@ -7,6 +7,7 @@
 	background: #808080;
 	width: 100%;
 	height: 4vh;
+  border-bottom: solid black 2px;
 }
 .navButton{
   display: flex;
@@ -22,8 +23,6 @@
   background-color: #666666;
   color: white;
 }
-
-
 
 .notifButton{
   display: flex;

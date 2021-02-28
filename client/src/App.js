@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import './App.css';
 import Settings from './components/Settings.js';
 import ChatWindow from './components/ChatWindow.js';
@@ -7,6 +8,8 @@ import About from './components/About.js';
 import SignupPage from './components/SignupPage.js';
 import ContactUsPage from './components/ContactUsPage.js';
 import SearchPage from './components/SearchPage.js';
+import Test from './components/Test.js';
+
 import IconLogin from './images/icon_login.svg';
 import IconSettings from './images/icon_settings.svg';
 import IconInfo from './images/icon_info.svg';
@@ -76,7 +79,6 @@ function RenderNotifs(props) {
   }
   return (null);
 }
-
 
 //changed App from a function a class 
 class App extends Component {
@@ -194,6 +196,7 @@ class App extends Component {
   */
 
   render() {
+
     return (
       <div className="App">
         <div className="navigation">
@@ -221,7 +224,7 @@ class App extends Component {
           <div className="notifButton" onClick={() => this.handleNotifClick()}>
             <img src={IconNotif} id="notificon" width="30" height="30"/>
           </div>
-          <RenderNotifs status={this.state.showNotif} />
+          <RenderNotifs status={this.state.showNotif} /> 
       </div>
         <CurPage page={this.state.curPage} />
       </div>

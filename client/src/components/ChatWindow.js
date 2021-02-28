@@ -2,70 +2,17 @@ import React, { Component } from "react";
 import './style/ChatWindow.css';
 import IconSend from '../images/icon_send.svg';
 export default class ChatWindow extends Component {
+
     render() {
+        //contactList should be something that is received from the server
+        const contactList = 'Yan,Kevin,Milo,Sud,Aman,Eggert,Eggboi,Eggs,SunnySideUp,Omelette,Sud,Aman,Eggert,Eggboi,Eggs,SunnySideUp,Omelette'.split(',');
+
+
+        var renderedOutput = contactList.map(item => <div className="contact">{item}</div>)
         return (
             <div className = "chatWindow">
                 <div className="contactsList">
-                    <div className="contact">
-                        contactName1
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
-                    <div className="contact">
-                        contactName
-                    </div>
+                    {renderedOutput}
                 </div>
                 <div className="curChat">
                     <div className="inputField">

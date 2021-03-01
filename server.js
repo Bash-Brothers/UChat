@@ -1,4 +1,3 @@
-
 var express = require("express"),
     bodyParser = require("body-parser"),
     MongoClient = require('mongodb').MongoClient;     
@@ -12,20 +11,17 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 console.log("- Client created")
  
 var app = express();
-
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+app.set('trust proxy', 1) // trust first proxy
 app.use(require("express-session")({
-    secret: "Rusty is a dog",
+    secret: "this is a secret",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    username: null,
 }));
 console.log("- Server created")
-
-// Showing home page
-app.get("/", function (req, res) {
-    console.log("you shouldn't be here")
-});
 
 // // Showing secret page
 // app.get("/secret", isLoggedIn, function (req, res) {
@@ -34,66 +30,86 @@ app.get("/", function (req, res) {
 
 
 // Handling new user signup
-app.post("/signup", function (req, res) {
+app.post("/signup", async function (req, res) {
     var name = req.body.name
     var username = req.body.username
     var password = req.body.password
+    var password_confirm = req.body.password_confirm;
+
+    var successCode = 0;
+    if(username.length == 0 || password.length == 0)
+    {
+        console.log("Username and Password must be non-empty");
+        successCode = 2;
+    }
+
+    if (password_confirm != password)
+    {
+        console.log("Passwords do not match");
+        successCode = 3;
+    }
+
+    if (successCode != 0)
+    {
+        return res.json({successCode: successCode});
+    }
+
     console.log("new user: ")
     console.log("   name = ", name);
     console.log("   username = ", username);
     console.log("   password = ", password);
 
-    addUser(name, username, password).catch(console.dir);
+    successCode = await addUser(name, username, password);
+    return res.json({successCode: successCode});
+
+
+    // if (successCode == 0)
+    // {
+    //     console.log("successCode = ", successCode, " \n successful registration confirmed, redirecting to login");
+    //     // set some react app state for the code 0
+    //     res.redirect("/login");
+    // }
+    // else
+    // {
+    //     console.log("succesCode = ", successCode, " \n registration unsuccessful, redirecting back to signup");
+    //     // set some react app state for the code 1
+    //     res.redirect("/signup");
+    // }
+    
 
 });
 
-//Showing login form
-app.get("/login", function (req, res) {
-    console.log("Shouldn't be here")
-});
 
-// Handling user login - if we use passport, this can go in the custom callback function
+// Handling user login
 app.post("/login", async(req, res) => {
-    var username = req.body.username;
-    var password = req.body.password;
+
+    console.log("login submitted, cookie username= ", req.session.username);
+
+    var username = req.body.username;   // entered user name
+    var password = req.body.password;   // entered password
 
     console.log("attempt to log in : ")
     console.log("   username = ", username);
     console.log("   password = ", password);
 
-    try{
-        successCode = await loginUser(username, password);      // loginUser does all the checking
 
-        console.log("successCode = ", successCode)
-        if (successCode == 0)       
-        {
-            console.log("- Successful login confirmed");      
-            console.log("- Redirecting to secret page");      
-            res.redirect("/secret");
-        }
-        else if (successCode==1 || successCode == 2)
-        {
-            console.log("- Unsuccessful login confirmed");
-            res.redirect("");
-        }
-    }    
-    catch (err)
-    {
-        console.log(err);
-    }   
+    successCode = await loginUser(username, password);      // loginUser does all the checking
+    console.log("successCode = ", successCode)
+    
+    return res.json({successCode: successCode});
 })
 
-//Handling user logout
-app.get("/logout", function (req, res) {
-    req.logout();
-    res.redirect("/");
-});
-
-// function isLoggedIn(req, res, next) {
-//     if (req.isAuthenticated()) return next();
-//     res.redirect("/login");
-// }
-
+function isLoggedIn(req, res, next) 
+{   
+    const username = req.session.username;
+    console.log("inside isLoggedIn, session username = ", username);
+    if (username != null) 
+    {   console.log("- Redirecting to secret page");      
+        return next();
+    }
+    console.log("- User not logged in, redirecting to login")
+    res.redirect("/login");
+}
 async function loginUser(username, password)
 {
     console.log("Inside loginUser")
@@ -114,7 +130,7 @@ async function loginUser(username, password)
             console.log("user not found");
             returnCode =2;                      // code 2 : user not found
         }
-        if (user.password == password)
+        else if (user.password == password)
         {
             console.log("login successful");
             returnCode=0;                       // code 0: success
@@ -139,39 +155,53 @@ async function loginUser(username, password)
 }
 
 
-// function that adds a new user to the database - should be called by /register
+// function that adds a new user to the database - should be called by /signup
 async function addUser(name, username, password)
 {
-    MongoClient.connect(uri, async function(err, db) {
-        if (err) throw err;
-        console.log("- Connected to Database for user creation")
 
-        var dbo = db.db("test_db");
-        user_data = dbo.collection("user_data");
+    console.log("Inside add user");
+    var returnCode = 0;
+    try
+    {
+    db = await MongoClient.connect(uri);
+    console.log("- Connected to Database for user creation")
 
-        var new_user = { name: name, username: username, password: password };
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
 
-        try{
-        prev_user = await user_data.findOne({username: username});   // checks for previous user with given name
+    var new_user = { name: name, username: username, password: password };
 
-        console.log("prev user = ", prev_user);
+    prev_user = await user_data.findOne({username: username});   // checks for previous user with given name
 
-        if (prev_user != null) throw "username taken";              // if the prev_user is already present
+    console.log("prev user = ", prev_user);
 
-        user_data.insertOne(new_user, 
-            function(err, res) 
-            {
-                if (err) throw err;
-                console.log("- New user added");
-            }
-        );
+    if (prev_user != null) // if the prev_user is already present
+    {
+        throw "username taken";
+    }
 
+    user_data.insertOne(new_user, 
+        function(err, res) 
+        {
+            console.log("- New user added");
         }
-        finally{
-            db.close();
-            console.log("Database closed")
-        }
-    }); 
+    );
+
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 1;
+    }
+
+    finally
+    {
+        db.close();
+        console.log("Database closed")
+        console.log("Return code = ", returnCode);
+        return returnCode;
+    }
+ 
 }
 
 function main()

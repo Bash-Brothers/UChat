@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import './App.css';
-import Settings from './components/Settings.js';
+import SettingsGeneral from './components/SettingsGeneral.js';
+import SettingsAppearance from './components/SettingsAppearance.js';
+import SettingsSignout from './components/SettingsSignout.js';
 import ChatWindow from './components/ChatWindow.js';
 import LoginPage from './components/LoginPage.js';
 import About from './components/About.js';
@@ -34,7 +36,7 @@ function CurPage(props) {
     case 2:
       return <About />;
     case 3:
-      return <Settings />;
+      return <SettingsGeneral />;
     case 4:
       return <ChatWindow />;
     case 5:
@@ -157,8 +159,14 @@ class App extends Component {
               <Route path="/contactus">
                 <ContactUsPage/>
               </Route>
-              <Route path="/settings">
-                <Settings/>
+              <Route path="/settings/general">
+                <SettingsGeneral/>
+              </Route>
+              <Route path="/settings/appearance">
+                <SettingsAppearance/>
+              </Route>
+              <Route path="/settings/signout">
+                <SettingsSignout/>
               </Route>
               <Route path="/search">
                 <SearchPage />

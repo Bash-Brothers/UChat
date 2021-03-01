@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './style/Settings.css';
 import icon_edit from '../images/icon_edit.svg';
+import {isLoggedIn} from '../utils.js';
 
 
 
@@ -9,39 +10,21 @@ export default class Settings extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			page: 0,
+			loggedIn: true,
 		}
 	}
 
-	handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.value});
+	componentDidMount() //we need to make sure we are actually logged in
+    {                   
+        console.log("Inside component did mount for settings page");
+        isLoggedIn().then(loggedIn => this.setState({loggedIn: loggedIn}));
     }
 
-
-	handleSubmit =  async (event) => {
-        event.preventDefault();
-        const result = await fetch("/login", 
-                  {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': "application/json; charset=utf-8",
-                  },
-                  body: JSON.stringify(this.state) /* this is the data being posted */
-        })
-
-        const res = await result.json();  /* this is the res sent by the backend */
-
-        // currently, I return a successCode depending on what happened in the backend
-        // when successCode = 0, the user is logged in so we change state.isLoggedIn
-        // the successCode also has other states such as for "user not found", "incorrect pwd"
-        // so we can either getElementById or something similar to change the display according to that
-        event.target.reset(); // clear out form entries
-        this.setState({isLoggedIn: !res.successCode});
-        };
-
-
-
 	render() {
+		if(this.state.loggedIn == false)
+        {
+            return <Redirect to='/login' />;
+        }
 		return (
 			<div className = "main">
 				<div className = "container">

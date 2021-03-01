@@ -208,10 +208,8 @@ app.post("/settings/signout", async(req, res) => {
     console.log("logout submitted, cookie username= ", req.session.username);
     console.log("attempt to log out")
 
-    successCode = await loginUser(username, password);      // loginUser does all the checking
-    console.log("successCode = ", successCode)
-    
-    return res.json({successCode: successCode});
+    req.session.username = null;
+    res.redirect('/login');
 })
 
 

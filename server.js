@@ -1,6 +1,7 @@
 var express = require("express"),
     bodyParser = require("body-parser"),
-    MongoClient = require('mongodb').MongoClient;     
+    MongoClient = require('mongodb').MongoClient,
+    cookieSession = require('cookie-session'),     
     path = require('path');  
 
 
@@ -15,18 +16,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.set('trust proxy', 1) // trust first proxy
-app.use(require("express-session")({
-    secret: "this is a secret",
-    resave: false,
-    saveUninitialized: false,
+
+app.use(cookieSession({
+    name: 'session',
+    secret: "Don't use trays",
+    maxAge: 3600000, // 1 hour
     username: null,
-}));
+  }))
+
 console.log("- Server created")
 
-// // Showing secret page
-// app.get("/secret", isLoggedIn, function (req, res) {
-//     res.render("secret");
-// });
+
+// all isLoggedIn calls are redirected here
+app.get("/auth", function(req, res){
+    console.log("inside auth");
+    console.log("cookie username = ", req.session.username);
+    if(req.session.username != null) //inspect cookie username value
+    {
+        res.json({loggedIn: true});
+    }
+    else 
+    {
+        res.json({loggedIn: false});
+    }
+});
 
 
 // Handling new user signup
@@ -60,22 +73,7 @@ app.post("/signup", async function (req, res) {
     console.log("   password = ", password);
 
     successCode = await addUser(name, username, password);
-    return res.json({successCode: successCode});
-
-
-    // if (successCode == 0)
-    // {
-    //     console.log("successCode = ", successCode, " \n successful registration confirmed, redirecting to login");
-    //     // set some react app state for the code 0
-    //     res.redirect("/login");
-    // }
-    // else
-    // {
-    //     console.log("succesCode = ", successCode, " \n registration unsuccessful, redirecting back to signup");
-    //     // set some react app state for the code 1
-    //     res.redirect("/signup");
-    // }
-    
+    return res.json({successCode: successCode});   
 
 });
 
@@ -96,24 +94,25 @@ app.post("/login", async(req, res) => {
     successCode = await loginUser(username, password);      // loginUser does all the checking
     console.log("successCode = ", successCode)
     
+    if (successCode == 0)
+    {
+        req.session.username = username;
+        console.log("cookie session  username = ", req.session.username );
+    }
+    else 
+    {
+        req.session.username = null;
+        console.log("cookie session  username = ", req.session.username );
+    }
+
     return res.json({successCode: successCode});
 })
 
-function isLoggedIn(req, res, next) 
-{   
-    const username = req.session.username;
-    console.log("inside isLoggedIn, session username = ", username);
-    if (username != null) 
-    {   console.log("- Redirecting to secret page");      
-        return next();
-    }
-    console.log("- User not logged in, redirecting to login")
-    res.redirect("/login");
-}
+
 async function loginUser(username, password)
 {
     console.log("Inside loginUser")
-    let returnCode;
+    var returnCode = 0;
     try{
         db = await MongoClient.connect(uri)
         console.log("- Connected to database for user login")
@@ -133,16 +132,17 @@ async function loginUser(username, password)
         else if (user.password == password)
         {
             console.log("login successful");
-            returnCode=0;                       // code 0: success
+            returnCode=0;                       // code 0 : success
         }
         else 
         {
             console.log("wrong password");
-            returnCode=1;                       //code 1: wrong password
+            returnCode=1;                       //code 1 : wrong password
         }       
     }
     catch (err)
     {
+        returnCode = 3;                         // code 3: database errors
         console.log(err);
     }
     finally
@@ -158,7 +158,6 @@ async function loginUser(username, password)
 // function that adds a new user to the database - should be called by /signup
 async function addUser(name, username, password)
 {
-
     console.log("Inside add user");
     var returnCode = 0;
     try

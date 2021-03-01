@@ -21,7 +21,7 @@ import IconContactUs from './images/icon_contactus.svg';
 import IconSearch from './images/icon_search.svg';
 import IconNotif from './images/icon_notif.svg';
 
-
+import {isLoggedIn} from './utils.js';
 
 // looks at the current page (from App's state) and renders the relevant page
 function CurPage(props) {
@@ -88,11 +88,8 @@ class App extends Component {
     super(props);
     this.state = {
       curPage: 0,
-      loggedIn: true,
       showNotif: false,
       response: '',
-      post: '',
-      responseToPost: '',
     };
     /*this.CurNav = this.CurNav.bind(this);
     this.mainNav = this.mainNav.bind(this);
@@ -105,15 +102,16 @@ class App extends Component {
     const response = await fetch('/');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-
     return body;
   };
 
   componentDidMount() {
+    console.log("Inside component did mount for app");
     this.callApi()
       .then(res => this.setState({ response: res.express }))
       .catch(err => console.log(err));
   }
+
   handleClick(i) {
     this.setState({
       curPage: i,
@@ -148,7 +146,7 @@ class App extends Component {
               <Route path="/login">
                 <LoginPage/>
               </Route>
-              <Route exact path="/chats">
+              <Route path="/chats">
                 <ChatWindow/>
               </Route>
               <Route path="/search">

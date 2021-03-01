@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import {Redirect} from "react-router-dom";
 import './style/LoginPage.css';
 import egg from '../images/paul.jpg';
+import { isLoggedIn } from '../utils.js';
 
 export default class LoginPage extends React.Component
 {
     constructor(props)
     {
         super(props);
-        this.state = {username: "default", password: "default", isLoggedIn: false};
+        this.state = {username: "default", password: "default", loggedIn: false};
     }
 
     handleChange = (event) => {
@@ -32,16 +33,28 @@ export default class LoginPage extends React.Component
         // when successCode = 0, the user is logged in so we change state.isLoggedIn
         // the successCode also has other states such as for "user not found", "incorrect pwd"
         // so we can either getElementById or something similar to change the display according to that
+
         event.target.reset(); // clear out form entries
-        this.setState({isLoggedIn: !res.successCode});
+
+        const loggedIn = await isLoggedIn();   // uses the actual function isLoggedIn not the success code 
+                                               // can be modified, it's a test
+        
+        // this is written out like this because we will eventually 
+        // need to set state conditionally depending on the successCode
+        if(loggedIn)
+        {
+            this.setState({loggedIn: true});
+        }
         };
 
     render()
     {
-        if(this.state.isLoggedIn)
+        console.log("rendering login");
+        if(this.state.loggedIn)
         {
             return <Redirect to='/chats' />;
         }
+
         return (
             <div className="login">
             <img src={egg} id="loginlogo"/>

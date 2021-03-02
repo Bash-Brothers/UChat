@@ -18,6 +18,7 @@ export default class ChatWindow extends Component {
     }
 
     render() {
+
         if(this.state.loggedIn == false)
         {
             return <Redirect to='/login' />;

@@ -6,7 +6,7 @@
     justify-content: center;
     flex-direction: column;
     align-items:center;
-    background-color: lightgray;
+    background-color: #ffffff;
 }
 
 
@@ -18,7 +18,7 @@
 }
 
 .creators{
-    background-color: indigo;
+    background-color: #1b3faa;
     color: white;
     font-size: larger;
     padding: 20px;

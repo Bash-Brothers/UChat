@@ -13,10 +13,10 @@
       display: flex;
       flex-row: row wrap;
       justify-content: flex-end;
-      background: #808080;
+      background: #eeeeee;
       width: 100%;
       height: 4vh;
-    border-bottom: solid black 2px;
+    border-bottom: solid #d0d0d0 2px;
   }
   .navButton{
     display: flex;

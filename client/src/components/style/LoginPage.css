@@ -5,16 +5,38 @@
     justify-content: center;
     flex-direction: column;
     align-items:center;
-    background-color: lightgray;
+    background-color: #ffffff;
+    color: white;
 }
 
 .loginform{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: indianred;
+    background-color: #1b3faa;
     padding: 10px;
     border-radius: 10px;
+    color: white;
+}
+.contactlink {
+	color: black;
+}
+.contactlink:link {
+	color: black;
+}
+.contactlink:visited {
+	color: black;
+}
+.loginlink {
+	color: white;
+}
+
+.loginlink:link {
+	color: white;
+}
+
+.loginlink:visited {
+	color: white;
 }
 
 #loginlogo{
@@ -28,4 +50,5 @@
     padding-bottom: 10px; /*whatever the height of your footer is*/
     position: fixed;
     bottom: 0;
+
 }

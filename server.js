@@ -202,6 +202,17 @@ async function addUser(name, username, password)
     }
  
 }
+// handling user signout
+app.post("/settings/signout", async(req, res) => {
+
+    console.log("logout submitted, cookie username= ", req.session.username);
+    console.log("attempt to log out")
+
+    req.session.username = null;
+    res.redirect('/login');
+})
+
+
 
 function main()
 {

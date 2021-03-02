@@ -25,7 +25,7 @@ export default class Nav extends React.Component {
                     <Link to="/about" className="navButton">
                         <img src={IconInfo} id="loginicon" width="30" height="30" />
                     </Link>
-                    <Link to="/settings" className="navButton">
+                    <Link to="/settings/general" className="navButton">
                         <img src={IconSettings} id="loginicon" width="30" height="30" />
                     </Link>
                     <Link to="/chats" className="navButton">

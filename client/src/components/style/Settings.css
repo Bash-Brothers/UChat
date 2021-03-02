@@ -20,6 +20,8 @@
 	background-color: #C4C4C4;
 	text-indent: 30px;
 	line-height: 50px;
+	text-decoration: none;
+	color: black;
 }
 
 .menu-button-active {
@@ -30,6 +32,8 @@
 	background-color: #DADADA;
 	text-indent: 30px;
 	line-height: 50px;
+	text-decoration: none;
+	color: black;
 }
 
 .menu-button-active:hover {
@@ -100,5 +104,16 @@
 }
 
 .settings-input:hover {
+	cursor: pointer;
+}
+
+.logout-button {
+	border-color: #444444;
+	background: #EEEEEE;
+	height: 5vh;
+	width: 12vw;
+}
+.logout-button:hover {
+	background: #DDDDDD;
 	cursor: pointer;
 }

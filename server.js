@@ -170,6 +170,9 @@ async function addUser(name, username, password)
 
     var new_user = { name: name, username: username, password: password };
 
+    // Add list of notifications containing notification objects with necessary info?
+
+
     prev_user = await user_data.findOne({username: username});   // checks for previous user with given name
 
     console.log("prev user = ", prev_user);

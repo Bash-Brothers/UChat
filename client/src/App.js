@@ -13,16 +13,6 @@ import SearchPage from './components/SearchPage.js';
 import Test from './components/Test.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
-
-import IconLogin from './images/icon_login.svg';
-import IconSettings from './images/icon_settings.svg';
-import IconInfo from './images/icon_info.svg';
-import IconRegister from './images/icon_register.svg';
-import IconChat from './images/icon_chat.svg';
-import IconContactUs from './images/icon_contactus.svg';
-import IconSearch from './images/icon_search.svg';
-import IconNotif from './images/icon_notif.svg';
-
 import {isLoggedIn} from './utils.js';
 
 // looks at the current page (from App's state) and renders the relevant page

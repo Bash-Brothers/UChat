@@ -10,6 +10,7 @@ import IconChat from '../images/icon_chat.svg';
 import IconContactUs from '../images/icon_contactus.svg';
 import IconSearch from '../images/icon_search.svg';
 import IconNotif from '../images/icon_notif.svg';
+import IconFriendReqs from '../images/friend_requests.svg';
 
 export default class Nav extends React.Component {
     render() {
@@ -31,8 +32,14 @@ export default class Nav extends React.Component {
                     <Link to="/chats" className="navButton">
                         <img src={IconChat} id="loginicon" width="30" height="30" />
                     </Link>
+                    <Link to="/friendrequests" className="navButton">
+                        <img src={IconFriendReqs} id="loginicon" width="30" height="30" />
+                    </Link>
                     <Link to="/search" className="navButton">
                         <img src={IconSearch} id="loginicon" width="30" height="30" />
+                    </Link>
+                    <Link to="/contactus" className="navButton">
+                        <img src={IconContactUs} id="loginicon" width="30" height="30" />
                     </Link>
                 </div>
             </div>

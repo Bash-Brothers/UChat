@@ -1,0 +1,145 @@
+
+
+.friendreqPage{
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: row;
+    height: 90vh;
+}
+
+.friendreqpanel{
+    height: 96vh;
+    width: 40%;
+  }
+
+.searchfriendreq{
+background-color: white;
+height: 4vh;
+}
+
+.inputFieldFriendreq{
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    line-height: 100%;
+  
+  }
+
+.friendreqSearchbar-input {
+    padding: 10px 24px;
+    border-radius: 25px;
+    width: 6vw;
+    height: 0.6vh;
+    vertical-align: middle;
+}
+
+.friendreq-search {
+    background-image: url('../../images/icon_search.svg');
+    background-repeat: no-repeat;
+    background-color: white;
+    padding: 2vh 2vh;
+    border: black;
+    background-size: 3vh 3vh;
+    background-position: 50% 50%;
+    filter: invert(1);
+    height: 2vh;
+    width: 2vh;
+    vertical-align: middle;
+}
+
+.friendreqList{
+    background-color: #C4C4C4;
+    height: 92vh;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.friendreqList::-webkit-scrollbar {
+    width: 10px;
+}
+  
+.friendreqList::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+
+.friendreqList::-webkit-scrollbar-thumb {
+background: #888; 
+
+}
+
+.friendreqList::-webkit-scrollbar-thumb:hover {
+background: #555; 
+}
+
+.friendreq{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    background-color: rgb(126, 161, 177);
+    border: 1px black solid;
+    border-right: none;
+    /* border-radius: 5px; */
+    /* margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;  */
+    height: 175px;
+    position: relative;
+}
+
+.friendrequest{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    background-color: rgb(126, 161, 177);
+    border: 1px black solid;
+    border-right: none;
+    /* border-radius: 5px; */
+    /* margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;  */
+    height: 175px;
+    position: relative;
+}
+
+.acceptButton {
+    background-color: rgb(94, 204, 255);
+    color: black; 
+    height: 30%;
+    width: 32%;
+    border-radius: 6px;
+    position: absolute;
+    top: 60%;
+    right: 35%;
+}
+
+.deleteButton {
+    background-color: rgb(176, 160, 160);
+    color: black; 
+    height: 30%;
+    width: 32%;
+    border-radius: 6px;
+    position: absolute;
+    top: 60%;
+    right: 2%;
+}
+
+.friendname{
+    font: Arial;
+    font-weight: 700;
+    position: absolute;
+    height: 0%;
+    width: 0%;
+    top: 12%;
+    left: 34%;
+    border: black;
+
+}

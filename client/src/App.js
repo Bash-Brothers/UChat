@@ -10,6 +10,8 @@ import About from './components/About.js';
 import SignupPage from './components/SignupPage.js';
 import ContactUsPage from './components/ContactUsPage.js';
 import SearchPage from './components/SearchPage.js';
+import FriendRequests from './components/FriendRequests.js';
+
 import Test from './components/Test.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
@@ -22,6 +24,7 @@ import IconChat from './images/icon_chat.svg';
 import IconContactUs from './images/icon_contactus.svg';
 import IconSearch from './images/icon_search.svg';
 import IconNotif from './images/icon_notif.svg';
+import IconFriendReqs from './images/friend_requests.svg';
 
 import {isLoggedIn} from './utils.js';
 
@@ -169,8 +172,8 @@ class App extends Component {
               <Route path="/search">
                 <SearchPage />
               </Route>
-              <Route path="/">
-                <LoginPage />
+              <Route path="/friendrequests">
+                <FriendRequests />
               </Route>
             </Switch>
           </div>

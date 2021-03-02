@@ -10,3 +10,4 @@ search: https://www.flaticon.com/free-icon/loupe_709592?term=search&page=1&posit
 searchbarbutton: https://www.flaticon.com/free-icon/search_149852?term=search&page=1&position=4&page=1&position=4&related_id=149852&origin=search&origin=tag
 send: https://www.flaticon.com/free-icon/send_736212?term=send&page=1&position=4&page=1&position=4&related_id=736212&origin=search
 notification: https://www.flaticon.com/free-icon/notification_633816?term=notifications&page=1&position=5&page=1&position=5&related_id=633816&origin=search
+friendrequests: https://www.flaticon.com/free-icon/friend-request_3447621?term=friend%20request&page=1&position=7&page=1&position=7&related_id=3447621&origin=tag

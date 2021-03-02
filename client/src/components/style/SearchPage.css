@@ -42,6 +42,10 @@
 
 }
 
+.search-button{
+    background-color: black;
+}
+
 .search-send {
     background-color: rgb(133, 133, 133);
     color: black; 

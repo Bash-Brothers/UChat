@@ -148,7 +148,7 @@ async function loginUser(username, password)
     finally
     {
         db.close();
-        console.log("- Database closed")
+        console.log("- Database closed");
         console.log("return code = ", returnCode);
         return returnCode;
     }
@@ -207,7 +207,7 @@ function friendStatus(username1, username2){
     finally
     {
         db.close();
-        console.log("Database closed")
+        console.log("Database closed");
         console.log("Return code = ", returnCode);
         return retvar;
     }
@@ -237,7 +237,7 @@ function findUsers(substring){
     finally
     {
         db.close();
-        console.log("Database closed")
+        console.log("Database closed");
         console.log("Return code = ", returnCode);
         return matchingUsers;
     }
@@ -273,9 +273,57 @@ function getName(usernameID){
     finally
     {
         db.close();
-        console.log("Database closed")
+        console.log("Database closed");
         console.log("Return code = ", returnCode);
         return matchingUserName;
+    }
+}
+/*NOTE: this function will test to make sure that their status is valid for posterity. Frontent should prevent this check from
+ ever happening by preventing a button push if they are already related*/
+async function sendFriendRequest(username1, username2){
+    if(friendStatus){
+        console.log("Notice: Attempted to send invalid friend req");
+        return -1;
+    }
+    try
+    {
+    db = MongoClient.connect(uri);
+    console.log("Connected to Database for lookup")
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+
+    const filter = { username: username1 };
+    //push a new value to their pending friends
+    const updateDocument = {
+       $push: {
+          outpending: username2,
+       },
+    };
+    const result1 = await user_data.updateOne(filter, updateDocument);
+    
+    const filter = { username: username2 };
+    //push a new value to their notifcations friends
+    const updateDocument = {
+       $push: {
+          notifs: username1,
+       },
+    };
+    const result2 = await user_data.updateOne(filter, updateDocument);
+
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 1;
+    }
+    finally
+    {
+        console.log("Attempted friend request. Status: ", result1, result2);
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        return returnCode;
     }
 }
 
@@ -292,7 +340,7 @@ async function addUser(name, username, password)
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    var new_user = { name: name, username: username, password: password, friends: {}, notifs: {}};
+    var new_user = { name: name, username: username, password: password, friends: {}, notifs: {}, outpending: {}};
 
     // Add list of notifications containing notification objects with necessary info?
 
@@ -323,7 +371,7 @@ async function addUser(name, username, password)
     finally
     {
         db.close();
-        console.log("Database closed")
+        console.log("Database closed");
         console.log("Return code = ", returnCode);
         return returnCode;
     }

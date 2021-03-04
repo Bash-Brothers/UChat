@@ -183,8 +183,10 @@ async function friendStatus(username1, username2){
     user_data = dbo.collection("user_data");
 
     //note to devs, we need this to happen at the same time incase of possible changes at the same time
+    //note, also please handle the pendingfrs
     user1Notifs = await user_data.findOne({username: username1},{notifs: 1});
     user1Friends = await user_data.findOne({username: username2},{username: 1});
+
     if(user1Notifs.contains(username2) && user1Friends.contains(username2)){
         console.log("Issue: The user ", username1, "did not have their notifs scrubbed correctly");
         retvar = -1;
@@ -282,7 +284,8 @@ async function getName(usernameID){
 /*NOTE: this function will test to make sure that their status is valid for posterity. Frontent should prevent this check from
  ever happening by preventing a button push if they are already related*/
 async function sendFriendRequest(username1, username2){
-    if(friendStatus){
+    status = await friendStatus(username1, username2);
+    if(status !== 0){
         console.log("Notice: Attempted to send invalid friend req");
         return -1;
     }
@@ -298,7 +301,7 @@ async function sendFriendRequest(username1, username2){
     //push a new value to their pending friends
     const updateDocument = {
        $push: {
-          outpending: username2,
+          pendingfrs: username2,
        },
     };
     const result1 = await user_data.updateOne(filter, updateDocument);
@@ -341,7 +344,7 @@ async function addUser(name, username, password)
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    var new_user = { name: name, username: username, password: password, friends: {}, notifs: {}, outpending: {}};
+    var new_user = { name: name, username: username, password: password, friends: [], notifs: [], pendingfrs: []};
 
     // Add list of notifications containing notification objects with necessary info?
 

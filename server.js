@@ -172,7 +172,7 @@ function sendFriendRequest(user1, user2);
 //FUNCTION: friends Status: 4 outputs
 //from user1's perspective, what is the friend status of user2? 
 //-1 - error, 0 - not friends at all, 1- pending friends, 2- friends already
-function friendStatus(username1, username2){
+async function friendStatus(username1, username2){
     retvar = -1;
     try
     {
@@ -182,8 +182,9 @@ function friendStatus(username1, username2){
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    user1Notifs = user_data.findOne({username: username1},{notifs: 1});
-    user1Friends = user_data.findOne({username: username2},{username: 1});
+    //note to devs, we need this to happen at the same time incase of possible changes at the same time
+    user1Notifs = await user_data.findOne({username: username1},{notifs: 1});
+    user1Friends = await user_data.findOne({username: username2},{username: 1});
     if(user1Notifs.contains(username2) && user1Friends.contains(username2)){
         console.log("Issue: The user ", username1, "did not have their notifs scrubbed correctly");
         retvar = -1;
@@ -214,7 +215,7 @@ function friendStatus(username1, username2){
 }
 
 //returns an array of usernames that match substring
-function findUsers(substring){
+async function findUsers(substring){
     matchingusers = [];
     try
     {
@@ -224,7 +225,7 @@ function findUsers(substring){
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    matchingUsers = user_data.find( { username: {$regex: substring}}, {username: 1} );
+    matchingUsers = await user_data.find( { username: {$regex: substring}}, {username: 1} );
     matchingUsers.toArray();
     console.log("found users: ", matchingUsers);
     
@@ -243,7 +244,7 @@ function findUsers(substring){
     }
 }
 //FUNCTION: returns array of names based on username substr
-function findUsersNames(substring){
+async function findUsersNames(substring){
     nameslist = [];
     userlist = findUsers(substring);
     for(const item in userlist){
@@ -253,7 +254,7 @@ function findUsersNames(substring){
     return nameslist;
 }
 
-function getName(usernameID){
+async function getName(usernameID){
     matchingUserName = "";
     try
     {
@@ -263,7 +264,7 @@ function getName(usernameID){
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    matchingUserName = user_data.findOne( { username: usernameID}, {name: 1} );
+    matchingUserName = await user_data.findOne( { username: usernameID}, {name: 1} );
     }
     catch (err)
     {

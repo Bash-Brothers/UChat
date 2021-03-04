@@ -5,10 +5,12 @@
 /.pnp
 .pnp.js
 
+
 # testing
 /coverage
 
 # production
+/chatapp-1
 /build
 
 # misc

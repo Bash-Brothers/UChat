@@ -6,7 +6,7 @@
 .menu {
 	display: flex;
 	flex-direction: column;
-	background-color: #C4C4C4;
+	background-color: #1b3faa;
 	height: 96vh;
 	width: 13%;
 	margin-top: 4vh;
@@ -17,11 +17,12 @@
 	height: 50px;
 	width: 100%;
 	text-align: left;
-	background-color: #C4C4C4;
+	background-color: #1b3faa;
 	text-indent: 30px;
 	line-height: 50px;
 	text-decoration: none;
-	color: black;
+	color: white;
+	border-bottom: 1px solid #163099;
 }
 
 .menu-button-active {
@@ -29,11 +30,13 @@
 	height: 50px;
 	width: 100%;
 	text-align: left;
-	background-color: #DADADA;
+	background-color: #131f88;
 	text-indent: 30px;
 	line-height: 50px;
 	text-decoration: none;
-	color: black;
+	color: white;
+	border-bottom: 1px solid #163099;
+
 }
 
 .menu-button-active:hover {
@@ -42,7 +45,6 @@
 
 .menu-button:hover {
 	cursor:pointer;
-	background-color: #D0D0D0;
 }
 
 .content {

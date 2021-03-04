@@ -44,6 +44,7 @@ export default class LoginPage extends React.Component
         if(loggedIn)
         {
             this.setState({loggedIn: true});
+            window.location.reload();
         }
         };
 
@@ -63,11 +64,12 @@ export default class LoginPage extends React.Component
                 <input type="text" name="username" value = {this.state.value} onChange = {this.handleChange} />
                 <p>Password:</p>
                 <input type="password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
+                <p />
                 <input type="submit" value="Login" />
-                <div className="link"><a href ="/">Forgot username/password?</a></div>
-                <div className="link"><a href="/signup">Don't have an account? Click here to sign up.</a></div>
+                <a href ="/" class="loginlink">Forgot username/password?</a>
+                <a href="/signup" class="loginlink">Don't have an account? Click here to sign up.</a>
             </form>
-            <div id="contact" className="link">Need help with your account or have feedback? <a href ="#">Contact us</a></div>
+            <div id="contact" className="contactlink">Need help with your account or have feedback? <a href ="#">Contact us</a></div>
             </div> 
           );
         

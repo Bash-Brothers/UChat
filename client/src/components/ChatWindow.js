@@ -68,7 +68,7 @@ export default class ChatWindow extends Component {
 
                 if(sender === this.state.curUser)
                 {
-                    return <div className="sent">{message}</div>;
+                    return (<div className="sent">{message}</div>);
                 }
                 else
                 {

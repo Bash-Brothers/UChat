@@ -41,7 +41,7 @@ export default class SearchPage extends Component {
 
     handleClick() {
 
-        //change addstatus, send update to backend 
+        //change addstatus, send update to backend (call add friend)
 
     }
 

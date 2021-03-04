@@ -15,6 +15,8 @@ import FriendRequests from './components/FriendRequests.js';
 import Test from './components/Test.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
+<<<<<<< HEAD
+=======
 
 import IconLogin from './images/icon_login.svg';
 import IconSettings from './images/icon_settings.svg';
@@ -26,6 +28,7 @@ import IconSearch from './images/icon_search.svg';
 import IconNotif from './images/icon_notif.svg';
 import IconFriendReqs from './images/friend_requests.svg';
 
+>>>>>>> f580a587397a2c7e237943225b5d801e078d8f8a
 import {isLoggedIn} from './utils.js';
 
 // looks at the current page (from App's state) and renders the relevant page

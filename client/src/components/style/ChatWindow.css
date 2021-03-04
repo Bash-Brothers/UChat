@@ -77,11 +77,22 @@
 
 .messages{
     overflow-y: scroll;
-    height: 91vh;
+    height: 85vh;
     display: flex;
     flex-direction: column-reverse;
     font-size: larger;
     background-color: #33cadb;
+}
+
+.currentChat{
+  height: 6vh;
+  background-color: black;
+  color: white;
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid red 2px;
 }
 
 .received{
@@ -105,6 +116,17 @@
     border: solid grey 2px;
     /*display: inline-block;*/
 }
+
+.no-messages{
+  max-width: 80%;
+  margin-left: 10%;
+  background-color: red;
+  color: white;
+  padding: 4px;
+  border-radius: 5px;
+  border: solid white 3px;
+}
+
 
 .searchbar-input {
     padding: 10px 24px;

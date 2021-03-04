@@ -5,10 +5,12 @@
 /.pnp
 .pnp.js
 
+
 # testing
 /coverage
 
 # production
+/chatapp-1
 /build
 
 # misc
@@ -21,3 +23,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+chatapp-1 - Shortcut.lnk

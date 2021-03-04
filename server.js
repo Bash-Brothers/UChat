@@ -154,6 +154,130 @@ async function loginUser(username, password)
     }
 }
 
+/*helper functions:
+function friendStatus(username1, username2);
+    returns 0 if the users are "strangers"
+    returns 1 if the users are pending friends
+    returns 2 if the users are already friends
+function findUsers(substring);
+    returns an array of usernames that contain substring
+function findUsersNames(substring);
+    same as findUsers but returns names;
+function getName(username);
+    returns the full name of a user given a username
+function sendFriendRequest(user1, user2);
+    user1 now has a pending request, user2 now has a pending invitation (user1 sent to user2)
+*/ 
+
+//FUNCTION: friends Status: 4 outputs
+//from user1's perspective, what is the friend status of user2? 
+//-1 - error, 0 - not friends at all, 1- pending friends, 2- friends already
+function friendStatus(username1, username2){
+    retvar = -1;
+    try
+    {
+    db = MongoClient.connect(uri);
+    console.log("Connected to Database for lookup")
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+
+    user1Notifs = user_data.findOne({username: username1},{notifs: 1});
+    user1Friends = user_data.findOne({username: username2},{username: 1});
+    if(user1Notifs.contains(username2) && user1Friends.contains(username2)){
+        console.log("Issue: The user ", username1, "did not have their notifs scrubbed correctly");
+        retvar = -1;
+    }
+    else if(user1Notifs.contains(username2)){
+        retvar = 1;
+    }
+    else if(user1Friends.contains(username2)){
+        retvar = 2;
+    }
+    else{
+        retvar = 0;
+    }
+
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 1;
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed")
+        console.log("Return code = ", returnCode);
+        return retvar;
+    }
+}
+
+//returns an array of usernames that match substring
+function findUsers(substring){
+    matchingusers = [];
+    try
+    {
+    db = MongoClient.connect(uri);
+    console.log("Connected to Database for lookup")
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+
+    matchingUsers = user_data.find( { username: {$regex: substring}}, {username: 1} );
+    matchingUsers.toArray();
+    console.log("found users: ", matchingUsers);
+    
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 1;
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed")
+        console.log("Return code = ", returnCode);
+        return matchingUsers;
+    }
+}
+//FUNCTION: returns array of names based on username substr
+function findUsersNames(substring){
+    nameslist = [];
+    userlist = findUsers(substring);
+    for(const item in userlist){
+        nameslist.push(item);
+    }
+    console.log("Query for names");
+    return nameslist;
+}
+
+function getName(usernameID){
+    matchingUserName = "";
+    try
+    {
+    db = MongoClient.connect(uri);
+    console.log("Connected to Database for lookup")
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+
+    matchingUserName = user_data.findOne( { username: usernameID}, {name: 1} );
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 1;
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed")
+        console.log("Return code = ", returnCode);
+        return matchingUserName;
+    }
+}
 
 // function that adds a new user to the database - should be called by /signup
 async function addUser(name, username, password)
@@ -168,7 +292,7 @@ async function addUser(name, username, password)
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    var new_user = { name: name, username: username, password: password };
+    var new_user = { name: name, username: username, password: password, friends: {}, notifs: {}};
 
     // Add list of notifications containing notification objects with necessary info?
 

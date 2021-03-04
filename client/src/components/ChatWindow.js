@@ -32,6 +32,7 @@ export default class ChatWindow extends Component {
     }
 
     render() {
+
         if(this.state.loggedIn == false)
         {
             //alert('Log in to view chats!');

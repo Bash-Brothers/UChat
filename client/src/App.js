@@ -10,9 +10,25 @@ import About from './components/About.js';
 import SignupPage from './components/SignupPage.js';
 import ContactUsPage from './components/ContactUsPage.js';
 import SearchPage from './components/SearchPage.js';
+import FriendRequests from './components/FriendRequests.js';
+
 import Test from './components/Test.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
+<<<<<<< HEAD
+=======
+
+import IconLogin from './images/icon_login.svg';
+import IconSettings from './images/icon_settings.svg';
+import IconInfo from './images/icon_info.svg';
+import IconRegister from './images/icon_register.svg';
+import IconChat from './images/icon_chat.svg';
+import IconContactUs from './images/icon_contactus.svg';
+import IconSearch from './images/icon_search.svg';
+import IconNotif from './images/icon_notif.svg';
+import IconFriendReqs from './images/friend_requests.svg';
+
+>>>>>>> f580a587397a2c7e237943225b5d801e078d8f8a
 import {isLoggedIn} from './utils.js';
 
 // looks at the current page (from App's state) and renders the relevant page
@@ -159,8 +175,8 @@ class App extends Component {
               <Route path="/search">
                 <SearchPage />
               </Route>
-              <Route path="/">
-                <LoginPage />
+              <Route path="/friendrequests">
+                <FriendRequests />
               </Route>
             </Switch>
           </div>

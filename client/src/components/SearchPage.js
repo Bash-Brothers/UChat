@@ -1,8 +1,28 @@
 import React, { Component } from "react";
 import './style/SearchPage.css';
 import egg from '../images/paul.jpg';
+import {Redirect} from "react-router-dom";
+import {isLoggedIn} from '../utils.js';
 
-export default function SearchPage(props) {
+export default class SearchPage extends Component {
+
+    constructor(props)
+    {
+        super(props);
+        this.state = {loggedIn: true};
+    }
+    componentDidMount() //we need to make sure we are actually logged in
+    {                   
+        console.log("Inside component did mount for chat window");
+        isLoggedIn().then(loggedIn => this.setState({loggedIn: loggedIn}));
+    }
+    render() {
+        if(this.state.loggedIn == false)
+        {
+            return <Redirect to='/login' />;
+        }
+
+
         return (
             <div className="searchpage">
                 <form>
@@ -36,6 +56,7 @@ export default function SearchPage(props) {
                         />
                     </form>
                 </div> */}
-             </div> 
+            </div> 
         )
+    }
 }

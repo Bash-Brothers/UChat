@@ -516,13 +516,14 @@ async function addFriend(username1, username2){
 
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
-
+    //create new chat HERE
 
     const filter = { username: username1 };
     //push a new value to their notifcations friends
     const updateDocument = {
        $push: {
           friends: username2,
+          //ADD NEW CHAT TO BOTH
        },
     };
     const result1 = await user_data.updateOne(filter, updateDocument);
@@ -532,6 +533,7 @@ async function addFriend(username1, username2){
     const updateDocument = {
        $push: {
           friends: username1,
+          //ADD NEW CHAT TO BOTH
        },
     };
     const result2 = await user_data.updateOne(filter, updateDocument);

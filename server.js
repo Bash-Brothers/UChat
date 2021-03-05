@@ -1,3 +1,4 @@
+const { response } = require("express");
 var express = require("express"),
     bodyParser = require("body-parser"),
     MongoClient = require('mongodb').MongoClient,
@@ -226,7 +227,7 @@ async function addUser(name, username, password)
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    var new_user = { name: name, username: username, password: password, friends: [], notifs: [], pendingfr: []};
+    var new_user = { name: name, username: username, password: password, chats: [], friends: [], notifs: [], pendingfr: []};
 
     // Add list of notifications containing notification objects with necessary info?
 
@@ -263,6 +264,76 @@ async function addUser(name, username, password)
     }
  
 }
+
+async function userInfo(username)
+{
+
+    console.log("Inside server.js/userInfo");
+    let returnCode;
+    let info;
+    try
+    {
+    db = await MongoClient.connect(uri);
+    console.log("- Connected to Database for user info lookup")
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+ 
+    user = await user_data.findOne({username: username}, {name: true, username: false, password: false, friends: true, notifs: true, pending: true}); 
+
+    if (user == null)
+    {
+        console.log("User not found")
+        returnCode = 1;
+        return;
+    }
+
+    info = user; 
+    returnCode = 0;
+
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 2;
+    }
+
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        
+        return {returnCode: returnCode, info: info};
+    }
+
+
+}
+
+// endpoint to check who the current user is
+app.get("/info", async(req, res) => {
+    const username = req.session.username; 
+    console.log("inside /info, username = ", username);
+    res.send({username: req.session.username});
+})
+
+// endpoint to retrieve all the user info
+app.get("/info/:username", async (req, res) => {
+    const username = req.params.username;
+
+    info = await userInfo(username);
+    
+
+    if (info.returnCode != 0)
+    {
+        res.send({returnCode: returnCode, info: null});
+    }
+    
+    info = await info.info;
+
+    res.send({returnCode: 0, info: info});
+
+});
 
 
 /*FRIEND helper functions:
@@ -598,6 +669,56 @@ async function confirmFriend(username1, username2){
     }
 }
 
+// returns the entire message list from this chatID
+app.get("/chat/:chat_id", async (req, res) => 
+{
+    const chat_id = req.params.chat_id;
+    console.log("Inside server.js /chat/", chat_id);
+
+    let returnCode;
+    let messages;
+    let participants;
+    try
+    {
+        db = await MongoClient.connect(uri);
+        console.log("- Connected to database for chat retrieval");
+
+        var dbo = db.db("test_db");
+        chat_data = dbo.collection("chat_data");
 
 
+        const chat = await chat_data.findOne({chat_id: chat_id});
+
+        if (chat == null) // chat doesn't exist 
+        {
+            console.log("Chat doesn't exist");
+            returnCode = 1;
+            return;
+        }
+
+        participants = await chat.participants;
+
+        if (!participants.includes(req.session.username))   // if user isn't a participant in the chat
+        {
+            console.log("User isn't logged in ");
+            returnCode = 2;
+            return;
+        }
+        
+        messages = await chat.messages;
+        returnCode = 0;
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 3;
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        res.json({returnCode: returnCode , messages: messages, participants: participants});
+    }
+});
 

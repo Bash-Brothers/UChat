@@ -4,11 +4,6 @@ import egg from '../images/paul.jpg';
 import {Redirect} from "react-router-dom";
 import {isLoggedIn} from '../utils.js';
 
-
-
-
-
-
 export default class SearchPage extends Component {
 
     constructor(props)
@@ -62,7 +57,6 @@ export default class SearchPage extends Component {
         }
     }
 
-
     render() {
         if(this.state.loggedIn == false)
         {
@@ -82,7 +76,6 @@ export default class SearchPage extends Component {
             </div>
             )
 
-
         return (
             <div className="searchpage">
                 <form action="/search" onSubmit={this.handleSubmit}>
@@ -92,7 +85,7 @@ export default class SearchPage extends Component {
                         class="search-input"
                         value= {this.state.value}
                         onChange= {this.handleChange}
-                        placeholder="Search for Friends"
+                        placeholder="Search for Users"
                     />
                 </form>
                 {renderedcards}

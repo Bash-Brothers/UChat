@@ -4,6 +4,11 @@ import egg from '../images/paul.jpg';
 import {Redirect} from "react-router-dom";
 import {isLoggedIn} from '../utils.js';
 
+
+
+
+
+
 export default class SearchPage extends Component {
 
     constructor(props)
@@ -40,9 +45,21 @@ export default class SearchPage extends Component {
     };
 
     handleClick() {
+        console.log("handleClick called")
 
         //change addstatus, send update to backend (call add friend)
 
+    }
+
+    button(status) {
+        switch (status) {
+            case 0:
+                return(<div className="button-add" onClick={() => this.handleClick()}/>)
+            case 1: 
+                return(<div className="button-pending"/>)
+            case 2:
+                return(<div className="button-friend"/>)
+        }
     }
 
 
@@ -60,8 +77,8 @@ export default class SearchPage extends Component {
                 <div className="contactname">
                     {contactcard['user']}
                 </div>
-                <div className = { (contactcard['addstatus'] === 0) ? "button-add" : (contactcard['addstatus'] === 1) ? "button-pending" : "button-friend"}
-                onClick={() => this.handleClick()}/>
+                {this.button(contactcard['addstatus'])}
+                
             </div>
             )
 
@@ -76,7 +93,6 @@ export default class SearchPage extends Component {
                         value= {this.state.value}
                         onChange= {this.handleChange}
                         placeholder="Search for Friends"
-
                     />
                 </form>
                 {renderedcards}

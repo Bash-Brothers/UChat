@@ -111,19 +111,6 @@ app.post("/login", async(req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Handling accept/delete friend request decision
 
 app.post("/friendrequests", async(req, res) => {
@@ -151,92 +138,34 @@ app.post("/friendrequests", async(req, res) => {
 })
 
 
+// handling user signout
+app.post("/settings/signout", async(req, res) => {
 
-async function removeRequest(username, friendname)
+    console.log("logout submitted, cookie username= ", req.session.username);
+    console.log("attempt to log out")
+
+    req.session.username = null;
+    res.redirect('/login');
+})
+
+
+
+function main()
 {
-    console.log("Inside add user");
-    var returnCode = 0;
-
-    try
-    {
-    db = await MongoClient.connect(uri);
-    console.log("- Connected to Database for friend request processing")
-
-    var dbo = db.db("test_db");
-    user_data = dbo.collection("user_data");
-
-    // Find the friend request list of a specific user
-
-    user = await user_data.findOne({username: username});
-
-    console.log("true user = ", user);
-
-
-    // Search through the friend request list of the above specific user
-
-    req = await user.findOne({friendname: friendname});   // checks for friend request from given friend's name
-
-    console.log("matching request found = ", req);
-
-
-    // Getting the specific friend's name that we will use to identify the friend request
-
-    var friend_req_identifier = { friendname: friendname }; // Not sure if we need the username in here as well
-
-
-    if (req == null) // if friend request from given friend's name does not exist
-    {
-        throw "friend request not found";
-    }
-
-    user_data.deleteOne(friend_req_identifier,
-        function(err, res) 
-        {
-            console.log("- Friend request deleted");
-        }
-    );
-
-    }
-    catch (err)
-    {
-        console.log(err);
-        returnCode = 1;
-    }
-
-    finally
-    {
-        db.close();
-        console.log("Database closed")
-        console.log("Return code = ", returnCode);
-        return returnCode;
-    }
+    var port = process.env.PORT || 5000;
+    app.listen(port, function () {
+        console.log("Server Has Started!");
+    });
 
 }
+main();
 
 
+/*
+HELPER FUNCTIONS
+*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*Initial user handling, creation helpers*/
 
 async function loginUser(username, password)
 {
@@ -283,7 +212,59 @@ async function loginUser(username, password)
     }
 }
 
-/*helper functions:
+// function that adds a new user to the database - should be called by /signup
+async function addUser(name, username, password)
+{
+    console.log("Inside add user");
+    var returnCode = 0;
+    try
+    {
+    db = await MongoClient.connect(uri);
+    console.log("- Connected to Database for user creation")
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+
+    var new_user = { name: name, username: username, password: password, friends: [], notifs: [], pendingfrs: []};
+
+    // Add list of notifications containing notification objects with necessary info?
+
+
+    prev_user = await user_data.findOne({username: username});   // checks for previous user with given name
+
+    console.log("prev user = ", prev_user);
+
+    if (prev_user != null) // if the prev_user is already present
+    {
+        throw "username taken";
+    }
+
+    user_data.insertOne(new_user, 
+        function(err, res) 
+        {
+            console.log("- New user added");
+        }
+    );
+
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 1;
+    }
+
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        return returnCode;
+    }
+ 
+}
+
+
+/*FRIEND helper functions:
 function friendStatus(username1, username2);
     returns 0 if the users are "strangers"
     returns 1 if the users are pending friends
@@ -374,16 +355,6 @@ async function findUsers(substring){
         return matchingUsers;
     }
 }
-//FUNCTION: returns array of names based on username substr
-async function findUsersNames(substring){
-    nameslist = [];
-    userlist = findUsers(substring);
-    for(const item in userlist){
-        nameslist.push(item);
-    }
-    console.log("Query for names");
-    return nameslist;
-}
 
 async function getName(usernameID){
     matchingUserName = "";
@@ -410,6 +381,21 @@ async function getName(usernameID){
         return matchingUserName;
     }
 }
+
+
+
+//FUNCTION: returns array of names based on username substr
+async function findUsersNames(substring){
+    nameslist = [];
+    userlist = findUsers(substring);
+    for(const item in userlist){
+        nameslist.push(item);
+    }
+    console.log("Query for names");
+    return nameslist;
+}
+
+
 /*NOTE: this function will test to make sure that their status is valid for posterity. Frontent should prevent this check from
  ever happening by preventing a button push if they are already related*/
 async function sendFriendRequest(username1, username2){
@@ -460,37 +446,47 @@ async function sendFriendRequest(username1, username2){
     }
 }
 
-// function that adds a new user to the database - should be called by /signup
-async function addUser(name, username, password)
+async function removeRequest(username, friendname)
 {
     console.log("Inside add user");
     var returnCode = 0;
+
     try
     {
     db = await MongoClient.connect(uri);
-    console.log("- Connected to Database for user creation")
+    console.log("- Connected to Database for friend request processing")
 
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    var new_user = { name: name, username: username, password: password, friends: [], notifs: [], pendingfrs: []};
+    // Find the friend request list of a specific user
 
-    // Add list of notifications containing notification objects with necessary info?
+    user = await user_data.findOne({username: username});
+
+    console.log("true user = ", user);
 
 
-    prev_user = await user_data.findOne({username: username});   // checks for previous user with given name
+    // Search through the friend request list of the above specific user
 
-    console.log("prev user = ", prev_user);
+    req = await user.findOne({friendname: friendname});   // checks for friend request from given friend's name
 
-    if (prev_user != null) // if the prev_user is already present
+    console.log("matching request found = ", req);
+
+
+    // Getting the specific friend's name that we will use to identify the friend request
+
+    var friend_req_identifier = { friendname: friendname }; // Not sure if we need the username in here as well
+
+
+    if (req == null) // if friend request from given friend's name does not exist
     {
-        throw "username taken";
+        throw "friend request not found";
     }
 
-    user_data.insertOne(new_user, 
+    user_data.deleteOne(friend_req_identifier,
         function(err, res) 
         {
-            console.log("- New user added");
+            console.log("- Friend request deleted");
         }
     );
 
@@ -504,30 +500,58 @@ async function addUser(name, username, password)
     finally
     {
         db.close();
+        console.log("Database closed")
+        console.log("Return code = ", returnCode);
+        return returnCode;
+    }
+
+}
+
+async function addFriend(username1, username2){
+    matchingUserName = "";
+    try
+    {
+    db = MongoClient.connect(uri);
+    console.log("Connected to Database for lookup")
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+
+
+    const filter = { username: username1 };
+    //push a new value to their notifcations friends
+    const updateDocument = {
+       $push: {
+          friends: username2,
+       },
+    };
+    const result1 = await user_data.updateOne(filter, updateDocument);
+
+    const filter = { username: username2 };
+    //push a new value to their notifcations friends
+    const updateDocument = {
+       $push: {
+          friends: username1,
+       },
+    };
+    const result2 = await user_data.updateOne(filter, updateDocument);
+
+    }
+
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 1;
+    }
+    finally
+    {
+        db.close();
         console.log("Database closed");
         console.log("Return code = ", returnCode);
         return returnCode;
     }
- 
 }
-// handling user signout
-app.post("/settings/signout", async(req, res) => {
-
-    console.log("logout submitted, cookie username= ", req.session.username);
-    console.log("attempt to log out")
-
-    req.session.username = null;
-    res.redirect('/login');
-})
 
 
 
-function main()
-{
-    var port = process.env.PORT || 5000;
-    app.listen(port, function () {
-        console.log("Server Has Started!");
-    });
 
-}
-main();

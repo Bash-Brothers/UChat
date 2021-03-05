@@ -225,7 +225,7 @@ async function addUser(name, username, password)
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    var new_user = { name: name, username: username, password: password, friends: [], notifs: [], pendingfrs: []};
+    var new_user = { name: name, username: username, password: password, friends: [], notifs: [], pendingfr: []};
 
     // Add list of notifications containing notification objects with necessary info?
 
@@ -293,19 +293,19 @@ async function friendStatus(username1, username2){
     user_data = dbo.collection("user_data");
 
     //note to devs, we need this to happen at the same time incase of possible changes at the same time
-    //note, also please handle the pendingfrs
-    user1Notifs = await user_data.findOne({username: username1},{notifs: 1});
-    user1Friends = await user_data.findOne({username: username2},{username: 1});
+    //note, also please handle the pendingfr
+    user1status = await user_data.findOne({username: username1},{notifs: 1, friends: 1});
+    user2status = await user_data.findOne({username: username2},{notifs: 1, friends: 1, });
 
-    if(user1Notifs.includes(username2) && user1Friends.includes(username2)){
+    if(user1status.notifs.includes(username2) && user1status.notifs.includes(username2)){
         console.log("Issue: The user ", username1, "did not have their notifs scrubbed correctly");
         retvar = -1;
     }
-    else if(user1Notifs.includes(username2)){
-        retvar = 1;
-    }
-    else if(user1Friends.includes(username2)){
+    else if(user1status.friends.includes(username2) || user2status.friends.includes(username2)){
         retvar = 2;
+    }
+    else if(user1status.notifs.includes(username2) || user2status.notifs.includes(username2)){
+        retvar = 1;
     }
     else{
         retvar = 0;
@@ -416,7 +416,7 @@ async function sendFriendRequest(username1, username2){
     //push a new value to their pending friends
     const updateDocument1 = {
        $push: {
-          pendingfrs: username2,
+          pendingfr: username2,
        },
     };
     const result1 = await user_data.updateOne(filter1, updateDocument1);
@@ -446,7 +446,7 @@ async function sendFriendRequest(username1, username2){
     }
 }
 
-async function removeRequest(username, friendname)
+async function removeFriendRequest(username, friendname)
 {
     console.log("Inside add user");
     var returnCode = 0;
@@ -507,7 +507,8 @@ async function removeRequest(username, friendname)
 
 }
 
-async function addFriend(username1, username2){
+async function confirmFriend(username1, username2){
+    //remove Friend request
     matchingUserName = "";
     try
     {
@@ -518,11 +519,14 @@ async function addFriend(username1, username2){
     user_data = dbo.collection("user_data");
     //create new chat HERE
 
+    /* ChatID = await newChat(username1, username2) //returns chatID*/
+
     const filter1 = { username: username1 };
     //push a new value to their notifcations friends
     const updateDocument1 = {
        $push: {
           friends: username2,
+          chats: chatID,
           //ADD NEW CHAT TO BOTH
        },
     };
@@ -533,6 +537,7 @@ async function addFriend(username1, username2){
     const updateDocument2 = {
        $push: {
           friends: username1,
+          chats: chatID,
           //ADD NEW CHAT TO BOTH
        },
     };

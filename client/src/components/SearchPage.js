@@ -25,6 +25,7 @@ export default class SearchPage extends Component {
 
         return (
             <div className="searchpage">
+<<<<<<< Updated upstream
                 <form>
                     <div class="search-bar">
                         <input 
@@ -40,6 +41,17 @@ export default class SearchPage extends Component {
                             class="search-send" 
                         />
                     </div>  
+=======
+                <form action="/search" onSubmit={this.handleSubmit}>
+                    <input 
+                        type="search"
+                        name="query"
+                        className="search-input"
+                        value= {this.state.value}
+                        onChange= {this.handleChange}
+                        placeholder="Search for Friends"
+                    />
+>>>>>>> Stashed changes
                 </form>
                 
                 {/* <div className="search">

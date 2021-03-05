@@ -1,62 +1,97 @@
 
-.searchpage{
+.searchpage {
     height: 96vh;
     display: flex;
     margin-top: 4vh;
-    justify-content: center;
+    justify-content: left;
     flex-direction: column;
-    align-items:center;
-    background-color: lightgray;
-    position: relative;
-}
+    align-items: center;
+    background-color: #ffffff;
+    }
 
-/* #loginlogo{
-    height: 25vh;
-    border: solid black 3px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-} */
-
-.search{
-    background-color: indigo;
-    color: white;
-    font-size: larger;
-    top: 300px;
-    position: fixed;
-    padding: 0px;
-    border-radius: 30px;
-    
-}
 
 .search-input {
-    /* background-color: white; */
-    background-color: rgb(202, 202, 202);
-    color: white; 
-    height: 5%; 
-    width: 40%;
-    border-radius: 10px;
-    position: absolute;
-    top: 30%;
-    right: 35%;
-    padding: 2px 0px 2px 30px;
-
-}
-
-.search-button{
-    background-color: black;
-}
-
-.search-send {
-    background-color: rgb(133, 133, 133);
+    background-color: #ffffff;
+    margin-top: 2vh;
     color: black; 
-    height: 5%;
-    width: 4%;
-    border-radius: 25px;
-    position: absolute;
-    top: 30%;
-    left: 65%;
+    height: 5vh; 
+    width: 40vw;
+    border-radius: 10px;
+    padding: 2px 0px 2px 30px;
+    background-image: url('../../images/icon_search.svg');
+    background-size: 20px 20px;
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+
+
 }
 
-input[type="search"] {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+.contactcard {
+    display: flex;
+    margin-top: 2vh;
+    width: 20vw;
+    height: 8vh;
+    border: 1px solid black;
+    border-radius: 10px;
+    background:  #1b3faa;
+}
+
+.contactname {
+    margin-top: 1vh;
+    height: 6vh;
+    width: 14vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
+    line-height: 6vh;
+    align-items: center;
+    color: white;
+    background:  #1b3faa;
+}
+
+
+.button-add {
+    height: 6vh;
+    margin-top: 1vh;
+    width: 3vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    background-image: url('../../images/icon_add.svg');
+    background-size: 2vh 2vh;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    filter: invert(1);
+    cursor: pointer;
+}
+
+.button-add:hover{
+    background-image: url('../../images/icon_add.svg');
+    border: black solid 2px;
+    border-radius: 10px;
+}
+
+.button-pending {
+    height: 6vh;
+    margin-top: 1vh;
+    width: 3vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    background-image: url('../../images/icon_pending.svg');
+    background-size: 2vh 2vh;
+    background-position: 50% 90%;
+    background-repeat: no-repeat;
+    filter: invert(1);
+
+}
+
+.button-friend {
+    height: 6vh;
+    margin-top: 1vh;
+    width: 3vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    background-image: url('../../images/icon_check.svg');
+    background-size: 2vh 2vh;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    filter: invert(1);
 }

@@ -11,3 +11,6 @@ searchbarbutton: https://www.flaticon.com/free-icon/search_149852?term=search&pa
 send: https://www.flaticon.com/free-icon/send_736212?term=send&page=1&position=4&page=1&position=4&related_id=736212&origin=search
 notification: https://www.flaticon.com/free-icon/notification_633816?term=notifications&page=1&position=5&page=1&position=5&related_id=633816&origin=search
 friendrequests: https://www.flaticon.com/free-icon/friend-request_3447621?term=friend%20request&page=1&position=7&page=1&position=7&related_id=3447621&origin=tag
+pendingicon: https://www.flaticon.com/free-icon/more_512142?term=three%20dots&page=1&position=3&page=1&position=3&related_id=512142&origin=search
+addicon: https://www.flaticon.com/free-icon/add_1237946?term=plus&page=1&position=1&page=1&position=1&related_id=1237946&origin=search
+check icon: https://www.flaticon.com/free-icon/tick_447147?term=checkmark&page=1&position=1&page=1&position=1&related_id=447147&origin=search

@@ -16,30 +16,7 @@ import Test from './components/Test.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
 
-import {isLoggedIn} from './utils.js';
-
-// looks at the current page (from App's state) and renders the relevant page
-function CurPage(props) {
-  const page = props.page;
-  switch (page) {
-    case 0:
-      return <LoginPage />;
-    case 1:
-      return <SignupPage />;
-    case 2:
-      return <About />;
-    case 3:
-      return <SettingsGeneral />;
-    case 4:
-      return <ChatWindow />;
-    case 5:
-      return <SearchPage />;
-    case 6:
-      return <ContactUsPage />;
-
-  }
-  return <LoginPage />;
-}
+import { isLoggedIn } from './utils.js';
 
 // render the notifications menu if the user has clicked on the notifications button
 function RenderNotifs(props) {
@@ -139,31 +116,34 @@ class App extends Component {
                 <SignupPage />
               </Route>
               <Route path="/login">
-                <LoginPage/>
+                <LoginPage />
               </Route>
               <Route path="/chats">
-                <ChatWindow/>
+                <ChatWindow />
               </Route>
               <Route path="/search">
-                <SearchPage/>
+                <SearchPage />
               </Route>
               <Route path="/contactus">
-                <ContactUsPage/>
+                <ContactUsPage />
               </Route>
               <Route path="/settings/general">
-                <SettingsGeneral/>
+                <SettingsGeneral />
               </Route>
               <Route path="/settings/appearance">
-                <SettingsAppearance/>
+                <SettingsAppearance />
               </Route>
               <Route path="/settings/signout">
-                <SettingsSignout/>
+                <SettingsSignout />
               </Route>
               <Route path="/search">
                 <SearchPage />
               </Route>
               <Route path="/friendrequests">
                 <FriendRequests />
+              </Route>
+              <Route path="/">
+                <LoginPage />
               </Route>
             </Switch>
           </div>

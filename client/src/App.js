@@ -16,7 +16,7 @@ import Test from './components/Test.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
 
-import { isLoggedIn } from './utils.js';
+import {isLoggedIn} from './utils.js';
 
 // render the notifications menu if the user has clicked on the notifications button
 function RenderNotifs(props) {
@@ -143,7 +143,7 @@ class App extends Component {
                 <FriendRequests />
               </Route>
               <Route path="/">
-                <LoginPage />
+                <LoginPage/>
               </Route>
             </Switch>
           </div>

@@ -78,15 +78,17 @@ export default class SearchPage extends Component {
 
         return (
             <div className="searchpage">
+
                 <form action="/search" onSubmit={this.handleSubmit}>
                     <input 
                         type="search"
                         name="query"
-                        class="search-input"
+                        className="search-input"
                         value= {this.state.value}
                         onChange= {this.handleChange}
-                        placeholder="Search for Users"
+                        placeholder="Search for Friends"
                     />
+
                 </form>
                 {renderedcards}
             </div> 

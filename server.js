@@ -2,7 +2,8 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     MongoClient = require('mongodb').MongoClient,
     cookieSession = require('cookie-session'),     
-    path = require('path');  
+    path = require('path'), 
+    { v4: uuidv4 } = require('uuid');  
 
 
 // the link to the database along with username and password for the db - can be copied off Mongo's connection page 
@@ -507,6 +508,47 @@ async function removeFriendRequest(username, friendname)
 
 }
 
+async function createNewChat(username1, username2)
+{
+    let returnCode;
+    try
+    {
+        db = MongoClient.connect(uri);
+        console.log("Connected to database for new chat creation");
+
+        var dbo = db.db("test_db");
+        chat_data = dbo.collect("chat_data");
+
+        var uniqueChatID = uuidv4();
+        new_chat = {
+            chat_id: uniqueChatID, 
+            messages: [],
+            participants: [username1, username2]
+            }
+
+        chat_data.insertOne(new_chat, 
+            function(err, res)
+            {
+                if (err) throw err;
+                console.log("New chat with ID ", uniqueChatID, " added");
+            });
+
+        returnCode = uniqueChatID;
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = -1;
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        return returnCode;
+    }
+}
+
 async function confirmFriend(username1, username2){
     //remove Friend request
     matchingUserName = "";
@@ -518,8 +560,7 @@ async function confirmFriend(username1, username2){
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
     //create new chat HERE
-
-    /* ChatID = await newChat(username1, username2) //returns chatID*/
+    chatID = await createNewChat(username1, username2);
 
     const filter1 = { username: username1 };
     //push a new value to their notifcations friends
@@ -527,7 +568,6 @@ async function confirmFriend(username1, username2){
        $push: {
           friends: username2,
           chats: chatID,
-          //ADD NEW CHAT TO BOTH
        },
     };
     const result1 = await user_data.updateOne(filter1, updateDocument1);
@@ -538,7 +578,6 @@ async function confirmFriend(username1, username2){
        $push: {
           friends: username1,
           chats: chatID,
-          //ADD NEW CHAT TO BOTH
        },
     };
     const result2 = await user_data.updateOne(filter2, updateDocument2);

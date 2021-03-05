@@ -98,7 +98,7 @@ background: #555;
     justify-content: center;
     align-items: center;
     font-size: large;
-    background-color: rgb(126, 161, 177);
+    background-color: rgb(223, 223, 223);
     border: 1px black solid;
     border-right: none;
     /* border-radius: 5px; */
@@ -111,25 +111,40 @@ background: #555;
 }
 
 .acceptButton {
-    background-color: rgb(94, 204, 255);
-    color: black; 
+    background-color: #1b3faa;
+    color: white; 
     height: 30%;
     width: 32%;
+    border: solid black 2px;
     border-radius: 6px;
     position: absolute;
     top: 60%;
     right: 35%;
+    cursor: pointer;
+    font-size: large;
+}
+
+.acceptButton:hover{
+    background-color: black;
 }
 
 .deleteButton {
-    background-color: rgb(176, 160, 160);
+    background-color: white;
     color: black; 
     height: 30%;
     width: 32%;
+    border: solid black 2px;
     border-radius: 6px;
     position: absolute;
     top: 60%;
     right: 2%;
+    cursor: pointer;
+    font-size: large;
+}
+
+.deleteButton:hover{
+    background-color: black;
+    color: white;
 }
 
 .friendname{

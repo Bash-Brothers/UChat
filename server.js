@@ -109,6 +109,135 @@ app.post("/login", async(req, res) => {
 })
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Handling accept/delete friend request decision
+
+app.post("/friendrequests", async(req, res) => {
+
+    console.log(req.session.username, " responded to friend request");
+
+    var username = req.body.username; // entered username
+    var friendname = req.body.changedfriendrequest;   // entered name of person who sent friend req
+    var response = req.body.response;   // entered user's response
+
+    console.log("In the friend request list of ", username);
+    console.log("   request changed = ", friendname);
+    console.log("   response = ", response);
+
+    // Here, as opposed to backend login functionality, no checking of the submitted data needs to be done
+    // Username is already confirmed to be in database during login page checking
+    // There are only 2 options: Accept and Delete
+
+    successCode = await removeRequest(username, friendname);
+
+    // Based on response,
+    // Call addFriend function here?
+
+    return res.json({successCode: successCode}); // There is only one option here: success
+})
+
+
+
+async function removeRequest(username, friendname)
+{
+    console.log("Inside add user");
+    var returnCode = 0;
+
+    try
+    {
+    db = await MongoClient.connect(uri);
+    console.log("- Connected to Database for friend request processing")
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+
+    // Find the friend request list of a specific user
+
+    user = await user_data.findOne({username: username});
+
+    console.log("true user = ", user);
+
+
+    // Search through the friend request list of the above specific user
+
+    req = await user.findOne({friendname: friendname});   // checks for friend request from given friend's name
+
+    console.log("matching request found = ", req);
+
+
+    // Getting the specific friend's name that we will use to identify the friend request
+
+    var friend_req_identifier = { friendname: friendname }; // Not sure if we need the username in here as well
+
+
+    if (req == null) // if friend request from given friend's name does not exist
+    {
+        throw "friend request not found";
+    }
+
+    user_data.deleteOne(friend_req_identifier,
+        function(err, res) 
+        {
+            console.log("- Friend request deleted");
+        }
+    );
+
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 1;
+    }
+
+    finally
+    {
+        db.close();
+        console.log("Database closed")
+        console.log("Return code = ", returnCode);
+        return returnCode;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 async function loginUser(username, password)
 {
     console.log("Inside loginUser")

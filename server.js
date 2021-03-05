@@ -297,14 +297,14 @@ async function friendStatus(username1, username2){
     user1Notifs = await user_data.findOne({username: username1},{notifs: 1});
     user1Friends = await user_data.findOne({username: username2},{username: 1});
 
-    if(user1Notifs.contains(username2) && user1Friends.contains(username2)){
+    if(user1Notifs.includes(username2) && user1Friends.includes(username2)){
         console.log("Issue: The user ", username1, "did not have their notifs scrubbed correctly");
         retvar = -1;
     }
-    else if(user1Notifs.contains(username2)){
+    else if(user1Notifs.includes(username2)){
         retvar = 1;
     }
-    else if(user1Friends.contains(username2)){
+    else if(user1Friends.includes(username2)){
         retvar = 2;
     }
     else{
@@ -412,23 +412,23 @@ async function sendFriendRequest(username1, username2){
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    const filter = { username: username1 };
+    const filter1 = { username: username1 };
     //push a new value to their pending friends
-    const updateDocument = {
+    const updateDocument1 = {
        $push: {
           pendingfrs: username2,
        },
     };
-    const result1 = await user_data.updateOne(filter, updateDocument);
+    const result1 = await user_data.updateOne(filter1, updateDocument1);
     
-    const filter = { username: username2 };
+    const filter2 = { username: username2 };
     //push a new value to their notifcations friends
-    const updateDocument = {
+    const updateDocument2 = {
        $push: {
           notifs: username1,
        },
     };
-    const result2 = await user_data.updateOne(filter, updateDocument);
+    const result2 = await user_data.updateOne(filter2, updateDocument2);
 
     }
     catch (err)
@@ -518,25 +518,25 @@ async function addFriend(username1, username2){
     user_data = dbo.collection("user_data");
     //create new chat HERE
 
-    const filter = { username: username1 };
+    const filter1 = { username: username1 };
     //push a new value to their notifcations friends
-    const updateDocument = {
+    const updateDocument1 = {
        $push: {
           friends: username2,
           //ADD NEW CHAT TO BOTH
        },
     };
-    const result1 = await user_data.updateOne(filter, updateDocument);
+    const result1 = await user_data.updateOne(filter1, updateDocument1);
 
-    const filter = { username: username2 };
+    const filter2 = { username: username2 };
     //push a new value to their notifcations friends
-    const updateDocument = {
+    const updateDocument2 = {
        $push: {
           friends: username1,
           //ADD NEW CHAT TO BOTH
        },
     };
-    const result2 = await user_data.updateOne(filter, updateDocument);
+    const result2 = await user_data.updateOne(filter2, updateDocument2);
 
     }
 

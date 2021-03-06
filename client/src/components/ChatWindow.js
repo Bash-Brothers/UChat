@@ -17,6 +17,7 @@ export default class ChatWindow extends Component {
             chatsList: null,
             messageList: null,
             curMessage: null,
+            intervalID: null,
             
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,6 +48,16 @@ export default class ChatWindow extends Component {
         
     }
 
+    // gets the updated list of messages and sets state.
+    // called every 5 seconds
+    async getData() 
+    {
+        console.log("Getting data");
+        const curChatInfo = await this.getChat(this.state.curChat);
+        const messageList = curChatInfo.messages;
+        this.setState({messageList: messageList });
+
+    }
     async componentDidMount() //action to take as soon as enter the page
     {                   
         console.log("Inside component did mount for chat window");
@@ -66,19 +77,24 @@ export default class ChatWindow extends Component {
 
         console.log("curChatInfo = ", curChatInfo);
 
-
         const chatParticipants = curChatInfo.participants;
 
         console.log("participants = ", chatParticipants);
 
         const messageList = curChatInfo.messages;
 
-        console.log("message List = ", messageList);
+        // get updated list of messages every 5 seconds
+        this.intervalID = setInterval(this.getData.bind(this), 5000)
 
         this.setState({loggedIn: loggedIn,  curUser: curUser, curChat: curChat, 
                       curChatName: chatParticipants, messageList: messageList, 
                       chatsList: chatsList,  });
-
+    }
+    componentWillUnmount()
+    {
+        // stop interval once we exit this page
+        console.log("Inside will unmount , intervalID = ", this.intervalID);
+        clearInterval(this.intervalID);
     }
 
     async changeChat(newChat)
@@ -127,7 +143,7 @@ export default class ChatWindow extends Component {
                   body: JSON.stringify(this.state.curMessage)
         })
 
-        const res = await result.json();  /* {returnCode, } */
+        const res = await result.json();  /* {returnCode} */
 
         const returnCode = await res.returnCode;
 
@@ -137,10 +153,7 @@ export default class ChatWindow extends Component {
             return null;
         }
 
-        const newMessageList = this.state.messageList;
-        newMessageList.push(this.state.curMessage);
-
-        this.setState({messageList: newMessageList, msg_value: ""});
+        this.setState({msg_value: ""}); // clear form entry
         
     }
 

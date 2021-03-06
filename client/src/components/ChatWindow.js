@@ -50,14 +50,21 @@ export default class ChatWindow extends Component {
 
     // gets the updated list of messages and sets state.
     // called every 5 seconds
+
+    //TO DO, replace with faster implementation
     async getData() 
     {
         console.log("Getting data");
-        const curChatInfo = await this.getChat(this.state.curChat);
-        const messageList = curChatInfo.messages;
-        this.setState({messageList: messageList });
-
+        try{
+            const curChatInfo = await this.getChat(this.state.curChat);
+            const messageList = curChatInfo.messages;
+            this.setState({messageList: messageList });
+        }
+        catch{
+            console.log("user has no chat data");
+        }
     }
+
     async componentDidMount() //action to take as soon as enter the page
     {                   
         console.log("Inside component did mount for chat window");
@@ -71,24 +78,34 @@ export default class ChatWindow extends Component {
         const curUser = userInfo.username;  
 
         const chatsList = userInfo.chats; // note, this won't work for groupchats 
+        if(chatsList.length > 0){
+            const curChat = userInfo.chats[chatsList.length -1];  // most recent chat is displayed by default
+            const curChatInfo = await this.getChat(curChat);
 
-        const curChat = userInfo.chats[0];  // first chat is displayed by default
-        const curChatInfo = await this.getChat(curChat);
+            console.log("curChatInfo = ", curChatInfo);
 
-        console.log("curChatInfo = ", curChatInfo);
+            const chatParticipants = curChatInfo.participants;
 
-        const chatParticipants = curChatInfo.participants;
+            console.log("participants = ", chatParticipants);
 
-        console.log("participants = ", chatParticipants);
+            const messageList = curChatInfo.messages;
 
-        const messageList = curChatInfo.messages;
+            // get updated list of messages every 5 seconds
+            this.intervalID = setInterval(this.getData.bind(this), 5000)
 
-        // get updated list of messages every 5 seconds
-        this.intervalID = setInterval(this.getData.bind(this), 5000)
-
-        this.setState({loggedIn: loggedIn,  curUser: curUser, curChat: curChat, 
+            this.setState({loggedIn: loggedIn,  curUser: curUser, curChat: curChat, 
                       curChatName: chatParticipants, messageList: messageList, 
                       chatsList: chatsList,  });
+        }
+        else{
+            // get updated list of messages every 5 seconds
+            this.intervalID = setInterval(this.getData.bind(this), 5000)
+            this.setState({loggedIn: loggedIn,  curUser: curUser, });
+        }
+
+        
+
+        
     }
     componentWillUnmount()
     {
@@ -173,8 +190,12 @@ export default class ChatWindow extends Component {
         // const contactList = [{user: 'Sud', chatId: 0}, {user: 'Eggert', chatId: 2},  {user: 'Musk', chatId: 1}]
 
         const chatsList = this.state.chatsList;
-
-        var renderedContacts = chatsList.map(chat_id => <div className="contact" onClick={() => this.changeChat(chat_id)}>{chat_id}</div>)
+        try{
+            var renderedContacts = chatsList.map(chat_id => <div className="contact" onClick={() => this.changeChat(chat_id)}>{chat_id}</div>);
+        }
+        catch{
+            var renderedContacts = null;
+        }
 
         // const dummyMessages0 = [{chat_id: 0, sender: "Aman", message: "you son of a bitch, I'm in", time: 97}, {chat_id: 0, sender: "Sud", message: "chat apps are easy money", time: 97}, {chat_id: 0, sender: "Aman", message: "no vaccine tracker sounds better", time: 99}, {chat_id: 0, sender: "Sud", message: "lets build a chatapp" , time: 100}];
         // const dummyMessages1 = [];

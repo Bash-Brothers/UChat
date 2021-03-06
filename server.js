@@ -114,6 +114,7 @@ app.post("/login", async(req, res) => {
 
 
 // Handling accept/delete friend request decision
+//pass in true for response to signify accepted request
 
 app.post("/friendrequests", async(req, res) => {
 
@@ -130,13 +131,12 @@ app.post("/friendrequests", async(req, res) => {
     // Here, as opposed to backend login functionality, no checking of the submitted data needs to be done
     // Username is already confirmed to be in database during login page checking
     // There are only 2 options: Accept and Delete
+    if (resonse === true){
+        successCode = await confirmFriend(username, friendname);
+    }
+    await removeRequest(username, friendname);
 
-    successCode = await removeRequest(username, friendname);
-
-    // Based on response,
-    // Call addFriend function here?
-
-    return res.json({successCode: successCode}); // There is only one option here: success
+    return res.json({successCode: successCode});
 })
 
 
@@ -632,7 +632,6 @@ async function confirmFriend(username1, username2){
     user_data = dbo.collection("user_data");
     //create new chat HERE
     chatID = await createNewChat(username1, username2);
-
     const filter1 = { username: username1 };
     //push a new value to their notifcations friends
     const updateDocument1 = {
@@ -672,8 +671,15 @@ async function confirmFriend(username1, username2){
 // returns the entire message list from this chatID
 app.get("/chat/:chat_id", async (req, res) => 
 {
-    const chat_id = req.params.chat_id;
-    console.log("Inside server.js /chat/", chat_id);
+    try{
+        const chat_id = req.params.chat_id;
+        console.log("Inside server.js /chat/", chat_id);
+    }
+    catch{
+        console.log("user has no chats to display");
+        return;
+    }
+    
 
     let returnCode;
     let messages;

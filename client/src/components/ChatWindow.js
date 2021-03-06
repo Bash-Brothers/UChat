@@ -16,7 +16,10 @@ export default class ChatWindow extends Component {
             curChatName: null,  // person(s) usr is chatting w/
             chatsList: null,
             messageList: null,
+            curMessage: null,
+            
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     getChat = async (chat_id) =>{
@@ -92,6 +95,55 @@ export default class ChatWindow extends Component {
 
     }
 
+    getCurrentTime()
+    {
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date+' '+time;
+
+        return dateTime
+    }
+
+    handleChange = (event) => {
+        console.log("Inside handleChange");
+        const newMessage = {chat_id: this.state.curChat, sender: this.state.curUser, message: event.target.value, time: this.getCurrentTime()};
+        console.log("Inside handleChange, newMessage = ", newMessage);
+        this.setState({curMessage: newMessage});
+    }
+
+    handleSubmit = async (event) =>
+    {
+        event.preventDefault();
+        console.log("Inside handleSubmit");
+        const fetchurl = "/sendchat/"+this.state.curChat;
+        console.log("inside handleSubmit, fetchurl = ", fetchurl);
+        const result = await fetch("/sendchat/"+this.state.curChat, 
+                  {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': "application/json; charset=utf-8",
+                  },
+                  body: JSON.stringify(this.state.curMessage)
+        })
+
+        const res = await result.json();  /* {returnCode, } */
+
+        const returnCode = await res.returnCode;
+
+        if (returnCode != 0)
+        {
+            console.log("error sending chat");
+            return null;
+        }
+
+        const newMessageList = this.state.messageList;
+        newMessageList.push(this.state.curMessage);
+
+        this.setState({messageList: newMessageList, msg_value: ""});
+        
+    }
+
     render() {
 
         if(this.state.loggedIn == false)
@@ -153,7 +205,7 @@ export default class ChatWindow extends Component {
                 <div className="sidebar">
                     <div className="searchorcreate">
                         <div className="inputField2">
-                            <form onSubmit={this.handleSubmit}>
+                            <form>
                                 <input
                                     type="text"
                                     class="searchbar-input"
@@ -178,12 +230,11 @@ export default class ChatWindow extends Component {
                                 type="text"
                                 class="message-input"
                                 placeholder="Type a message..."
+                                onChange = {this.handleChange}
+                                value = {this.state.msg_value}
                             />
-                            <input
-                                type="submit"
-                                class="message-send"
-                                value=""
-                            />
+                        <input type="submit" value="send" />
+
                         </form>
                     </div>
                     <div className="messages">

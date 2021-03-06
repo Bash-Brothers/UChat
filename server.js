@@ -722,3 +722,60 @@ app.get("/chat/:chat_id", async (req, res) =>
     }
 });
 
+app.post("/sendchat/:chat_id", async (req, res) => {
+    const chat_id = req.params.chat_id;
+    console.log("Inside server.js /sendchat/", chat_id);
+    const message = req.body;
+
+    let returnCode;
+
+    try
+    {
+        db = await MongoClient.connect(uri);
+        console.log("- Connected to database for chat submission");
+
+        var dbo = db.db("test_db");
+        chat_data = dbo.collection("chat_data");
+
+
+        const chat = await chat_data.findOne({chat_id: chat_id});
+
+        if (chat == null) // chat doesn't exist 
+        {
+            console.log("Chat doesn't exist");
+            returnCode = 1;
+            return;
+        }
+
+        participants = await chat.participants;
+        if (!participants.includes(req.session.username))   // if user isn't a participant in the chat
+        {
+            console.log("User isn't logged in ");
+            returnCode = 2;
+            return;
+        }
+        
+        messages = await chat.messages;
+        
+        updated_msgs = chat.messages;
+        updated_msgs.push(message);
+
+        chat_data.update({chat_id: chat.chat_id},{$set:{"messages":updated_msgs}});
+            
+        console.log("chat updated");
+        
+        returnCode = 0;
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 3;
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        res.json({returnCode: returnCode });
+    }
+});

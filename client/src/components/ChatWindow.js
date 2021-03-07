@@ -79,7 +79,7 @@ export default class ChatWindow extends Component {
 
         const chatsList = userInfo.chats; // note, this won't work for groupchats 
         if(chatsList.length > 0){
-            const curChat = userInfo.chats[chatsList.length -1];  // most recent chat is displayed by default
+            const curChat = userInfo.chats[0];  // most recent chat is displayed by default
             const curChatInfo = await this.getChat(curChat);
 
             console.log("curChatInfo = ", curChatInfo);

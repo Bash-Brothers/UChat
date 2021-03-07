@@ -113,7 +113,7 @@ app.post("/login", async(req, res) => {
 
 
 
-// Handling accept/delete friend request decision
+// Handling the sending of a 
 //pass in true for response to signify accepted request
 app.post("/sendfriendrequest", async(req, res) => {
 
@@ -690,21 +690,13 @@ async function confirmFriend(username1, username2){
 // returns the entire message list from this chatID
 app.get("/chat/:chat_id", async (req, res) => 
 {
-    try{
-        const chat_id = req.params.chat_id;
-        console.log("Inside server.js /chat/", chat_id);
-    }
-    catch{
-        console.log("user has no chats to display");
-        return;
-    }
-    
 
     let returnCode;
     let messages;
     let participants;
     try
     {
+        const chat_id = req.params.chat_id;
         db = await MongoClient.connect(uri);
         console.log("- Connected to database for chat retrieval");
 

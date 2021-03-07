@@ -3,12 +3,33 @@ import {Redirect} from "react-router-dom";
 import './style/SignupPage.css';
 import egg from '../images/paul.jpg';
 
+function DisplayErrors(props) {
+    const success = props.success;
+    switch (success) {
+        case 1: //username already taken
+            return (<div className="signupError">Username is already taken</div>)
+        case 2: //empty password/username
+            return (<div className="signupError">Username and password must be non-empty</div>)
+        case 3: //passwords do not match
+            return (<div className="signupError">Passwords do not match</div>)
+        default: 
+            return (null);
+    }
+}
+
 export default class SignupPage extends React.Component
 {      
     constructor(props)
     {
         super(props);
-        this.state = {name: "default", username: "default", password: "default", password_confirm: "defaultc", isSignedUp: false };
+        this.state = {
+            name: "default", 
+            username: "default", 
+            password: "default", 
+            password_confirm: "defaultc", 
+            isSignedUp: false,
+            successCode: 0, 
+        };
     }
 
     handleChange = (event) => {
@@ -35,7 +56,7 @@ export default class SignupPage extends React.Component
         // so we can either getElementById or something similar to change the display according to that
         console.log("success code from handle  : ",res.successCode );
         event.target.reset(); // clear out form entries
-        this.setState({isSignedUp: !res.successCode});
+        this.setState({isSignedUp: !res.successCode, successCode: res.successCode});
         };
 
     render()
@@ -52,6 +73,7 @@ export default class SignupPage extends React.Component
                     <input type="text" className="signupField" placeholder="Username" name="username" value = {this.state.value} onChange = {this.handleChange} />
                     <input type="password" className="signupField" placeholder="Password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
                     <input type="password" className="signupField" placeholder="Re-enter password" name="password_confirm" value = {this.state.value} onChange = {this.handleChange}/>
+                    <DisplayErrors success={this.state.successCode} />
                     <input type="submit" className="signupButton" value="Sign Up" />
                 </form>
                 <div id="contact" className="link">Need help with your account or have feedback? <a href ="#">Contact us</a></div>

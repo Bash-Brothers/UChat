@@ -7,11 +7,11 @@
 
 .sidebar{
   height: 96vh;
-  width: 13%;
+  width: 13vw;
 }
 
 .searchorcreate{
-  background-color: #1b3faa;
+  background-color: #131f88;
   height: 6vh;
   line-height: 6vh;
   display: flex;
@@ -70,7 +70,7 @@
 }
 
 .inputField2{
-  border-bottom: 1px solid #163099;
+  border-bottom: 1px solid #131f88;
   width: 100%;
   background-color: #1b3faa;
   color: white;
@@ -84,23 +84,42 @@
 
 .messages{
     overflow-y: scroll;
-    height: 85vh;
+    height: 89vh;
     display: flex;
     flex-direction: column-reverse;
     font-size: larger;
     background-color: white;
 }
 
-.currentChat{
-  height: 6vh;
-  background-color: #aaaaaa;
+
+.sdfsdf{
+  height: 8vh;
+  background-color: white;
   color: black;
   font-size: larger;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid black 1px;
+
 }
+
+.currentChat {
+  font-size: 25px;
+  text-align: left;
+  text-indent: 40px;
+  position : absolute;
+  z-index  : 1;
+  top   : 4.1vh;
+  right: 1vw;
+  pointer-events   : none;
+  background-image : linear-gradient(to top, 
+                    rgba(255,255,255, 0), 
+                    rgba(255,255,255, 1) 70%);
+  width    : 87vw;
+  height   : 14vh;
+}
+
+
 
 .received{
     padding: 4px;
@@ -146,12 +165,38 @@
     vertical-align: middle;
 }
 
+.searchbar-input:focus {
+  outline:0;
+}
+
+.searchbar-send {
+    background-image: url('../../images/icon_search.svg');
+    background-color: #e4c055; 
+    background-repeat: no-repeat;
+    padding: 2vh 2vh;
+    border: black;
+    background-size: 2vh 2vh;
+    background-position: 50% 50%;
+    filter: invert(1);
+    height: 2vh;
+    width: 2vh;
+    vertical-align: middle;
+}
+
+.searchbar-send:focus {
+  outline:0;
+}
+
 .message-input {
     padding: 12px 20px;
     border-radius: 25px;
     width: 60vw;
     height: 2vh;
     vertical-align: middle;
+}
+
+.message-input:focus {
+  outline:0;
 }
 
 .message-send {
@@ -166,6 +211,145 @@
     height: 2vh;
     width: 2vh;
     vertical-align: middle;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.message-send:hover {
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.message-send:focus {
+  outline:0;
+}
+
+.button-media {
+    background-image: url('../../images/icon_register.svg');
+    background-repeat: no-repeat;
+    background-color: white;
+    padding: 2vh 2vh;
+    border: black;
+    background-size: 3vh 3vh;
+    background-position: 50% 50%;
+    /* filter: invert(1); */
+    height: 2vh;
+    width: 2vh;
+    vertical-align: middle;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.button-media:hover {
+  opacity: 1;
+  transition: 0.3s;
+}
+
+
+.mediaWidget {
+  display: flex;
+  background: #EEEEEE;
+  margin-left: 7.5vw;
+  margin-right: 1vw;
+  position: absolute;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 5vw;
+  width: 10vw;
+  z-index: 1;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.mediaUploadImage {
+  background-image: url('../../images/icon_image.svg');
+  background-repeat: no-repeat;
+  background-size: 5vh 5vh;
+  background-position: 50% 50%;
+  height: 4vw;
+  width: 4vw;
+  border-radius: 15px;
+  border: 3px solid black;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.mediaUploadImage:hover {
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.latexWidget {
+  display: flex;
+  background: #EEEEEE;
+  margin-left: 7.5vw;
+  margin-right: 1vw;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 50vh;
+  width: 20vw;
+  z-index: 1;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+
+.mediaLatex {
+  background-image: url('../../images/icon_latex.svg');
+  background-repeat: no-repeat;
+  background-size: 7vh auto;
+  background-position: 50% 50%;
+  height: 4vw;
+  width: 4vw;
+  border-radius: 15px;
+  border: 3px solid black;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.mediaLatex:hover {
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.latexHeader {
+  width: 20vw;
+  height: 6vh;
+  border-radius: 15px;
+}
+
+.latexInput {
+  width: 19vw;
+  height: 38vh;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none;
+}
+
+.latexSend {
+  width: 8vw;
+  height: 4vh;
+  background: #1b3faa;
+  border-radius: 20px;
+  color: white;
+  margin-bottom: 0.8vh;
+  margin-top: 0.8vh;
+}
+
+.button-back {
+  background-image: url('../../images/icon_back.svg');
+  background-repeat: no-repeat;
+  background-size: 2vh auto;
+  background-position: 50% 50%;
+  height: 2vw;
+  width: 2vw;
 }
 
 .contactsList::-webkit-scrollbar {

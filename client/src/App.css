@@ -41,7 +41,7 @@
 
 .notifications {
   display: flex;
-  background: #DDDDDD;
+  background: green;
   margin-left: auto;
   margin-right: 1vw;
   margin-top: 4vh;

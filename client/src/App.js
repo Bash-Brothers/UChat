@@ -124,9 +124,6 @@ class App extends Component {
               <Route path="/search">
                 <SearchPage />
               </Route>
-              <Route path="/contactus">
-                <ContactUsPage />
-              </Route>
               <Route path="/settings/general">
                 <SettingsGeneral />
               </Route>

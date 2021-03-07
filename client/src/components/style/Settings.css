@@ -45,6 +45,8 @@
 
 .menu-button:hover {
 	cursor:pointer;
+	background: #0d1a88;
+	transition: 0.3s;
 }
 
 .content {

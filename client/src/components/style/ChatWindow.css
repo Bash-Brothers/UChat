@@ -11,12 +11,16 @@
 }
 
 .searchorcreate{
-  background-color: white;
-  height: 4vh;
+  background-color: #1b3faa;
+  height: 6vh;
+  line-height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .contactsList{
-    background-color: #C4C4C4;
-    height: 92vh;
+    background-color: #1b3faa;
+    height: 90vh;
     width: 100%;
     overflow-y: auto;
 }
@@ -25,10 +29,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     font-size: large;
-    background-color: rgb(223, 144, 144);
-    border: 1px black solid;
+    background-color: #1b3faa;
+    border-bottom: 1px solid #163099;
     border-right: none;
     /* border-radius: 5px; */
     /* margin-top: 5px;
@@ -36,11 +40,13 @@
     margin-left: 5px;
     margin-right: 5px;  */
     height: 50px;
+    text-indent: 30px;
+    line-height: 50px;
+    color: white;
 }
 
 .contact:hover{
     cursor: pointer;
-    background-color: white;
 }
 
 .curChat{
@@ -55,7 +61,7 @@
 
 .inputField{
     width: 100%;
-    background-color: black;
+    background-color: white;
     color: white;
     display: flex;
     justify-content: center;
@@ -64,13 +70,14 @@
 }
 
 .inputField2{
+  border-bottom: 1px solid #163099;
   width: 100%;
-  background-color: black;
+  background-color: #1b3faa;
   color: white;
   display: flex;
   justify-content: center;
   height: 100%;
-  line-height: 100%;
+  line-height: 6vh;
 
 }
 
@@ -81,39 +88,42 @@
     display: flex;
     flex-direction: column-reverse;
     font-size: larger;
-    background-color: #33cadb;
+    background-color: white;
 }
 
 .currentChat{
   height: 6vh;
-  background-color: black;
-  color: white;
+  background-color: #aaaaaa;
+  color: black;
   font-size: larger;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid red 2px;
+  border: solid black 1px;
 }
 
 .received{
     padding: 4px;
     margin-top: 10px;
-    margin-left: 1%;
-    background-color: lightgray;
-    max-width: 79%;
+    margin-left: 3%;
+    background-color: #cccccc;
+    max-width: 60%;
     border-radius: 5px;
-    border: solid grey 2px;
+    border: solid #e5e5e5 1px;
+    text-indent: 20px;
     /*display: inline-block;*/
 }
 
 .sent{
-    margin-left: 20%;
+    margin-left: 37%;
     margin-top: 10px;
-    background-color: lightgray;
-    max-width: 79%;
+    background-color: #1b3faa;
+    max-width: 60%;
     padding: 4px;
     border-radius: 5px;
-    border: solid grey 2px;
+    border: 1px solid #163099;
+    text-indent: 20px;
+    color: white;
     /*display: inline-block;*/
 }
 
@@ -145,14 +155,14 @@
 }
 
 .message-send {
-    background-image: url('../../images/icon_search.svg');
+    background-image: url('../../images/icon_send.svg');
     background-repeat: no-repeat;
     background-color: white;
     padding: 2vh 2vh;
     border: black;
     background-size: 3vh 3vh;
     background-position: 50% 50%;
-    filter: invert(1);
+    /* filter: invert(1); */
     height: 2vh;
     width: 2vh;
     vertical-align: middle;
@@ -180,7 +190,7 @@
 }
 
 .messages::-webkit-scrollbar-track {
-  background: #33cadb; 
+  background: #ffffff; 
 }
  
 .messages::-webkit-scrollbar-thumb {

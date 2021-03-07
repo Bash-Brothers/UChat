@@ -60,12 +60,9 @@ export default class LoginPage extends React.Component
             <div className="login">
             <img src={egg} id="loginlogo"/>
             <form action="/login" className="loginform" onSubmit={this.handleSubmit}>
-                <p>Username:</p>
-                <input type="text" name="username" value = {this.state.value} onChange = {this.handleChange} />
-                <p>Password:</p>
-                <input type="password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
-                <p />
-                <input type="submit" value="Login" />
+                <input type="text" className="loginField" placeholder="Username" name="username" value = {this.state.value} onChange = {this.handleChange} />
+                <input type="password" className="loginField" placeholder="Password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
+                <input type="submit" className="loginButton" value="Log In" />
                 <a href ="/" class="loginlink">Forgot username/password?</a>
                 <a href="/signup" class="loginlink">Don't have an account? Click here to sign up.</a>
             </form>

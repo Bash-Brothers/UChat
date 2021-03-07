@@ -14,11 +14,38 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #1b3faa;
     padding: 10px;
     border-radius: 10px;
     width: 35vh;
     color: white;
+    box-shadow: 2px 3px 6px 4px #cccccc;
+}
+
+.signupField {
+    height: 3vh;
+    width: 12vw;
+    margin-top: 2vh;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    padding-left: 20px;
+}
+
+.signupButton {
+    height: 3.1vh;
+    width: 12.4vw;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    border-radius: 10px;
+    background: #1b3faa;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+.signupButton:hover {
+    cursor: pointer;
+    background: #032daa;
+    transition: 0.3s;
 }
 
 #loginlogo{

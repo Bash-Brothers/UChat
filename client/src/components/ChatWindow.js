@@ -1,8 +1,45 @@
 import React, { Component } from "react";
 import './style/ChatWindow.css';
 import IconSend from '../images/icon_send.svg';
+import IconLatex from '../images/icon_latex.svg';
+import IconImage from '../images/icon_image.svg';
+import IconBack from '../images/icon_back.svg';
+import IconSearch from '../images/icon_search.svg';
 import {Redirect} from "react-router-dom";
 import {isLoggedIn, getUserInfo} from '../utils.js';
+
+
+//display media widget if the media button is clicked, handle clicks within the widget
+function RenderMediaWidget(props) {
+  const status = props.status;
+  if (status === 1) {
+    return (
+      <div className="mediaWidget">
+        <div className="mediaLatex" onClick={() => props.onClick(1)}/>
+        <form>
+            <input type="file" id="imageUpload" name="imagename" hidden/>
+            <label for="imageUpload">
+                <div className="mediaUploadImage"/>
+            </label>
+        </form>
+      </div>
+    )
+  }
+  else if (status === 2) {  //render the latex widget on latex button click
+    return (
+        <div className="latexWidget">
+            <div className="latexHeader">
+                <div className="button-back" onClick={() => props.onClick(2)}/>
+            </div>
+            <form>
+                <textarea className="latexInput" placeholder="enter latex..."/>
+                <input className="latexSend" type="submit" value="Send"/>
+            </form>
+        </div>
+        )
+  }
+  return (null);
+}
 
 export default class ChatWindow extends Component {
 
@@ -18,9 +55,11 @@ export default class ChatWindow extends Component {
             messageList: null,
             curMessage: null,
             intervalID: null,
+            mediaState: 0,  //0 for not showing, 1 for menu, 2 for latex input
             
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleMediaClick = this.handleMediaClick.bind(this);
     }
 
     getChat = async (chat_id) =>{
@@ -102,11 +141,9 @@ export default class ChatWindow extends Component {
             this.intervalID = setInterval(this.getData.bind(this), 5000)
             this.setState({loggedIn: loggedIn,  curUser: curUser, });
         }
-
-        
-
         
     }
+
     componentWillUnmount()
     {
         // stop interval once we exit this page
@@ -174,9 +211,29 @@ export default class ChatWindow extends Component {
         // this.setState({msg_value: ""}); // clear form entry
         
     }
+    //handle clicks on the media button
+    handleMediaClick(i) {
+        switch(i) {
+            case 0: // media button clicked
+                if (this.state.mediaState === 0) 
+                    this.setState({mediaState: 1,})
+                else
+                    this.setState({mediaState: 0,})
+                break;
+            case 1: // latex button clicked
+                this.setState({mediaState: 2,})
+                break;
+            case 2: // latex back button clicked
+                this.setState({mediaState: 1,})
+                break;
+
+        }
+        
+    }
+
+
 
     render() {
-
         if(this.state.loggedIn == false)
         {
             //alert('Log in to view chats!');
@@ -248,7 +305,7 @@ export default class ChatWindow extends Component {
                                 />
                                 <input
                                     type="submit"
-                                    class="message-send"
+                                    class="searchbar-send"
                                     value=""
                                 />
                             </form>
@@ -260,19 +317,23 @@ export default class ChatWindow extends Component {
                 </div>
                 <div className="curChat">
                     <div className="inputField">
+                        <div className="button-media" onClick={() => this.handleMediaClick(0)}/>
                         <form onSubmit={this.handleSubmit}>
                             <input
                                 type="text"
-                                class="message-input"
+                                className="message-input"
                                 placeholder="Type a message..."
                                 onChange = {this.handleChange}
                                 value = {this.state.msg_value}
                             />
-                        <input type="submit" value="send" />
+                        <input className="message-send" type="submit" value="" />
 
                         </form>
                     </div>
                     <div className="messages">
+                        <RenderMediaWidget 
+                            status={this.state.mediaState}
+                            onClick={(i) => this.handleMediaClick(i)}/>
                         {renderedMessages}
                     </div>
                     <div className="currentChat">

@@ -35,16 +35,14 @@ export default class Nav extends React.Component {
                     <div className="navigation1">
 
                         <Link to="/login" className="navButton">
-                            <img src={IconLogin} width="30" height="30" />
+                            Login
                         </Link>
+                        or
                         <Link to="/signup" className="navButton">
-                            <img src={IconSignup} width="30" height="30" />
+                            Signup
                         </Link>
                         <Link to="/about" className="navButton">
                             <img src={IconInfo} width="30" height="30" />
-                        </Link>
-                        <Link to="/contactus" className="navButton">
-                            <img src={IconContactUs} width="30" height="30" />
                         </Link>
                     </div>
                 </div>
@@ -67,9 +65,6 @@ export default class Nav extends React.Component {
                         </Link>
                         <Link to="/search" className="navButton">
                             <img src={IconSearch} width="30" height="30" />
-                        </Link>
-                        <Link to="/contactus" className="navButton">
-                            <img src={IconContactUs} width="30" height="30" />
                         </Link>
                     </div>
                 </div>

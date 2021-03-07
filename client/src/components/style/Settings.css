@@ -23,6 +23,7 @@
 	text-decoration: none;
 	color: white;
 	border-bottom: 1px solid #163099;
+	transition: 0.3s;
 }
 
 .menu-button-active {
@@ -71,6 +72,7 @@
 	line-height: 80px;
 	height: 80px;
 	font-size: 30px;
+
 }
 
 .field-text {

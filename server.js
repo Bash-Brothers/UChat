@@ -115,8 +115,27 @@ app.post("/login", async(req, res) => {
 
 // Handling accept/delete friend request decision
 //pass in true for response to signify accepted request
+app.post("/sendfriendrequest", async(req, res) => {
 
-app.post("/friendrequests", async(req, res) => {
+    console.log(req.session.username, " responded to friend request");
+
+    var username = req.body.username; // entered username
+    var friendname = req.body.friendname;   // entered name of person who sent friend req
+
+    console.log(username, "is sending a friend request to ", friendname);
+    // console.log("   request changed = ", friendname);
+    // console.log("   response = ", response);
+
+    // Here, as opposed to backend login functionality, no checking of the submitted data needs to be done
+    // Username is already confirmed to be in database during login page checking
+    // There are only 2 options: Accept and Delete
+    successCode = await sendFriendRequest(username, friendname);
+
+    return res.json({successCode: successCode});
+})
+
+//this post function handles a RESPONSE to a friend request, contained in the response field as true (accepted) or false (rejected)
+app.post("/handlefriendrequest", async(req, res) => {
 
     console.log(req.session.username, " responded to friend request");
 

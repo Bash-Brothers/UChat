@@ -84,11 +84,12 @@
 
 .messages{
     overflow-y: scroll;
-    height: 89vh;
+    height: 87vh;
     display: flex;
     flex-direction: column-reverse;
     font-size: larger;
     background-color: white;
+    border: none;
 }
 
 
@@ -109,7 +110,7 @@
   text-indent: 40px;
   position : absolute;
   z-index  : 1;
-  top   : 4.1vh;
+  top   : 4.3vh;
   right: 1vw;
   pointer-events   : none;
   background-image : linear-gradient(to top, 

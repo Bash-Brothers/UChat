@@ -170,7 +170,8 @@ export default class ChatWindow extends Component {
             return null;
         }
 
-        this.setState({msg_value: ""}); // clear form entry
+        event.target.reset();
+        // this.setState({msg_value: ""}); // clear form entry
         
     }
 

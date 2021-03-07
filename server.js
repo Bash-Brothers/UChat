@@ -115,6 +115,22 @@ app.post("/login", async(req, res) => {
 
 // Handling the sending of a 
 //pass in true for response to signify accepted request
+app.get("/findusers", async(req, res) => {
+
+    console.log(req.session.username, " is searching for users");
+
+    var friendname = req.body.username;   // entered name of person who sent friend req
+
+    users = findUsers(username);
+    if(users = -1){
+        successCode = -1;
+    }
+    else{
+        successCode = 0;
+    }
+    return res.json({successCode: successCode, users: users});
+})
+
 app.post("/sendfriendrequest", async(req, res) => {
 
     console.log(req.session.username, " responded to friend request");
@@ -436,7 +452,7 @@ async function findUsers(substring){
     catch (err)
     {
         console.log(err);
-        returnCode = 1;
+        return -1;
     }
     finally
     {

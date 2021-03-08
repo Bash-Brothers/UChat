@@ -404,14 +404,16 @@ async function friendStatus(username1, username2){
     user1status = await user_data.findOne({username: username1},{notifs: 1, friends: 1});
     user2status = await user_data.findOne({username: username2},{notifs: 1, friends: 1, });
 
-    if(user1status.notifs.includes(username2) && user1status.notifs.includes(username2)){
-        console.log("Issue: The user ", username1, "did not have their notifs scrubbed correctly");
+    if(user1status.notifs.includes(username2) && user2status.notifs.includes(username1)){
+        console.log("Issue: The user did not have their notifs scrubbed correctly");
         retvar = -1;
     }
     else if(user1status.friends.includes(username2) || user2status.friends.includes(username2)){
+        //already friends
         retvar = 2;
     }
-    else if(user1status.notifs.includes(username2) || user2status.notifs.includes(username2)){
+    else if(user1status.notifs.includes(username2) || user2status.notifs.includes(username1)){
+        //already pending a fr
         retvar = 1;
     }
     else{

@@ -4,12 +4,29 @@ import './style/LoginPage.css';
 import egg from '../images/paul.jpg';
 import { isLoggedIn } from '../utils.js';
 
+function DisplayErrors(props) {
+    const success = props.success;
+    switch (success) {
+        case 1: //wrong password
+            return (<div className="loginError">Incorrect password</div>)
+        case 2: //invalid username
+            return (<div className="loginError">Invalid username</div>)
+        default: 
+            return (null);
+    }
+}
+
+
 export default class LoginPage extends React.Component
 {
     constructor(props)
     {
         super(props);
-        this.state = {username: "default", password: "default", loggedIn: false};
+        this.state = {
+            username: "default", 
+            password: "default", 
+            loggedIn: false, 
+            successCode: 0};
     }
 
     handleChange = (event) => {
@@ -38,7 +55,7 @@ export default class LoginPage extends React.Component
 
         const loggedIn = await isLoggedIn();   // uses the actual function isLoggedIn not the success code 
                                                // can be modified, it's a test
-        
+        this.setState({successCode: res.successCode})
         // this is written out like this because we will eventually 
         // need to set state conditionally depending on the successCode
         if(loggedIn)
@@ -62,7 +79,8 @@ export default class LoginPage extends React.Component
             <form action="/login" className="loginform" onSubmit={this.handleSubmit}>
                 <input type="text" className="loginField" placeholder="Username" name="username" value = {this.state.value} onChange = {this.handleChange} />
                 <input type="password" className="loginField" placeholder="Password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
-                <input type="submit" className="loginButton" value="Log In" />
+                <DisplayErrors success={this.state.successCode} />
+                <input type="submit" className="loginButton" value="Log In" onClick/>
                 <a href ="/" class="loginlink">Forgot username/password?</a>
                 <a href="/signup" class="loginlink">Don't have an account? Click here to sign up.</a>
             </form>

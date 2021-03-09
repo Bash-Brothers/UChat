@@ -70,16 +70,16 @@ export default class SearchPage extends Component {
 
         const res = await result.json();  /* this is the res sent by the backend of find users etc */
 
-        function showDiv(){
-            document.getElementById('request-sent').style.visibility="visible";
-        }
+        //function showDiv(){
+        //    document.getElementById('request-sent').style.visibility="visible";
+        //}
     
-        function hideDiv(){
-            document.getElementById('request-sent').style.visibility="hidden";
-        }
+        //function hideDiv(){
+        //    document.getElementById('request-sent').style.visibility="hidden";
+        //}
 
-        setTimeout("showDiv()", 1000);
-        setTimeout("hideDiv()", 5000);
+        //setTimeout("showDiv()", 1000);
+        //setTimeout("hideDiv()", 5000);
 
         //const successCode = await res.successCode;
         //const users = await res.users;

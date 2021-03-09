@@ -69,7 +69,7 @@ export default class SignupPage extends React.Component
             <div className="signup">
                 <img src={egg} id="loginlogo"/>
                 <form action="/signup" className="signupform" onSubmit={this.handleSubmit}>
-                    <input type="text" className="signupField" placeholder="Name" name="name" />
+                    <input type="text" className="signupField" placeholder="Name" name="name" value = {this.state.value} onChange = {this.handleChange}/>
                     <input type="text" className="signupField" placeholder="Username" name="username" value = {this.state.value} onChange = {this.handleChange} />
                     <input type="password" className="signupField" placeholder="Password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
                     <input type="password" className="signupField" placeholder="Re-enter password" name="password_confirm" value = {this.state.value} onChange = {this.handleChange}/>

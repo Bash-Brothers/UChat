@@ -824,3 +824,101 @@ app.post("/sendchat/:chat_id", async (req, res) => {
         res.json({returnCode: returnCode });
     }
 });
+
+
+app.post('/change/name/:username', async(req, res) =>{
+
+    const username = req.params.username;
+    const submittedName = req.body.submittedName;
+
+    console.log("inside server.js /change/name/", username);
+
+    let returnCode;
+
+    try
+    {
+        db = await MongoClient.connect(uri);
+        console.log("- Connected to database for name change");
+
+        var dbo = db.db("test_db");
+        user_data = dbo.collection("user_data");
+
+
+        const user = await user_data.findOne({username: username});
+
+        if (user == null) // user doesn't exist 
+        {
+            console.log("User doesn't exist");
+            returnCode = 1;
+            return;
+        }
+
+        user_data.update({username: username},{$set:{"name":submittedName}});
+            
+        console.log("name updated");
+        
+        returnCode = 0;
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 3;  // database errors
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        res.json({returnCode: returnCode });
+    }
+});
+
+app.post('/change/password/:username', async(req, res) =>{
+
+    const username = req.params.username;
+
+    const newPassword = req.body.newPassword;
+
+    console.log("inside server.js /change/password/", username);
+
+    let returnCode;
+
+    try
+    {
+        db = await MongoClient.connect(uri);
+        console.log("- Connected to database for password change");
+
+        var dbo = db.db("test_db");
+        user_data = dbo.collection("user_data");
+
+
+        const user = await user_data.findOne({username: username});
+
+        if (user == null) // user doesn't exist 
+        {
+            console.log("User doesn't exist");
+            returnCode = 1; // user DNE error
+            return;
+        }
+
+        user_data.update({username: username},{$set:{"password":newPassword}});
+            
+        console.log("password updated");
+        
+        returnCode = 0;
+    }
+    catch (err)
+    {
+        console.log(err);
+        returnCode = 3;  // database errors
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        res.json({returnCode: returnCode });
+    }
+
+
+});

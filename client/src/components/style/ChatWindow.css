@@ -59,6 +59,11 @@
     border-right: solid black 2px;
 }
 
+.link{
+    color: white;
+    text-decoration: underline;
+}
+
 .inputField{
     width: 100%;
     background-color: white;
@@ -157,6 +162,15 @@
   border: solid white 3px;
 }
 
+.no-chats{
+  max-width: 80%;
+  margin-left: 10%;
+  background-color: #1b3faa;
+  color: white;
+  padding: 4px;
+  border-radius: 5px;
+  border: solid white 3px;
+}
 
 .searchbar-input {
     padding: 10px 24px;
@@ -217,6 +231,7 @@
 }
 
 .message-send:hover {
+  cursor: pointer;
   opacity: 1;
   transition: 0.3s;
 }

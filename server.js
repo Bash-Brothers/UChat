@@ -110,33 +110,73 @@ app.post("/login", async(req, res) => {
     return res.json({successCode: successCode});
 })
 
-
-
-
 // Handling the sending of a 
 //pass in true for response to signify accepted request
-app.get("/findusers", async(req, res) => {
+app.get("/findusers/:substring", async(req, res) => {
 
+    curUser = req.session.username
     console.log(req.session.username, " is searching for users");
+    console.log(req.params.substring, " is the entered substring");
+    //var friendname = req.body.username;   // entered name of person who sent friend req
 
-    var friendname = req.body.username;   // entered name of person who sent friend req
+    users = await findUsers(req.params.substring);
+    //console.log("In get method, received original users:")
+    //console.log(users)
 
-    users = findUsers(username);
+    listOfUsernames = []
+    //extract just the usernames from the list of dicts
+    for (var i in users){
+        dict = users[i]
+        status = await friendStatus(dict['username'], curUser)
+        listOfUsernames.push({user: dict['username'], addstatus: status}) 
+    }
+    console.log('final list')
+    console.log(listOfUsernames)
+
+    successCode = 0
     if(users = -1){
         successCode = -1;
     }
-    else{
-        successCode = 0;
-    }
-    return res.json({successCode: successCode, users: users});
+    
+    return res.json({successCode: successCode, users: listOfUsernames});
 })
+
+//returns an array of usernames that match substring
+async function findUsers(substring){
+    matchingusers = [];
+    try
+    {
+    db = await MongoClient.connect(uri);
+    console.log("Connected to Database for lookup of substring", substring)
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+    
+    matchingUsers = await user_data.find({username: {$regex: substring}}); 
+    matchingUsers = await matchingUsers.toArray();
+
+    console.log("found users");
+    
+    }
+    catch (err)
+    {
+        console.log(err);
+        return -1;
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        return matchingUsers;
+    }
+}
 
 app.post("/sendfriendrequest", async(req, res) => {
 
     console.log(req.session.username, " responded to friend request");
 
-    var username = req.body.username; // entered username
-    var friendname = req.body.friendname;   // entered name of person who sent friend req
+    var username = req.body.username; // user sending the request
+    var friendname = req.body.friendname;   // user receiving the request
 
     console.log(username, "is sending a friend request to ", friendname);
     // console.log("   request changed = ", friendname);
@@ -393,7 +433,7 @@ async function friendStatus(username1, username2){
     retvar = -1;
     try
     {
-    db = MongoClient.connect(uri);
+    db = await MongoClient.connect(uri);
     console.log("Connected to Database for lookup")
 
     var dbo = db.db("test_db");
@@ -430,38 +470,8 @@ async function friendStatus(username1, username2){
     {
         db.close();
         console.log("Database closed");
-        console.log("Return code = ", returnCode);
+        console.log("Return code = ", retvar);
         return retvar;
-    }
-}
-
-//returns an array of usernames that match substring
-async function findUsers(substring){
-    matchingusers = [];
-    try
-    {
-    db = MongoClient.connect(uri);
-    console.log("Connected to Database for lookup")
-
-    var dbo = db.db("test_db");
-    user_data = dbo.collection("user_data");
-
-    matchingUsers = await user_data.find( { username: {$regex: substring}}, {username: 1} );
-    matchingUsers.toArray();
-    console.log("found users: ", matchingUsers);
-    
-    }
-    catch (err)
-    {
-        console.log(err);
-        return -1;
-    }
-    finally
-    {
-        db.close();
-        console.log("Database closed");
-        console.log("Return code = ", returnCode);
-        return matchingUsers;
     }
 }
 
@@ -515,7 +525,7 @@ async function sendFriendRequest(username1, username2){
     }
     try
     {
-    db = MongoClient.connect(uri);
+    db = await MongoClient.connect(uri);
     console.log("Connected to Database for lookup")
 
     var dbo = db.db("test_db");
@@ -547,11 +557,11 @@ async function sendFriendRequest(username1, username2){
     }
     finally
     {
-        console.log("Attempted friend request. Status: ", result1, result2);
+        //console.log("Attempted friend request. Status: ", result1, result2);
         db.close();
         console.log("Database closed");
-        console.log("Return code = ", returnCode);
-        return returnCode;
+        //console.log("Return code = ", returnCode);
+        return 0;
     }
 }
 

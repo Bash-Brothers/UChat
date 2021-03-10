@@ -10,6 +10,23 @@
     background-color: #ffffff;
 }
 
+#reqsent{
+    width: 150px;
+    height: 20px;
+    padding: 5px;
+    background: greenyellow;
+    border-radius: 6px;
+    border: solid black 2px;
+    color: black;
+    text-align: center;
+    position: fixed;
+    left: 44%;
+    top: 1%;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .search-input {
     padding: 12px 20px;
@@ -69,20 +86,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#request-sent{
-    position: fixed;
-    margin-top: 20px;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: greenyellow;
-    padding: 10px;
-    left: 45%;
-    top: 4%;
-    visibility: hidden;
 }
 
 .contactname {

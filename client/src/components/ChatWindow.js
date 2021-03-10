@@ -354,7 +354,7 @@ export default class ChatWindow extends Component {
                 let sender = messageObj['sender'];
                 let message = messageObj['message'];
                 let time = messageObj['time'];
-                let type = 1    //get message type from backend (temporarily using type 0 = text, type 1 = image)
+                let type = 0    //get message type from backend (temporarily using type 0 = text, type 1 = image)
                 /*This timestamp extraction code may be inefficient
                 It also only uses 24 hour time, and doesn't extract dates
                 (we'll probably need to use some other logic for displaying dates anyways, since usually dates are only displayed once per day)

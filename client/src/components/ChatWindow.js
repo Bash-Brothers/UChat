@@ -12,11 +12,12 @@ import {isLoggedIn, getUserInfo} from '../utils.js';
 //display media widget if the media button is clicked, handle clicks within the widget
 
 
-
 class MediaWidget extends React.Component {
     constructor(props) {
         super(props);
     }   
+
+
 
     handleLatexSubmit = async (event) =>
     { 
@@ -70,24 +71,35 @@ class MediaWidget extends React.Component {
             return (
                 <div className="mediaWidget">
                     <div className="mediaLatex" onClick={() => this.props.onClick(1)}/>
-                    <form>
-                        <input type="file" id="imageUpload" name="imagename" hidden/>
-                        <label for="imageUpload">
-                             <div className="mediaUploadImage"/>
-                        </label>
-                    </form>
+                    <div className="mediaUploadImage"  onClick={() => this.props.onClick(2)}/>
                 </div>
             )
         }
         else if (status === 2) {  //render the latex widget on latex button click
             return (
                 <div className="latexWidget">
-                    <div className="latexHeader">
-                    <div className="button-back" onClick={() => this.props.onClick(2)}/>
+                    <div className="widgetHeader">
+                    <div className="button-back" onClick={() => this.props.onClick(3)}/>
                 </div>
                 <form onSubmit={this.handleLatexSubmit}>
                     <textarea className="latexInput" id="latexEditor" placeholder="enter latex..."/>
-                    <input className="latexSend" type="submit" value="Send"/>
+                    <input className="widgetSend" type="submit" value="Send"/>
+                </form>
+            </div>
+            )
+        }
+        else if (status === 3) { //render the image input widget
+            return (
+                <div className="imageWidget">
+                    <div className="widgetHeader">
+                    <div className="button-back" onClick={() => this.props.onClick(3)}/>
+                </div>
+                <form>
+                    <input type="file" id="imageUpload" name="imagename" hidden/>
+                    <label for="imageUpload">
+                        <div className="placeholderImage"/>
+                    <input className="widgetSend" type="submit" value="Send"/>
+                    </label>
                 </form>
             </div>
             )
@@ -114,7 +126,7 @@ export default class ChatWindow extends Component {
             messageList: null,
             curMessage: null,
             intervalID: null,
-            mediaState: 0,  //0 for not showing, 1 for menu, 2 for latex input
+            mediaState: 0,  //0 for not showing, 1 for menu, 2 for latex input, 3 for image input
             
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -205,7 +217,7 @@ export default class ChatWindow extends Component {
             this.intervalID = setInterval(this.getData.bind(this), 5000)
 
             this.setState({loggedIn: loggedIn,  curUser: curUser, curChat: curChat, 
-                      curChatName: chatParticipants, messageList: messageList, 
+                      curChatName: chatName, messageList: messageList, 
                       chatsList: chatsList,  });
         }
         else{
@@ -297,7 +309,10 @@ export default class ChatWindow extends Component {
             case 1: // latex button clicked
                 this.setState({mediaState: 2,})
                 break;
-            case 2: // latex back button clicked
+            case 2: // image button clicked
+                this.setState({mediaState: 3,})
+                break;
+            case 3: // back button clicked
                 this.setState({mediaState: 1,})
                 break;
 

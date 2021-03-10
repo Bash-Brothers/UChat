@@ -16,6 +16,7 @@ import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
 
 import {isLoggedIn} from './utils.js';
+import {storage} from './firebase-config.js';
 
 // render the notifications menu if the user has clicked on the notifications button
 function RenderNotifs(props) {

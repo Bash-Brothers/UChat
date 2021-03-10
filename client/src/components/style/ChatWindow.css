@@ -113,9 +113,7 @@
   top   : 4.3vh;
   right: 1vw;
   pointer-events   : none;
-  background-image : linear-gradient(to top, 
-                    rgba(255,255,255, 0), 
-                    rgba(255,255,255, 1) 70%);
+  background-image : white;
   width    : 87vw;
   height   : 14vh;
 }

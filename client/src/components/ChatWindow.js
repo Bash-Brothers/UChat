@@ -122,12 +122,22 @@ export default class ChatWindow extends Component {
             const curChatInfo = await this.getChat(curChat);
 
             console.log("curChatInfo = ", curChatInfo);
-
-            const chatParticipants = curChatInfo.participants;
-
-            console.log("participants = ", chatParticipants);
-
-            const messageList = curChatInfo.messages;
+            var chatParticipants =[];
+            try{
+                chatParticipants = curChatInfo.participants;
+            }
+            catch{
+                alert('curchatinfo is null')
+                chatParticipants = [];
+            }
+           
+            var messageList = []
+            try{
+                 messageList = curChatInfo.messages;
+            }
+            catch{
+                messageList =[]
+            }
 
             // get updated list of messages every 5 seconds
             this.intervalID = setInterval(this.getData.bind(this), 5000)

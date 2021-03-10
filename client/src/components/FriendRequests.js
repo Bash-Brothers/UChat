@@ -44,16 +44,19 @@ export default class FriendRequests extends Component {
             friendrequestsList: null,
             curfriendreq: null, //stores the friendrequestId of current friend request
             intervalID: null,
+            response: false, // will later be updated to accept or delete
+            // button: -1,
+
 
 
 
             
             // How do we get the current user's username?
-            username: "default",
+            // username: "default",
             // loggedIn: true.valueOf,
-            friendreqList: ["Yan", "Kevin", "Milo", "Sud", "Aman"],
-            changedfriendrequest: "",
-            response: "none",
+            // friendreqList: ["Yan", "Kevin", "Milo", "Sud", "Aman"],
+            // changedfriendrequest: "",
+            
 
             //contactList should be something that is received from the server
             // const friendreqList = 'Yan,Kevin,Milo,Sud,Aman,Eggert,Eggboi,Eggs,SunnySideUp,Omelette,Sud,Aman,Eggert,Eggboi,Eggs,SunnySideUp,Omelette'.split(','),
@@ -61,8 +64,9 @@ export default class FriendRequests extends Component {
             // More dummy strings
             // , Eggert, Eggboi, Eggs, SunnySideUp, Omelette, Sud, Aman, Eggert, Eggboi, Eggs, SunnySideUp, Omelette
         };
-        this.handleClick = this.handleClick.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleAccept = this.handleAccept.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
@@ -90,20 +94,12 @@ export default class FriendRequests extends Component {
         {
             this.setState({loggedIn: false});
         }
+        
 
 
         // let rows = this.props.rows.map(item => { 
         //     return {uid: SomeLibrary.generateUniqueID(), value: item};
         //   });
-
-
-
-
-
-
-
-
-
 
 
         const userInfo = await getUserInfo(); // about current user
@@ -126,9 +122,11 @@ export default class FriendRequests extends Component {
 
             // get updated list of friend requests every 5 seconds
             // Not sure whether it is right to call this function using .bind(this)
-            this.intervalID = setInterval(this.getUpdatedFriendrequestsList.bind(this), 30000)
+            this.intervalID = setInterval(this.getUpdatedFriendrequestsList.bind(this), 5000)
 
             this.setState({loggedIn: loggedIn,  curUser: curUser, friendrequestsList: Notifs,  });
+
+            console.log("Obtained user info and friend requests array");
         }
         else{
             // Here we don't have to keep updating list of friend requests
@@ -138,11 +136,12 @@ export default class FriendRequests extends Component {
             
             // get updated list of friend requests every 5 seconds
             // Not sure whether it is right to call this function using .bind(this)
-            this.intervalID = setInterval(this.getUpdatedFriendrequestsList.bind(this), 30000)
+            this.intervalID = setInterval(this.getUpdatedFriendrequestsList.bind(this), 5000)
 
             this.setState({loggedIn: loggedIn,  curUser: curUser, friendrequestsList: null, });
         }
         
+        console.log("Completed component did mount for friend requests page");
     }
 
     componentWillUnmount()
@@ -156,19 +155,92 @@ export default class FriendRequests extends Component {
 
 
 
+    // handleClick = friendreq_id => async (event) =>
+
+    // For understanding of what is done here, look in to the concept of currying functions
+    // https://stackoverflow.com/questions/32782922/what-do-multiple-arrow-functions-mean-in-javascript
+    // https://stackoverflow.com/questions/60027202/how-do-i-pass-props-and-other-parameters-to-function-using-react-hooks
+    // https://stackoverflow.com/questions/60027202/how-do-i-pass-props-and-other-parameters-to-function-using-react-hooks
+    // https://stackoverflow.com/questions/42299594/await-is-a-reserved-word-error-inside-async-function
+
+    handleAccept = async (friendreq_id) =>
+    {
+      
+        const id = friendreq_id;
+
+        // Fetching from server.js
+        const result = await fetch("/handlefriendrequest", 
+        {
+            method: 'POST',
+            headers: 
+                {
+                    'Content-Type': "application/json; charset=utf-8",
+                },
+            // This is the data being posted
+            body: JSON.stringify({curUser: this.state.curUser, curfriendreq:id, response:true}) // + JSON.stringify(this.state.response)
+        })
+
+        const res = await result.json();
+
+        const returnCode = await res.successCode;
+        
+        if (returnCode != 0)
+        {
+           alert('error sending chat')
+            return null;
+        }
+
+        // event.target.reset();
+
+        //Process the friend request
+        this.updateandFetch(friendreq_id);
+
+   }
 
 
+   handleDelete = async (friendreq_id) =>
+   {
+    const id = friendreq_id;
 
-    handleClick(event, friendreq_id){
-        this.setState({response: event.target.value});
+    // Fetching from server.js
+    const result = await fetch("/handlefriendrequest", 
+    {
+        method: 'POST',
+        headers: 
+            {
+                'Content-Type': "application/json; charset=utf-8",
+            },
+        // This is the data being posted
+        body: JSON.stringify({curUser: this.state.curUser, curfriendreq:id, response:false}) // + JSON.stringify(this.state.response)
+    })
 
-        var arraylength = this.state.friendrequestsList.length;
-        var array = this.state.friendrequestsList.slice();
-        var newarray;
+    const res = await result.json();
 
+    const returnCode = await res.successCode;
+    
+    if (returnCode != 0)
+    {
+       alert('error sending chat')
+        return null;
+    }
+
+    // event.target.reset();
+
+        //Process the friend request
+        this.updateandFetch(friendreq_id);
+
+    }
+
+
+   updateandFetch = async (friendreq_id) =>
+   {
         // alert('success');
 
-        // Instantly removes friend request from UI display
+        // Removing friend request from UI display
+        var arraylength = this.state.friendrequestsList.length;
+        var array = this.state.friendrequestsList.slice();
+
+        // Carry on from above: instantly removes friend request from UI display
         for (var j = 0; j < arraylength; j++) 
         {
             if (array[j] == friendreq_id)
@@ -179,65 +251,12 @@ export default class FriendRequests extends Component {
             }
         }
 
-        console.log(array);
+        // console.log(array);
 
-        this.setState({friendrequestsList: array});
-        // alert('success');
-
+        this.setState({friendrequestsList: array, });
 
 
-
-        //do with event
    }
-
-
-    // For understanding of what is done here, look in to the concept of currying functions
-    // https://stackoverflow.com/questions/32782922/what-do-multiple-arrow-functions-mean-in-javascript
-    // https://stackoverflow.com/questions/60027202/how-do-i-pass-props-and-other-parameters-to-function-using-react-hooks
-    // https://stackoverflow.com/questions/60027202/how-do-i-pass-props-and-other-parameters-to-function-using-react-hooks
-    // https://stackoverflow.com/questions/42299594/await-is-a-reserved-word-error-inside-async-function
-
-    handleSubmit(event, friendreq_id)
-    {
-        // alert('success');
-
-        // No need for prevent default here
-        // event.preventDefault();
-
-        // this.setState
-        // ({
-        //     changedfriendrequest: props.value,
-        // });
-
-        // alert('success');
-
-        // const result = await fetch("/handlefriendrequest", 
-        // {
-        //     method: 'POST',
-        //     headers: 
-        //         {
-        //             'Content-Type': "application/json; charset=utf-8",
-        //         },
-        //     // This is the data being posted
-        //     body: JSON.stringify(this.state) // + JSON.stringify(this.state.response)
-        // })
-
-        
-        // To be uncommented:
-
-        // const res = await result.json();
-
-        // if(loggedIn)
-        // {
-        //     this.setState
-        //     ({
-        //         loggedIn: true
-        //     });
-        //     window.location.reload();
-        // }
-
-
-    }
 
 
     render() {
@@ -245,6 +264,12 @@ export default class FriendRequests extends Component {
         {
             return <Redirect to='/login' />;
         }
+        if (this.state.curUser == null)
+        {
+            return (<div> Loading </div>);
+        }
+
+        console.log("Friend requests render");
 
 
         // if (this.state.curUser == null)
@@ -263,26 +288,32 @@ export default class FriendRequests extends Component {
                 // ALL the children and elements each have to have a key
                 // https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js
 
-                <div className="friendrequest" key={friendreq_id}>
+                //This form has 2 submit buttons
+                // See syntax rules here:
+                // https://stackoverflow.com/questions/60349756/react-js-two-submit-buttons-in-one-form
+                // https://stackoverflow.com/questions/51839138/how-do-i-use-multiple-submit-buttons-with-react-final-form
+
+                <div className="friendrequest" key={friendreq_id + '.div'}>
                     {/* https://stackoverflow.com/questions/42597602/react-onclick-pass-event-with-parameter */}
-                    <form key={friendreq_id}>
-                        {/* onSubmit={(e) => {this.handleSubmit(e, friendreq_id)}} */}
-                        <p class="friendname" key={friendreq_id}>{friendreq_id}</p>
-                        <input
-                            type="submit"
-                            class="acceptButton"
-                            value="Accept"
-                            onClick = {(e) => {this.handleClick(e, friendreq_id)}}
-                            key={friendreq_id}
-                        />
-                        <input
-                            type="submit"
-                            class="deleteButton"
-                            value="Delete"
-                            onClick = {(e) => {this.handleClick(e, friendreq_id)}}
-                            key={friendreq_id}
-                        />
-                    </form>
+                    <p className="friendname" key={friendreq_id + '.p'}>
+                        {friendreq_id}
+                    </p>
+                    <div 
+                        className="acceptButton" 
+                        key={friendreq_id + '.acc'}
+                        onClick = {() => {this.handleAccept(friendreq_id)}}
+                    >
+                        Accept
+                    </div>
+                    <div 
+                        className="deleteButton" 
+                        key={friendreq_id + '.del'}
+                        onClick = {() => {this.handleDelete(friendreq_id)}}
+                    >
+                        Delete
+                    </div>
+
+
                 </div>
 
                 // this.renderFriendrequest(friendreq_id)
@@ -295,7 +326,7 @@ export default class FriendRequests extends Component {
         // Old code
         // var renderedOutput = this.state.friendreqList.map(item => this.renderFriendrequest(item))
 
-        console.log("inside friend requests page");
+        console.log("Generating friend requests page");
         return (
             <div className="friendreqPage">
                 <div className="friendreqpanel">
@@ -305,12 +336,12 @@ export default class FriendRequests extends Component {
                                 {/* onSubmit={this.handleSubmit} */}
                                 <input
                                     type="text"
-                                    class="friendreqSearchbar-input"
+                                    className="friendreqSearchbar-input"
                                     placeholder="Search friend requests..."
                                 />
                                 <input
                                     type="submit"
-                                    class="friendreq-search"
+                                    className="friendreq-search"
                                     value=""
                                 />
                             </form>
@@ -341,7 +372,9 @@ export default class FriendRequests extends Component {
                 </div>
             </div>
             )
+            
         }
+        
     }
 
 

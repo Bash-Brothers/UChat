@@ -850,7 +850,6 @@ app.post("/sendchat/:chat_id", async (req, res) => {
     const chat_id = req.params.chat_id;
     console.log("Inside server.js /sendchat/", chat_id);
     const message = req.body;
-
     let returnCode;
 
     try
@@ -902,6 +901,19 @@ app.post("/sendchat/:chat_id", async (req, res) => {
         console.log("Return code = ", returnCode);
         res.json({returnCode: returnCode });
     }
+});
+
+
+app.post("/latexRequest", async(req, res) => {
+    const latex = await req.body.latex;
+    console.log('called', latex)
+    var spawn = require("child_process").spawn;
+    var request = spawn('python', ['latexRequest.py', latex]);
+    request.stderr.pipe(process.stderr);
+    request.stdout.pipe(process.stdout);
+    request.stdout.on('data', function(data) { 
+        res.json({filename: data.toString()}); //returns filename of converted latex
+    } ) 
 });
 
 
@@ -962,28 +974,4 @@ app.post("/sendchat/:chat_id", async (req, res) => {
 //         res.json({returnCode: returnCode , messages: messages, participants: participants});
 //     }
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

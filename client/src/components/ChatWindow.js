@@ -190,6 +190,8 @@ export default class ChatWindow extends Component {
                 alert('curchatinfo is null')
                 chatParticipants = [];
             }
+
+            const chatName = (chatParticipants[0] == curUser) ? chatParticipants[1] : chatParticipants[0];
            
             var messageList = []
             try{
@@ -227,10 +229,12 @@ export default class ChatWindow extends Component {
 
         const chatParticipants = curChatInfo.participants;
 
+        const chatName = (chatParticipants[0] == this.state.curUser) ? chatParticipants[1] : chatParticipants[0];
+
         const messageList = curChatInfo.messages;
 
         this.setState({curChat: newChat, 
-                      curChatName: chatParticipants, messageList: messageList, 
+                      curChatName: chatName, messageList: messageList, 
                      });
 
     }

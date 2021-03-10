@@ -164,6 +164,7 @@ export default class ChatWindow extends Component {
     //TO DO, replace with faster implementation
     async getData() 
     {
+        // console.log(window.location['pathname']);
         console.log("Getting data");
         try{
             const curChatInfo = await this.getChat(this.state.curChat);
@@ -497,7 +498,7 @@ export default class ChatWindow extends Component {
                             {...this.state}/>
                         {renderedMessages}
                     </div>
-                    <div className="currentChat">
+                    <div className="currentChatTo">
                         {this.state.curChatName}
                     </div>
                 </div>

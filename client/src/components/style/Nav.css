@@ -20,6 +20,16 @@
       align-items: center;
       font-size: 13px;
   }
+
+  .page-title{
+    font-size: 2.8vh;
+    position: relative;
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+    
+  }
+
   .navButton{
     display: flex;
     flex-direction: column;

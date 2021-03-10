@@ -69,6 +69,15 @@ export default class SearchPage extends Component {
         });
 
         const res = await result.json();  /* this is the res sent by the backend of find users etc */
+        var list = this.state.curUserList;
+        for(var i in list){
+            if((list[i])['user'] == user)
+            {
+                (list[i])['addstatus'] = 1;
+                break;
+            }
+        }
+        this.setState({curUserList: list});
 
         //function showDiv(){
         //    document.getElementById('request-sent').style.visibility="visible";

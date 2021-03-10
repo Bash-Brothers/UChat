@@ -43,7 +43,7 @@ export default class LoginPage extends React.Component
                   },
                   body: JSON.stringify(this.state) /* this is the data being posted */
         })
-
+        console.log("before parsing");
         const res = await result.json();  /* this is the res sent by the backend */
 
         // alert('success');

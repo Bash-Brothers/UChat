@@ -190,6 +190,8 @@ export default class ChatWindow extends Component {
                 alert('curchatinfo is null')
                 chatParticipants = [];
             }
+
+            const chatName = (chatParticipants[0] == curUser) ? chatParticipants[1] : chatParticipants[0];
            
             var messageList = []
             try{
@@ -227,10 +229,12 @@ export default class ChatWindow extends Component {
 
         const chatParticipants = curChatInfo.participants;
 
+        const chatName = (chatParticipants[0] == this.state.curUser) ? chatParticipants[1] : chatParticipants[0];
+
         const messageList = curChatInfo.messages;
 
         this.setState({curChat: newChat, 
-                      curChatName: chatParticipants, messageList: messageList, 
+                      curChatName: chatName, messageList: messageList, 
                      });
 
     }
@@ -354,7 +358,7 @@ export default class ChatWindow extends Component {
                 let sender = messageObj['sender'];
                 let message = messageObj['message'];
                 let time = messageObj['time'];
-                let type = 1    //get message type from backend (temporarily using type 0 = text, type 1 = image)
+                let type = 0    //get message type from backend (temporarily using type 0 = text, type 1 = image)
                 /*This timestamp extraction code may be inefficient
                 It also only uses 24 hour time, and doesn't extract dates
                 (we'll probably need to use some other logic for displaying dates anyways, since usually dates are only displayed once per day)

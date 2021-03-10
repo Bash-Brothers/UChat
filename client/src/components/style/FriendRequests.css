@@ -1,14 +1,16 @@
 
 
 .friendreqPage{
-    margin-top: 4vh;
+    margin-top: 8vh;
     display: flex;
     flex-direction: row;
     height: 90vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .friendreqpanel{
-    height: 96vh;
+    height: 92vh;
     width: 40%;
   }
 
@@ -82,7 +84,6 @@ background: #555;
     font-size: large;
     background-color: rgb(126, 161, 177);
     border: 1px black solid;
-    border-right: none;
     /* border-radius: 5px; */
     /* margin-top: 5px;
     margin-bottom: 5px;

@@ -39,7 +39,7 @@ class MediaWidget extends React.Component {
 
         const fetchurl = "/sendchat/"+this.props.curChat;
         console.log("inside handleLatexSubmit, fetchurl = ", fetchurl);
-        const newMessage = {chat_id: this.props.curChat, sender: this.props.curUser, message: filename, time: this.props.getCurrentTime()};
+        const newMessage = {chat_id: this.props.curChat, sender: this.props.curUser, message: filename, time: this.props.getCurrentTime(), type: "latex"};
         console.log(newMessage)
         const result = await fetch("/sendchat/"+this.props.curChat, 
                   {
@@ -251,7 +251,7 @@ export default class ChatWindow extends Component {
 
     handleChange = (event) => {
         console.log("Inside handleChange");
-        const newMessage = {chat_id: this.state.curChat, sender: this.state.curUser, message: event.target.value, time: this.getCurrentTime()};
+        const newMessage = {chat_id: this.state.curChat, sender: this.state.curUser, message: event.target.value, time: this.getCurrentTime(), type: "text"};
         console.log("Inside handleChange, newMessage = ", newMessage);
         this.setState({curMessage: newMessage});
     }
@@ -359,7 +359,7 @@ export default class ChatWindow extends Component {
                 let sender = messageObj['sender'];
                 let message = messageObj['message'];
                 let time = messageObj['time'];
-                let type = 0    //get message type from backend (temporarily using type 0 = text, type 1 = image)
+                let type = messageObj['type'];    //get message type from backend (temporarily using type 0 = text, type 1 = image)
                 /*This timestamp extraction code may be inefficient
                 It also only uses 24 hour time, and doesn't extract dates
                 (we'll probably need to use some other logic for displaying dates anyways, since usually dates are only displayed once per day)
@@ -377,7 +377,7 @@ export default class ChatWindow extends Component {
 
                 if(sender === this.state.curUser)
                 {   
-                    if(type === 1){
+                    if(type === "latex"){
                         return (
                             <div className="sent">
                                 <div className="messageText">
@@ -403,7 +403,7 @@ export default class ChatWindow extends Component {
                 }
                 else
                 {
-                    if(type === 1){
+                    if(type === "latex"){
                         return (
                             <div className="sent">
                                 <div className="messageText">

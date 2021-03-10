@@ -289,6 +289,19 @@
   transition: 0.3s;
 }
 
+.placeholderImage {
+  background-image: url('../../images/icon_image.svg');
+  background-repeat: no-repeat;
+  background-size: 20vh 20vh;
+  background-position: 50% 50%;
+  height: 20vh;
+  width: 10vw;
+  border-radius: 15px;
+  border: none;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
 .mediaUploadImage:hover {
   opacity: 1;
   transition: 0.3s;
@@ -311,6 +324,24 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
+.imageWidget {
+  display: flex;
+  background: #EEEEEE;
+  margin-left: 7.5vw;
+  margin-right: 1vw;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  height: 35vh;
+  width: 20vw;
+  z-index: 1;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+
 
 .mediaLatex {
   background-image: url('../../images/icon_latex.svg');
@@ -330,7 +361,7 @@
   transition: 0.3s;
 }
 
-.latexHeader {
+.widgetHeader {
   width: 20vw;
   height: 6vh;
   border-radius: 15px;
@@ -347,7 +378,7 @@
   resize: none;
 }
 
-.latexSend {
+.widgetSend {
   width: 8vw;
   height: 4vh;
   background: #1b3faa;

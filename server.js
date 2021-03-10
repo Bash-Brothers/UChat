@@ -10,7 +10,7 @@ var express = require("express"),
 // the link to the database along with username and password for the db - can be copied off Mongo's connection page 
 const uri = "mongodb+srv://sudhanshu:aQDJZTTc6CO5Htrb@cluster0.xkm5f.mongodb.net/test_db?retryWrites=true&w=majority";
 // create instance of mongo client 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 console.log("- Client created")
  
 var app = express();

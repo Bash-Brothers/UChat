@@ -205,7 +205,7 @@ export default class ChatWindow extends Component {
             this.intervalID = setInterval(this.getData.bind(this), 5000)
 
             this.setState({loggedIn: loggedIn,  curUser: curUser, curChat: curChat, 
-                      curChatName: chatParticipants, messageList: messageList, 
+                      curChatName: chatName, messageList: messageList, 
                       chatsList: chatsList,  });
         }
         else{

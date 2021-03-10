@@ -17,41 +17,42 @@ import Page404 from './components/Page404.js';
 
 import {isLoggedIn} from './utils.js';
 
+// future features: notifications popup 
 // render the notifications menu if the user has clicked on the notifications button
-function RenderNotifs(props) {
-  const status = props.status;
-  if (status) {
-    return (
-      <div class="notifications">
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-      </div>
-    )
-  }
-  return (null);
-}
+// function RenderNotifs(props) {
+//   const status = props.status;
+//   if (status) {
+//     return (
+//       <div class="notifications">
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//       </div>
+//     )
+//   }
+//   return (null);
+// }
 
 //changed App from a function a class 
 class App extends Component {

@@ -182,15 +182,22 @@ export default class ChatWindow extends Component {
 
             console.log("curChatInfo = ", curChatInfo);
 
+            var chatParticipants =[];
+            try{
+                chatParticipants = curChatInfo.participants;
+            }
+            catch{
+                alert('curchatinfo is null')
+                chatParticipants = [];
+            }
            
-            const chatParticipants = curChatInfo.participants;
-
-            //!!! NOTE: HARD CODED FOR TWO PERSON CHATS !!!
-            //LOGIC WILL NEED TO CHANGE FOR MULTI-PERSON CHAT ROOMS
-            const chatName = ((curChatInfo.participants[0] === curUser) ? curChatInfo.participants[1] : curChatInfo.participants[1]);
-            console.log("participants = ", chatParticipants);
-
-            const messageList = curChatInfo.messages;
+            var messageList = []
+            try{
+                 messageList = curChatInfo.messages;
+            }
+            catch{
+                messageList =[]
+            }
 
             // get updated list of messages every 5 seconds
             this.intervalID = setInterval(this.getData.bind(this), 5000)
@@ -333,7 +340,11 @@ export default class ChatWindow extends Component {
         // }
         const messages = this.state.messageList; 
         var renderedMessages;
-        if(messages === null || messages.length == 0) //if a chat with curChat id has no messages, display a no messages div
+        if(renderedContacts === null)
+        {
+            renderedMessages = <div className="no-chats">Looks like you have no chats. <a href="/search" class="link">Add a user</a> to get started.</div>
+        }
+        else if(messages === null || messages.length == 0) //if a chat with curChat id has no messages, display a no messages div
         {
             renderedMessages = <div className="no-messages">Looks like this chat has no messages!</div>
         }

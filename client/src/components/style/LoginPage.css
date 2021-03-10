@@ -75,6 +75,11 @@
     transition: 0.3s;
 }
 
+.loginError {
+    margin-top: 5px;
+    color: red;
+}
+
 #loginlogo{
     height: 25vh;
     border: solid black 3px;

@@ -2,54 +2,100 @@ import React, { Component } from "react";
 import './style/SearchPage.css';
 import egg from '../images/paul.jpg';
 import {Redirect} from "react-router-dom";
-import {isLoggedIn} from '../utils.js';
+import {isLoggedIn, getUserInfo} from '../utils.js';
 
 export default class SearchPage extends Component {
 
     constructor(props)
     {
         super(props);
-        this.state = {loggedIn: true, search: ""};
+        this.state = {
+            loggedIn: true, 
+            search: "", 
+            curUser: "default",
+            successCode: 1, // successCode = 0 means search was successful, 1 means no search yet, -1 means search unsuccesful
+            curUserList: [],
+            hasSearched: false, //has the user searched yet
+        };
     }
-    componentDidMount() //we need to make sure we are actually logged in
+    async componentDidMount() //we need to make sure we are actually logged in
     {                   
         console.log("Inside component did mount for chat window");
+        const userInfo = await getUserInfo(); // about current user
+        const curUser = userInfo.username;  
         isLoggedIn().then(loggedIn => this.setState({loggedIn: loggedIn}));
+        this.setState({curUser:curUser});
     }
 
     handleChange = (event) => {
-        this.setState({[event.target.name]: event.target.value});
+        console.log("Inside handleChange")
+        const searchWord = event.target.value
+        console.log("Inside handleChange of search page, searched keyword is: ", searchWord)
+        this.setState({search: searchWord})
+        //this.setState({[event.target.name]: event.target.value});
     }
 
     handleSubmit =  async (event) => {
         event.preventDefault();
-        const result = await fetch("/search", 
+        const result = await fetch("/findusers/" + this.state.search, 
+                  {
+                    method: 'GET',
+                    headers: {
+                      'Content-Type': "application/json; charset=utf-8",
+                  },
+                  /* this is the data being posted */
+        });
+
+        const res = await result.json();  /* this is the res sent by the backend of find users etc */
+
+        const successCode = await res.successCode;
+        const users = await res.users;
+
+        event.target.reset(); // clear out form entries
+        this.setState({successCode: successCode, curUserList: users, hasSearched: true})
+        // make the contactList object 
+    };
+
+    // for add friend button
+    handleClick = async (user) => {
+        const result = await fetch("/sendfriendrequest", 
                   {
                     method: 'POST',
                     headers: {
                       'Content-Type': "application/json; charset=utf-8",
                   },
-                  body: JSON.stringify(this.state) /* this is the data being posted */
-        })
+                  body: JSON.stringify({username: this.state.curUser, friendname: user})
+                  /* this is the data being posted */
+        });
 
-        const res = await result.json();  /* this is the res sent by the backend */
+        const res = await result.json();  /* this is the res sent by the backend of find users etc */
 
-        event.target.reset(); // clear out form entries
+        //function showDiv(){
+        //    document.getElementById('request-sent').style.visibility="visible";
+        //}
+    
+        //function hideDiv(){
+        //    document.getElementById('request-sent').style.visibility="hidden";
+        //}
 
-        // make the contactList object 
-    };
+        //setTimeout("showDiv()", 1000);
+        //setTimeout("hideDiv()", 5000);
 
-    handleClick() {
-        console.log("handleClick called")
+        //const successCode = await res.successCode;
+        //const users = await res.users;
 
+        //event.target.reset(); // clear out form entries
+        //this.setState({successCode: successCode, curUserList: users, hasSearched: true})
+
+        // call sendFriendRequest(curUser, Paul)
         //change addstatus, send update to backend (call add friend)
 
     }
 
-    button(status) {
+    button(status, user) {
         switch (status) {
             case 0:
-                return(<div className="button-add" onClick={() => this.handleClick()}/>)
+                return(<div className="button-add" onClick={() => this.handleClick(user)}/>)
             case 1: 
                 return(<div className="button-pending"/>)
             case 2:
@@ -64,19 +110,25 @@ export default class SearchPage extends Component {
         }
 
         //receive this from the backend
-        const contactList = [{user: 'Paul', addstatus: 0}, {user: 'Aman', addstatus: 1}, {user: 'Milo', addstatus: 2}, ]
+        const contactList = this.state.curUserList
 
+        var renderedcards;
+        if((contactList === undefined || contactList.length == 0) && this.state.hasSearched){
+            renderedcards = <div className="noresults">No users matching the search</div>
+        }
+        else{
         var renderedcards = contactList.map(contactcard => 
             <div className="contactcard">
                 <div className="contactname">
                     {contactcard['user']}
                 </div>
-                {this.button(contactcard['addstatus'])}
-                
+                {this.button(contactcard['addstatus'], contactcard['user'])}
             </div>
             )
-
+        }
         return (
+            <div>
+            <div id="request-sent"> Friend request sent!</div>
             <div className="searchpage">
 
                 <form action="/search" onSubmit={this.handleSubmit}>
@@ -84,14 +136,16 @@ export default class SearchPage extends Component {
                         type="search"
                         name="query"
                         className="search-input"
-                        value= {this.state.value}
+                        value= {this.state.search_value}
                         onChange= {this.handleChange}
                         placeholder="Search for Friends"
                     />
+                    <input className="search-button" type="submit" value="" />
 
                 </form>
                 {renderedcards}
             </div> 
+            </div>
         )
     }
 }

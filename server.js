@@ -107,36 +107,78 @@ app.post("/login", async(req, res) => {
         console.log("cookie session  username = ", req.session.username );
     }
 
+    // alert('success');
+
     return res.json({successCode: successCode});
 })
 
-
-
-
 // Handling the sending of a 
 //pass in true for response to signify accepted request
-app.get("/findusers", async(req, res) => {
+app.get("/findusers/:substring", async(req, res) => {
 
+    curUser = req.session.username
     console.log(req.session.username, " is searching for users");
+    console.log(req.params.substring, " is the entered substring");
+    //var friendname = req.body.username;   // entered name of person who sent friend req
 
-    var friendname = req.body.username;   // entered name of person who sent friend req
+    users = await findUsers(req.params.substring);
+    //console.log("In get method, received original users:")
+    //console.log(users)
 
-    users = findUsers(username);
+    listOfUsernames = []
+    //extract just the usernames from the list of dicts
+    for (var i in users){
+        dict = users[i]
+        status = await friendStatus(dict['username'], curUser)
+        listOfUsernames.push({user: dict['username'], addstatus: status}) 
+    }
+    console.log('final list')
+    console.log(listOfUsernames)
+
+    successCode = 0
     if(users = -1){
         successCode = -1;
     }
-    else{
-        successCode = 0;
-    }
-    return res.json({successCode: successCode, users: users});
+    
+    return res.json({successCode: successCode, users: listOfUsernames});
 })
+
+//returns an array of usernames that match substring
+async function findUsers(substring){
+    matchingusers = [];
+    try
+    {
+    db = await MongoClient.connect(uri);
+    console.log("Connected to Database for lookup of substring", substring)
+
+    var dbo = db.db("test_db");
+    user_data = dbo.collection("user_data");
+    
+    matchingUsers = await user_data.find({username: {$regex: substring}}); 
+    matchingUsers = await matchingUsers.toArray();
+
+    console.log("found users");
+    
+    }
+    catch (err)
+    {
+        console.log(err);
+        return -1;
+    }
+    finally
+    {
+        db.close();
+        console.log("Database closed");
+        return matchingUsers;
+    }
+}
 
 app.post("/sendfriendrequest", async(req, res) => {
 
-    console.log(req.session.username, " responded to friend request");
+    console.log(req.session.username, " sent a friend request");
 
-    var username = req.body.username; // entered username
-    var friendname = req.body.friendname;   // entered name of person who sent friend req
+    var username = req.body.username; // user sending the request
+    var friendname = req.body.friendname;   // user receiving the request
 
     console.log(username, "is sending a friend request to ", friendname);
     // console.log("   request changed = ", friendname);
@@ -150,13 +192,23 @@ app.post("/sendfriendrequest", async(req, res) => {
     return res.json({successCode: successCode});
 })
 
+
+
+
+
+
+
+
+
+
+
 //this post function handles a RESPONSE to a friend request, contained in the response field as true (accepted) or false (rejected)
 app.post("/handlefriendrequest", async(req, res) => {
 
     console.log(req.session.username, " responded to friend request");
 
-    var username = req.body.username; // entered username
-    var friendname = req.body.changedfriendrequest;   // entered name of person who sent friend req
+    var username = req.body.curUser; // entered username
+    var friendname = req.body.curfriendreq;   // entered name of person who sent friend req
     var response = req.body.response;   // entered user's response
 
     console.log("In the friend request list of ", username);
@@ -166,10 +218,12 @@ app.post("/handlefriendrequest", async(req, res) => {
     // Here, as opposed to backend login functionality, no checking of the submitted data needs to be done
     // Username is already confirmed to be in database during login page checking
     // There are only 2 options: Accept and Delete
-    if (resonse === true){
+    if (response === true)
+    {
+        console.log("Friend request accepted", username);
         successCode = await confirmFriend(username, friendname);
     }
-    await removeRequest(username, friendname);
+    await removeFriendRequest(username, friendname);
 
     return res.json({successCode: successCode});
 })
@@ -314,7 +368,7 @@ async function userInfo(username)
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
  
-    user = await user_data.findOne({username: username}, {name: true, username: false, password: false, friends: true, notifs: true, pending: true}); 
+    user = await user_data.findOne({username: username}, {name: true, username: false, password: false, friends: true, notifs: true, pendingfr: true}); 
 
     if (user == null)
     {
@@ -393,7 +447,7 @@ async function friendStatus(username1, username2){
     retvar = -1;
     try
     {
-    db = MongoClient.connect(uri);
+    db = await MongoClient.connect(uri);
     console.log("Connected to Database for lookup")
 
     var dbo = db.db("test_db");
@@ -404,14 +458,16 @@ async function friendStatus(username1, username2){
     user1status = await user_data.findOne({username: username1},{notifs: 1, friends: 1});
     user2status = await user_data.findOne({username: username2},{notifs: 1, friends: 1, });
 
-    if(user1status.notifs.includes(username2) && user1status.notifs.includes(username2)){
-        console.log("Issue: The user ", username1, "did not have their notifs scrubbed correctly");
+    if(user1status.notifs.includes(username2) && user2status.notifs.includes(username1)){
+        console.log("Issue: The user did not have their notifs scrubbed correctly");
         retvar = -1;
     }
     else if(user1status.friends.includes(username2) || user2status.friends.includes(username2)){
+        //already friends
         retvar = 2;
     }
-    else if(user1status.notifs.includes(username2) || user2status.notifs.includes(username2)){
+    else if(user1status.notifs.includes(username2) || user2status.notifs.includes(username1)){
+        //already pending a fr
         retvar = 1;
     }
     else{
@@ -428,38 +484,8 @@ async function friendStatus(username1, username2){
     {
         db.close();
         console.log("Database closed");
-        console.log("Return code = ", returnCode);
+        console.log("Return code = ", retvar);
         return retvar;
-    }
-}
-
-//returns an array of usernames that match substring
-async function findUsers(substring){
-    matchingusers = [];
-    try
-    {
-    db = MongoClient.connect(uri);
-    console.log("Connected to Database for lookup")
-
-    var dbo = db.db("test_db");
-    user_data = dbo.collection("user_data");
-
-    matchingUsers = await user_data.find( { username: {$regex: substring}}, {username: 1} );
-    matchingUsers.toArray();
-    console.log("found users: ", matchingUsers);
-    
-    }
-    catch (err)
-    {
-        console.log(err);
-        return -1;
-    }
-    finally
-    {
-        db.close();
-        console.log("Database closed");
-        console.log("Return code = ", returnCode);
-        return matchingUsers;
     }
 }
 
@@ -513,7 +539,7 @@ async function sendFriendRequest(username1, username2){
     }
     try
     {
-    db = MongoClient.connect(uri);
+    db = await MongoClient.connect(uri);
     console.log("Connected to Database for lookup")
 
     var dbo = db.db("test_db");
@@ -545,18 +571,32 @@ async function sendFriendRequest(username1, username2){
     }
     finally
     {
-        console.log("Attempted friend request. Status: ", result1, result2);
+        //console.log("Attempted friend request. Status: ", result1, result2);
         db.close();
         console.log("Database closed");
-        console.log("Return code = ", returnCode);
-        return returnCode;
+        //console.log("Return code = ", returnCode);
+        return 0;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function removeFriendRequest(username, friendname)
 {
     console.log("Inside add user");
-    var returnCode = 0;
+    let returnCode;
 
     try
     {
@@ -566,36 +606,46 @@ async function removeFriendRequest(username, friendname)
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
 
-    // Find the friend request list of a specific user
+    // Remove the friend request notification from the user
+    // who received the friend request
 
-    user = await user_data.findOne({username: username});
-
-    console.log("true user = ", user);
-
-
-    // Search through the friend request list of the above specific user
-
-    req = await user.findOne({friendname: friendname});   // checks for friend request from given friend's name
-
-    console.log("matching request found = ", req);
-
-
-    // Getting the specific friend's name that we will use to identify the friend request
-
-    var friend_req_identifier = { friendname: friendname }; // Not sure if we need the username in here as well
+    const filter1 = { username: username };
+    const updateDocument1 = {
+       $pull: 
+       {
+            notifs: friendname, 
+       },
+    };
+    const result1 = await user_data.updateOne(filter1, updateDocument1);
+    console.log("Notification removed");
 
 
-    if (req == null) // if friend request from given friend's name does not exist
-    {
-        throw "friend request not found";
-    }
+    // Remove the pending friend request from the user
+    // who sent the friend request
 
-    user_data.deleteOne(friend_req_identifier,
-        function(err, res) 
-        {
-            console.log("- Friend request deleted");
-        }
-    );
+    const filter2 = { username: friendname };
+    const updateDocument2 = {
+       $pull: 
+       {
+            pendingfr: username, 
+       },
+    };
+    const result2 = await user_data.updateOne(filter2, updateDocument2);
+    console.log("PendingFR removed");
+
+
+    // updated_msgs = chat.messages;
+    // updated_msgs.push(message);
+
+    // chat_data.update({chat_id: chat.chat_id},{$set:{"messages":updated_msgs}});
+        
+    // console.log("chat updated");
+    
+    // returnCode = 0;
+
+
+
+
 
     }
     catch (err)
@@ -612,18 +662,58 @@ async function removeFriendRequest(username, friendname)
         return returnCode;
     }
 
+
+    // Old code
+
+    // // Find the friend request list of a specific user
+    // user = await user_data.findOne({username: username});
+    // console.log("true user = ", user);
+
+    // // Search through the friend request list of the above specific user
+    // req = await user.findOne({friendname: friendname});   // checks for friend request from given friend's name
+    // console.log("matching request found = ", req);
+
+    // // Getting the specific friend's name that we will use to identify the friend request
+    // var friend_req_identifier = { friendname: friendname }; // Not sure if we need the username in here as well
+
+    // if (req == null) // if friend request from given friend's name does not exist
+    // {
+    //     throw "friend request not found";
+    // }
+
+    // user_data.deleteOne(friend_req_identifier,
+    //     function(err, res) 
+    //     {
+    //         console.log("- Friend request deleted");
+    //     }
+    // );
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function createNewChat(username1, username2)
 {
     let returnCode;
     try
     {
-        db = MongoClient.connect(uri);
+        db = await MongoClient.connect(uri);
         console.log("Connected to database for new chat creation");
 
         var dbo = db.db("test_db");
-        chat_data = dbo.collect("chat_data");
+        chat_data = dbo.collection("chat_data");
 
         var uniqueChatID = uuidv4();
         new_chat = {
@@ -660,7 +750,7 @@ async function confirmFriend(username1, username2){
     matchingUserName = "";
     try
     {
-    db = MongoClient.connect(uri);
+    db = await MongoClient.connect(uri);
     console.log("Connected to Database for lookup")
 
     var dbo = db.db("test_db");
@@ -698,6 +788,7 @@ async function confirmFriend(username1, username2){
     {
         db.close();
         console.log("Database closed");
+        var returnCode = 0
         console.log("Return code = ", returnCode);
         return returnCode;
     }
@@ -812,6 +903,7 @@ app.post("/sendchat/:chat_id", async (req, res) => {
     }
 });
 
+
 app.post("/latexRequest", async(req, res) => {
     const latex = await req.body.latex;
     console.log('called', latex)
@@ -823,3 +915,63 @@ app.post("/latexRequest", async(req, res) => {
         res.json({filename: data.toString()}); //returns filename of converted latex
     } ) 
 });
+
+
+
+
+
+
+
+
+// returns the entire friend requests list from this chatID
+// app.get("/chat/:chat_id", async (req, res) => 
+// {
+
+//     let returnCode;
+//     let messages;
+//     let participants;
+//     try
+//     {
+//         const chat_id = req.params.chat_id;
+//         db = await MongoClient.connect(uri);
+//         console.log("- Connected to database for chat retrieval");
+
+//         var dbo = db.db("test_db");
+//         chat_data = dbo.collection("chat_data");
+
+
+//         const chat = await chat_data.findOne({chat_id: chat_id});
+
+//         if (chat == null) // chat doesn't exist 
+//         {
+//             console.log("Chat doesn't exist");
+//             returnCode = 1;
+//             return;
+//         }
+
+//         participants = await chat.participants;
+
+//         if (!participants.includes(req.session.username))   // if user isn't a participant in the chat
+//         {
+//             console.log("User isn't logged in ");
+//             returnCode = 2;
+//             return;
+//         }
+        
+//         messages = await chat.messages;
+//         returnCode = 0;
+//     }
+//     catch (err)
+//     {
+//         console.log(err);
+//         returnCode = 3;
+//     }
+//     finally
+//     {
+//         db.close();
+//         console.log("Database closed");
+//         console.log("Return code = ", returnCode);
+//         res.json({returnCode: returnCode , messages: messages, participants: participants});
+//     }
+// });
+

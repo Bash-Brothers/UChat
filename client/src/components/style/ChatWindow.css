@@ -30,7 +30,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: left;
-    font-size: large;
+    font-size: 4px;
     background-color: #1b3faa;
     border-bottom: 1px solid #163099;
     border-right: none;
@@ -57,6 +57,11 @@
     flex-direction: column-reverse;
     border-left: solid black 2px;
     border-right: solid black 2px;
+}
+
+.link{
+    color: white;
+    text-decoration: underline;
 }
 
 .inputField{
@@ -155,6 +160,15 @@
   border: solid white 3px;
 }
 
+.no-chats{
+  max-width: 80%;
+  margin-left: 10%;
+  background-color: #1b3faa;
+  color: white;
+  padding: 4px;
+  border-radius: 5px;
+  border: solid white 3px;
+}
 
 .searchbar-input {
     padding: 10px 24px;
@@ -215,6 +229,7 @@
 }
 
 .message-send:hover {
+  cursor: pointer;
   opacity: 1;
   transition: 0.3s;
 }

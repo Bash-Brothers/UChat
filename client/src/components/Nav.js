@@ -17,7 +17,7 @@ export default class Nav extends React.Component {
         super(props);
         this.state = {
             loggedIn: false,
-            curPage: 'default',
+            curPage: '',
         }
     }
     componentDidMount() //we need to make sure we are actually logged in
@@ -27,10 +27,15 @@ export default class Nav extends React.Component {
         switch(window.location['pathname'])
         {
             case '/chats': page = 'Chats'; break;
+            case '/chatapp': page = 'Log In'; break;
             case '/about': page = 'About'; break;
             case '/search': page = 'Search for users'; break;
             case '/settings/general': page = 'Settings'; break;
+            case '/settings/appearance': page = 'Settings'; break;
+            case '/settings/signout': page = 'Settings'; break;
             case '/friendrequests': page = 'Friend requests'; break;
+            case '/signup': page = 'Sign Up'; break;
+            case '/login': page = 'Log In'; break;
             default: page = 'Add a specific case for this url on nav.js'; break;
         }
         isLoggedIn().then(loggedIn => this.setState({loggedIn: loggedIn, curPage: page}));
@@ -43,15 +48,15 @@ export default class Nav extends React.Component {
             return (
                 <div className="main">
                     <div className="navigation1">
-
-                        <Link to="/login" className="navButton">
-                            Login
+                        <div className="page-title">{this.state.curPage}</div>
+                        <Link to="/login" className="navButton" onClick={() => this.setState({curPage: 'Log In'})}>
+                            Log In
                         </Link>
                         or
-                        <Link to="/signup" className="navButton">
-                            Signup
+                        <Link to="/signup" className="navButton" onClick={() => this.setState({curPage: 'Sign Up'})}>
+                            Sign Up
                         </Link>
-                        <Link to="/about" className="navButton">
+                        <Link to="/about" className="navButton" onClick={() => this.setState({curPage: 'About'})}>
                             <img src={IconInfo} width="30" height="30" />
                         </Link>
                     </div>

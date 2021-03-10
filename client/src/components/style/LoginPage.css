@@ -28,25 +28,21 @@
 .contactlink:visited {
 	color: black;
 }
-.loginlink {
-	color: black;
-    text-decoration: none;
-}
 
-.loginlink:link:hover {
-    color: black;
+#loginlink {
+	color: #0000EE;
     text-decoration: underline;
 }
 
-.loginlink:link {
-	color: black;
-    text-decoration: none;
+#loginlink:hover {
+    color: rgb(56, 27, 138);
+    text-decoration: underline;
 }
 
-.loginlink:visited {
-	color: black;
-    text-decoration: none;
-}
+/* #loginlink:visited {
+	color: rgb(147, 28, 245);
+    text-decoration: underline;
+} */
 
 .loginField {
     height: 3vh;

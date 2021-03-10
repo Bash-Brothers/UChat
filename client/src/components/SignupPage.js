@@ -75,8 +75,9 @@ export default class SignupPage extends React.Component
                     <input type="password" className="signupField" placeholder="Re-enter password" name="password_confirm" value = {this.state.value} onChange = {this.handleChange}/>
                     <DisplayErrors success={this.state.successCode} />
                     <input type="submit" className="signupButton" value="Sign Up" />
+                    <a href="/login" id="loginlink">Don't have an account? Click here to sign up.</a>
                 </form>
-                <div id="contact" className="link">Need help with your account or have feedback? <a href ="#">Contact us</a></div>
+                <div id="contact" className="contactlink">Need help with your account or have feedback? <a href ="/about">Contact us</a></div>
              </div> 
         );
     }

@@ -16,7 +16,6 @@ function DisplayErrors(props) {
     }
 }
 
-
 export default class LoginPage extends React.Component
 {
     constructor(props)
@@ -83,10 +82,10 @@ export default class LoginPage extends React.Component
                 <input type="password" className="loginField" placeholder="Password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
                 <DisplayErrors success={this.state.successCode} />
                 <input type="submit" className="loginButton" value="Log In"/>
-                <a href ="/" class="loginlink">Forgot username/password?</a>
-                <a href="/signup" class="loginlink">Don't have an account? Click here to sign up.</a>
+                {/* <a href ="/" class="loginlink">Forgot username/password?</a> */}
+                <a href="/signup" id="loginlink">Don't have an account? Click here to sign up.</a>
             </form>
-            <div id="contact" className="contactlink">Need help with your account or have feedback? <a href ="#">Contact us</a></div>
+            <div id="contact" className="contactlink">Need help with your account or have feedback? <a href ="/about">Contact us</a></div>
             </div> 
           );
         

@@ -755,14 +755,14 @@ async function confirmFriend(username1, username2){
 
     var dbo = db.db("test_db");
     user_data = dbo.collection("user_data");
-    //create new chat HERE
+    //create new chat here
     chatID = await createNewChat(username1, username2);
     const filter1 = { username: username1 };
     //push a new value to their notifcations friends
     const updateDocument1 = {
        $push: {
           friends: username2,
-          chats: chatID,
+          chats: {chat_id: chatID, chat_name: username2 },
        },
     };
     const result1 = await user_data.updateOne(filter1, updateDocument1);
@@ -772,7 +772,7 @@ async function confirmFriend(username1, username2){
     const updateDocument2 = {
        $push: {
           friends: username1,
-          chats: chatID,
+          chats: {chat_id: chatID, chat_name: username1 },
        },
     };
     const result2 = await user_data.updateOne(filter2, updateDocument2);
@@ -804,6 +804,8 @@ app.get("/chat/:chat_id", async (req, res) =>
     try
     {
         const chat_id = req.params.chat_id;
+        console.log("Inside server.js /chat/", chat_id);
+
         db = await MongoClient.connect(uri);
         console.log("- Connected to database for chat retrieval");
 

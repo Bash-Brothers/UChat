@@ -175,9 +175,9 @@ export default class ChatWindow extends Component {
         const userInfo = await getUserInfo(); // about current user
         const curUser = userInfo.username;  
 
-        const chatsList = userInfo.chats; // note, this won't work for groupchats 
+        const chatsList = userInfo.chats; 
         if(chatsList.length > 0){
-            const curChat = userInfo.chats[0];  // most recent chat is displayed by default
+            const curChat = userInfo.chats[0].chat_id;  // most recent chat is displayed by default
             const curChatInfo = await this.getChat(curChat);
 
             console.log("curChatInfo = ", curChatInfo);
@@ -322,8 +322,9 @@ export default class ChatWindow extends Component {
         // const contactList = [{user: 'Sud', chatId: 0}, {user: 'Eggert', chatId: 2},  {user: 'Musk', chatId: 1}]
 
         const chatsList = this.state.chatsList;
+        console.log("chatsList = ", chatsList)
         try{
-            var renderedContacts = chatsList.map(chat_id => <div className="contact" onClick={() => this.changeChat(chat_id)}>{chat_id}</div>);
+            var renderedContacts = chatsList.map(chat => <div className="contact" onClick={() => this.changeChat(chat.chat_id)}>{chat.chat_name}</div>);
         }
         catch{
             var renderedContacts = null;

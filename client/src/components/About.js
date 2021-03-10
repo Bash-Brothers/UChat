@@ -7,7 +7,7 @@ export default function About(props) {
             <div className="about">
                 <img src={egg} id="loginlogo"/>
                 <div className="info-content">
-                    Welcome to chatapp created by the Bash Brothers!
+                    Welcome to UChat created by the Bash Brothers! UChat is an application where users can share and send messages like any other app along with LaTeX equations and images!
                     <p>Aman Oberoi</p>
                     <p>Kevin Huang</p>
                     <p>Milo Kearney</p>

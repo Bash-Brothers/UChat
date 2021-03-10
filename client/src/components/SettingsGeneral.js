@@ -167,7 +167,7 @@ export default class Settings extends Component {
 							<div className = "category-header">
 								General Settings
 							</div>
-							<div className = "field-text">
+							<p className = "field-text">
 								<div className = "setting-name">
 									Name
 								</div>
@@ -182,9 +182,9 @@ export default class Settings extends Component {
 									<input type="submit" value="submit" />
                     			</form>
 								<div className = "setting-padding" />
-							</div>
-							Request Password Change
-							<div className = "field-text">
+							</p>
+							<div id="reqpas">Request Password Change:</div>
+							<p className = "field-text">
 								<div className = "setting-name">
 									Current Password
 								</div>
@@ -198,7 +198,7 @@ export default class Settings extends Component {
 								<input type="submit" value="submit" />
                     			</form>
                 				<div className = "setting-padding" />
-							</div>
+							</p>
 							{this.state.passwordVerified ? 
 							<div className = "field-text">  {/* conditonally render new password fields  */}
 								<div className = "setting-name">

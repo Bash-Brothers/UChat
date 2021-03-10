@@ -67,8 +67,6 @@ export default class FriendRequests extends Component {
             console.log("Obtained user info and friend requests array");
         }
         else{
-
-            alert('Friend requests array (userInfo.notifs) has a length smaller than or equal to zero');
             
             // get updated list of friend requests every 5 seconds
             // Not sure whether it is right to call this function using .bind(this)
@@ -206,9 +204,16 @@ export default class FriendRequests extends Component {
         console.log("Friend requests render");
 
         var friendrequestsList = this.state.friendrequestsList;
-        try{
+        var renderedFriendRequests;
+        
+        if(friendrequestsList === null || friendrequestsList.length == 0)
+        {
+            renderedFriendRequests = <div className="friendrequest">You dont have any friend requests! Search for users <a href='search'>here</a></div>
+        }
+        else
+        {
             // reverse() to display the most recently made friend requests first
-            var renderedFriendRequests = friendrequestsList.slice(0).reverse().map(friendreq_id => 
+            renderedFriendRequests = friendrequestsList.slice(0).reverse().map(friendreq_id => 
 
                 // Note: I spent a hell of a long time searching this up,
                 // In a complex react component that contains many elements,
@@ -243,19 +248,15 @@ export default class FriendRequests extends Component {
                 // this.renderFriendrequest(friendreq_id)
                 )
         }
-        catch{
-            // alert('success');
-            var renderedFriendRequests = null;
-        }
 
         console.log("Generating friend requests page");
         return (
             <div className="friendreqPage">
                 <div className="friendreqpanel">
-                    <div className="searchfriendreq">
+                    {/* <div className="searchfriendreq">
                         <div className="inputFieldFriendreq">
                             <form>
-                                {/* onSubmit={this.handleSubmit} */}
+                                
                                 <input
                                     type="text"
                                     className="friendreqSearchbar-input"
@@ -268,9 +269,8 @@ export default class FriendRequests extends Component {
                                 />
                             </form>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="friendreqList">
-
                         {renderedFriendRequests}
                     </div>
                 </div>

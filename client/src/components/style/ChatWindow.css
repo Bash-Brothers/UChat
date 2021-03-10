@@ -30,7 +30,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: left;
-    font-size: 4px;
+    font-size: large;
     background-color: #1b3faa;
     border-bottom: 1px solid #163099;
     border-right: none;
@@ -47,6 +47,7 @@
 
 .contact:hover{
     cursor: pointer;
+    background-color: #133086;
 }
 
 .curChat{
@@ -109,18 +110,19 @@
 
 } */
 
-.currentChat {
+.currentChatTo {
   font-size: 35px;
   text-align: left;
   text-indent: 40px;
   position : absolute;
+  vertical-align: middle;
   z-index  : 1;
-  top   : 4.3vh;
-  right: 1vw;
+  top   : 4.2vh;
   pointer-events   : none;
-  background-image : white;
-  width    : 87vw;
-  height   : 14vh;
+  background-color : rgb(255, 255, 255);
+  width    : 88.25vw; /*very finely calculated lol */
+  height   : 7vh;
+  border-bottom: solid 3px #1b3faa;
 }
 
 

@@ -60,8 +60,34 @@
     margin-bottom: 20px;
 }
 
+#loginlink {
+	color: #0000EE;
+    text-decoration: underline;
+    text-align: center;
+}
+
+#loginlink:hover {
+    color: rgb(56, 27, 138);
+    text-decoration: underline;
+}
+
+/* #loginlink:visited {
+	color: rgb(147, 28, 245);
+    text-decoration: underline;
+} */
+
 #contact{
     padding-bottom: 10px; /*whatever the height of your footer is*/
     position: fixed;
     bottom: 0;
+}
+
+.contactlink {
+	color: black;
+}
+.contactlink:link {
+	color: black;
+}
+.contactlink:visited {
+	color: black;
 }

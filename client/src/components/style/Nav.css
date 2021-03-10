@@ -11,7 +11,6 @@
     top: 0;
       position: fixed;
       display: flex;
-      flex-row: row wrap;
       justify-content: flex-end;
       background: #eeeeee;
       width: 100%;
@@ -20,6 +19,15 @@
       align-items: center;
       font-size: 13px;
   }
+
+  .page-title{
+    font-size: 2.8vh;
+    text-align: center;
+    width: 30vw;
+    position: fixed;
+    left: 35vw;
+  }
+
   .navButton{
     display: flex;
     flex-direction: column;

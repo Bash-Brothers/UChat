@@ -14,7 +14,6 @@
     align-items:center;
     background-color: #ffffff;
     color: white;
-
 }
 
 .info-content{
@@ -24,4 +23,5 @@
     padding: 20px;
     border-radius: 30px;
     box-shadow: 2px 3px 6px 4px #cccccc;
+    width: 60vh;
 }

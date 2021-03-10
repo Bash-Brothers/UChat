@@ -82,12 +82,21 @@
 	height: 55px;
 }
 
+#reqpas{
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	height: 25px;
+	margin-left: 6.3vw; /*finely calculated */
+	text-decoration: underline;
+}
+
 .setting-name {
 	font-weight: bold;
 	text-align: left;
 	text-indent: 30px;
-	line-height: 55px;
-	height: 55px;
+	line-height: 35px;
+	height: 35px;
 	width: 200px;
 }
 

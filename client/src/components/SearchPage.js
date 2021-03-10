@@ -69,6 +69,13 @@ export default class SearchPage extends Component {
         });
 
         const res = await result.json();  /* this is the res sent by the backend of find users etc */
+        
+        document.getElementById('mydiv').style.visibility='visible';
+    
+        setTimeout(function() {
+            document.getElementById('mydiv').style.visibility='hidden';
+        }, 3000); // <-- time in milliseconds
+        
         var list = this.state.curUserList;
         for(var i in list){
             if((list[i])['user'] == user)
@@ -119,7 +126,21 @@ export default class SearchPage extends Component {
         }
 
         //receive this from the backend
-        const contactList = this.state.curUserList
+        var contactList = this.state.curUserList
+        var index = -1;
+        for(var i in contactList)
+        {
+            if((contactList[i])['user'] === this.state.curUser)
+            {
+                index = i;
+                break;
+            }
+        }
+        
+        if(index > -1)
+        {
+            contactList.splice(index, 1);
+        }
 
         var renderedcards;
         if((contactList === undefined || contactList.length == 0) && this.state.hasSearched){
@@ -137,7 +158,7 @@ export default class SearchPage extends Component {
         }
         return (
             <div>
-            <div id="request-sent"> Friend request sent!</div>
+            <div id="mydiv"> Friend request sent!</div>
             <div className="searchpage">
 
                 <form action="/search" onSubmit={this.handleSubmit}>

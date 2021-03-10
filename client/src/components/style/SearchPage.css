@@ -10,6 +10,20 @@
     background-color: #ffffff;
 }
 
+#mydiv{
+    width: 150px;
+    height: 20px;
+    padding: 5px;
+    background: greenyellow;
+    border-radius: 6px;
+    border: solid black 2px;
+    color: black;
+    text-align: center;
+    position: fixed;
+    left: 44%;
+    top: 1%;
+    visibility: hidden;
+}
 
 .search-input {
     padding: 12px 20px;

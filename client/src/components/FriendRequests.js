@@ -155,8 +155,7 @@ export default class FriendRequests extends Component {
     
     if (returnCode != 0)
     {
-       alert('error sending chat')
-        return null;
+       console.log('return code was not 0 from server.js')
     }
 
     // event.target.reset();

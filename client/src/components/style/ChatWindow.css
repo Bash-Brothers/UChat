@@ -20,7 +20,7 @@
 }
 .contactsList{
     background-color: #1b3faa;
-    height: 90vh;
+    height: 96vh;
     width: 100%;
     overflow-y: auto;
 }
@@ -92,8 +92,8 @@
     border: none;
 }
 
-
-.sdfsdf{
+/* the old CSS for currentChat, kept here for reference
+.sdfsdf{ 
   height: 8vh;
   background-color: white;
   color: black;
@@ -102,10 +102,10 @@
   justify-content: center;
   align-items: center;
 
-}
+} */
 
 .currentChat {
-  font-size: 25px;
+  font-size: 35px;
   text-align: left;
   text-indent: 40px;
   position : absolute;
@@ -124,8 +124,8 @@
 
 .received{
     padding: 4px;
-    margin-top: 10px;
-    margin-left: 3%;
+    margin-bottom: 10px;
+    margin-left: 5%;
     background-color: #cccccc;
     max-width: 60%;
     border-radius: 5px;
@@ -135,8 +135,8 @@
 }
 
 .sent{
-    margin-left: 37%;
-    margin-top: 10px;
+    margin-left: 35%;
+    margin-bottom: 10px;
     background-color: #1b3faa;
     max-width: 60%;
     padding: 4px;
@@ -302,7 +302,7 @@
 .mediaLatex {
   background-image: url('../../images/icon_latex.svg');
   background-repeat: no-repeat;
-  background-size: 7vh auto;
+  background-size: 5vh auto;
   background-position: 50% 50%;
   height: 4vw;
   width: 4vw;
@@ -342,6 +342,7 @@
   color: white;
   margin-bottom: 0.8vh;
   margin-top: 0.8vh;
+  line-height: 4vh;
 }
 
 .button-back {
@@ -384,4 +385,27 @@
 
 .messages::-webkit-scrollbar-thumb:hover {
   background: #555; 
+}
+
+.messageText {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.messageTimeSent {
+  font-size: 10px;
+  text-align: right;
+}
+
+.messageTimeReceived {
+  font-size: 10px;
+  text-align: right;
+}
+
+.messageImage {
+  border-radius: 10px;
+  margin-top: 10px;
+  max-width: 30vw;
+  height: auto;
+  filter: invert();
 }

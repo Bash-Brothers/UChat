@@ -8,7 +8,6 @@ import ChatWindow from './components/ChatWindow.js';
 import LoginPage from './components/LoginPage.js';
 import About from './components/About.js';
 import SignupPage from './components/SignupPage.js';
-import ContactUsPage from './components/ContactUsPage.js';
 import SearchPage from './components/SearchPage.js';
 import FriendRequests from './components/FriendRequests.js';
 

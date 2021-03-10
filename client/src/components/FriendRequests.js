@@ -5,33 +5,6 @@ import {Redirect} from "react-router-dom";
 import {isLoggedIn, getUserInfo} from '../utils.js';
 
 
-
-// function FriendRequest(props) {
-
-//     return (
-//         <div className="friendrequest">
-//             {/* https://stackoverflow.com/questions/42597602/react-onclick-pass-event-with-parameter */}
-//             <form onSubmit={() => window.helloComponent.handleSubmit(props)}>
-//                 <p class="friendname">{props.value}</p>
-//                 <input
-//                     type="submit"
-//                     class="acceptButton"
-//                     value="Accept"
-//                     onClick = {() => window.helloComponent.handleClick(props)}
-//                 />
-//                 <input
-//                     type="submit"
-//                     class="deleteButton"
-//                     value="Delete"
-//                     onClick = {() => window.helloComponent.handleClick(props)}
-//                 />
-//             </form>
-//         </div>
-//       );
-//   }
-
-
-
 export default class FriendRequests extends Component {
 
     constructor(props)
@@ -45,24 +18,7 @@ export default class FriendRequests extends Component {
             curfriendreq: null, //stores the friendrequestId of current friend request
             intervalID: null,
             response: false, // will later be updated to accept or delete
-            // button: -1,
 
-
-
-
-            
-            // How do we get the current user's username?
-            // username: "default",
-            // loggedIn: true.valueOf,
-            // friendreqList: ["Yan", "Kevin", "Milo", "Sud", "Aman"],
-            // changedfriendrequest: "",
-            
-
-            //contactList should be something that is received from the server
-            // const friendreqList = 'Yan,Kevin,Milo,Sud,Aman,Eggert,Eggboi,Eggs,SunnySideUp,Omelette,Sud,Aman,Eggert,Eggboi,Eggs,SunnySideUp,Omelette'.split(','),
-            
-            // More dummy strings
-            // , Eggert, Eggboi, Eggs, SunnySideUp, Omelette, Sud, Aman, Eggert, Eggboi, Eggs, SunnySideUp, Omelette
         };
         this.handleAccept = this.handleAccept.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -94,12 +50,6 @@ export default class FriendRequests extends Component {
         {
             this.setState({loggedIn: false});
         }
-        
-
-
-        // let rows = this.props.rows.map(item => { 
-        //     return {uid: SomeLibrary.generateUniqueID(), value: item};
-        //   });
 
 
         const userInfo = await getUserInfo(); // about current user
@@ -107,18 +57,6 @@ export default class FriendRequests extends Component {
 
         const Notifs  = userInfo.notifs; 
         if(Notifs.length > 0){
-
-            // alert('success');
-            // It is only in the render function that we display the most recent friend requests first
-
-            // Probably don't need this
-            // const curfriendreq = Notifs[0];  // most recent friend request is displayed by default
-
-            // A friend request carries no information, 
-            // the friend request itself is the only information
-
-            // Here we don't have to keep updating list of friend requests
-            // We can update friend requests by refreshing the page?
 
             // get updated list of friend requests every 5 seconds
             // Not sure whether it is right to call this function using .bind(this)
@@ -129,10 +67,8 @@ export default class FriendRequests extends Component {
             console.log("Obtained user info and friend requests array");
         }
         else{
-            // Here we don't have to keep updating list of friend requests
-            // We can update friend requests by refreshing the page?
 
-            alert('success');
+            alert('Friend requests array (userInfo.notifs) has a length smaller than or equal to zero');
             
             // get updated list of friend requests every 5 seconds
             // Not sure whether it is right to call this function using .bind(this)
@@ -159,7 +95,6 @@ export default class FriendRequests extends Component {
 
     // For understanding of what is done here, look in to the concept of currying functions
     // https://stackoverflow.com/questions/32782922/what-do-multiple-arrow-functions-mean-in-javascript
-    // https://stackoverflow.com/questions/60027202/how-do-i-pass-props-and-other-parameters-to-function-using-react-hooks
     // https://stackoverflow.com/questions/60027202/how-do-i-pass-props-and-other-parameters-to-function-using-react-hooks
     // https://stackoverflow.com/questions/42299594/await-is-a-reserved-word-error-inside-async-function
 
@@ -271,12 +206,6 @@ export default class FriendRequests extends Component {
 
         console.log("Friend requests render");
 
-
-        // if (this.state.curUser == null)
-        // {
-        //     return (<div> Loading </div>);
-        // }
-
         var friendrequestsList = this.state.friendrequestsList;
         try{
             // reverse() to display the most recently made friend requests first
@@ -288,10 +217,6 @@ export default class FriendRequests extends Component {
                 // ALL the children and elements each have to have a key
                 // https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js
 
-                //This form has 2 submit buttons
-                // See syntax rules here:
-                // https://stackoverflow.com/questions/60349756/react-js-two-submit-buttons-in-one-form
-                // https://stackoverflow.com/questions/51839138/how-do-i-use-multiple-submit-buttons-with-react-final-form
 
                 <div className="friendrequest" key={friendreq_id + '.div'}>
                     {/* https://stackoverflow.com/questions/42597602/react-onclick-pass-event-with-parameter */}
@@ -323,8 +248,6 @@ export default class FriendRequests extends Component {
             // alert('success');
             var renderedFriendRequests = null;
         }
-        // Old code
-        // var renderedOutput = this.state.friendreqList.map(item => this.renderFriendrequest(item))
 
         console.log("Generating friend requests page");
         return (
@@ -348,24 +271,6 @@ export default class FriendRequests extends Component {
                         </div>
                     </div>
                     <div className="friendreqList">
-
-
-                        {/* <div className="friendrequest">
-                            <form onSubmit={this.handleSubmit}>
-                                <input
-                                    type="submit"
-                                    class="acceptButton"
-                                    value="Accept"
-                                />
-                            </form>
-                            <form onSubmit={this.handleSubmit}>
-                                <input
-                                    type="submit"
-                                    class="deleteButton"
-                                    value="Delete"
-                                />
-                            </form>
-                        </div> */}
 
                         {renderedFriendRequests}
                     </div>

@@ -18,41 +18,42 @@ import Page404 from './components/Page404.js';
 import {isLoggedIn} from './utils.js';
 import {storage} from './firebase-config.js';
 
+// future features: notifications popup 
 // render the notifications menu if the user has clicked on the notifications button
-function RenderNotifs(props) {
-  const status = props.status;
-  if (status) {
-    return (
-      <div class="notifications">
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-        <div class="notifications-content">
-          notification
-        </div>
-      </div>
-    )
-  }
-  return (null);
-}
+// function RenderNotifs(props) {
+//   const status = props.status;
+//   if (status) {
+//     return (
+//       <div class="notifications">
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//         <div class="notifications-content">
+//           notification
+//         </div>
+//       </div>
+//     )
+//   }
+//   return (null);
+// }
 
 //changed App from a function a class 
 class App extends Component {
@@ -69,20 +70,6 @@ class App extends Component {
   }
   //curPage values: Log in page: 0, Sign up page: 1, About page: 2, Settings page: 3, Chats page: 4
   //loggedIn state variable is to make sure someone is logged in before they can click on settings or chats
-
-  callApi = async () => {
-    const response = await fetch('/');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
-
-  componentDidMount() {
-    console.log("Inside component did mount for app");
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
-  }
 
   handleClick(i) {
     this.setState({

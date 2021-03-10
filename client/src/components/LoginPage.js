@@ -43,7 +43,7 @@ export default class LoginPage extends React.Component
                   },
                   body: JSON.stringify(this.state) /* this is the data being posted */
         })
-
+        console.log("before parsing");
         const res = await result.json();  /* this is the res sent by the backend */
 
         // alert('success');
@@ -82,7 +82,7 @@ export default class LoginPage extends React.Component
                 <input type="text" className="loginField" placeholder="Username" name="username" value = {this.state.value} onChange = {this.handleChange} />
                 <input type="password" className="loginField" placeholder="Password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
                 <DisplayErrors success={this.state.successCode} />
-                <input type="submit" className="loginButton" value="Log In" onClick/>
+                <input type="submit" className="loginButton" value="Log In"/>
                 <a href ="/" class="loginlink">Forgot username/password?</a>
                 <a href="/signup" class="loginlink">Don't have an account? Click here to sign up.</a>
             </form>

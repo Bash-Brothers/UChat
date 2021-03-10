@@ -46,6 +46,8 @@ export default class LoginPage extends React.Component
 
         const res = await result.json();  /* this is the res sent by the backend */
 
+        // alert('success');
+
         // currently, I return a successCode depending on what happened in the backend
         // when successCode = 0, the user is logged in so we change state.isLoggedIn
         // the successCode also has other states such as for "user not found", "incorrect pwd"

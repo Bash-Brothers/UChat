@@ -10,7 +10,7 @@
     background-color: #ffffff;
 }
 
-#mydiv{
+#reqsent{
     width: 150px;
     height: 20px;
     padding: 5px;
@@ -23,6 +23,9 @@
     left: 44%;
     top: 1%;
     visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .search-input {
@@ -83,20 +86,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#request-sent{
-    position: fixed;
-    margin-top: 20px;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: greenyellow;
-    padding: 10px;
-    left: 45%;
-    top: 4%;
-    visibility: hidden;
 }
 
 .contactname {

@@ -27,6 +27,15 @@ export default class LoginPage extends React.Component
             loggedIn: false, 
             successCode: 0};
     }
+    async componentDidMount() 
+    {                   
+		console.log("Inside component did mount for login page");
+        const loggedIn = await isLoggedIn();
+        if (loggedIn)
+        {
+            this.setState({loggedIn: true});
+        }
+    }
 
     handleChange = (event) => {
         this.setState({[event.target.name]: event.target.value});

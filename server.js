@@ -305,8 +305,6 @@ async function addUser(name, username, password) {
 
         prev_user = await user_data.findOne({ username: username });   // checks for previous user with given name
 
-        console.log("prev user = ", prev_user.username);
-
         if (prev_user != null) // if the prev_user is already present
         {
             console.log("Username already taken")

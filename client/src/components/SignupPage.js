@@ -41,6 +41,7 @@ export default class SignupPage extends React.Component
         if (loggedIn)
         {
             this.setState({loggedIn: true});
+            window.location.reload();
         }
     }
 

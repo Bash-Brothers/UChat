@@ -154,15 +154,35 @@
 }
 
 .settings-submit {
-	height: 55px;
-	width: 55px;
-	margin-left: 2vw;
-	border-radius: 15px;
+	height: 40px;
+	width: 40px;
+	margin-left: 1vw;
+	border-radius: 10px;
+	background-color: #e4c055;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 2vh 2vh;
+	background-image: url('../../images/icon_back.svg');
+	filter: invert(1);
+	transform: scaleX(-1) ;
+	border:none;
+	transition: 0.3s;
+	cursor:  pointer;
 }
 
+.settings-submit:focus {
+	outline: none;
+}
+.settings-submit:hover {
+	background-color: #ece077;
+	transition: 0.3s;
+}
+
+
+
 .settings-submit-placeholder {
-	height: 55px;
-	width: 55px;
-	margin-left: 2vw;
+	height: 40px;
+	width: 40px;
+	margin-left: 1vw;
 	opacity: 0;
 }

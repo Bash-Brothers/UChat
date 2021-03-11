@@ -181,7 +181,7 @@ export default class Settings extends Component {
             	           				placeholder={this.state.name}
 										onChange = {this.handleChange}
                        				/>
-									<input className="settings-submit" type="submit" value="Submit" />
+									<input className="settings-submit" type="submit" value=" " />
                     			</form>
 								<div className = "setting-padding" />
 							</div>
@@ -197,7 +197,7 @@ export default class Settings extends Component {
 										name = "submittedCurrentPassword"
 										onChange = {this.handleChange}
                        				/>
-								<input type="submit" value="Submit" className="settings-submit"/>
+								<input type="submit" value=" " className="settings-submit"/>
                     			</form>
                 				<div className = "setting-padding" />
 							</div>
@@ -216,7 +216,7 @@ export default class Settings extends Component {
 									name="newPassword"
 									onChange = {this.handleChange}
                        			/>
-                       			<input className="settings-submit-placeholder" type="submit" value="Submit" disabled/> {/*this is a jank AF solution but it works for now*/}
+                       			<input className="settings-submit-placeholder" type="submit" value=" " disabled/> {/*this is a jank AF solution but it works for now*/}
                        			</div>
                        			<div className ="setting-padding"/>
                        		</div>
@@ -232,7 +232,7 @@ export default class Settings extends Component {
 										name="newPasswordConfirm"
 										onChange = {this.handleChange}
 									/>
-									<input form="changePW" className="settings-submit" type="submit" value="Submit" />
+									<input form="changePW" className="settings-submit" type="submit" value=" " />
 								</div>
 								<div className = "setting-padding" />
 							</div>
@@ -252,7 +252,7 @@ export default class Settings extends Component {
 									onChange = {this.handleChange}
 									disabled
                        			/>
-                       			<input className="settings-submit-placeholder" type="submit" value="Submit" disabled/> {/*this is a jank AF solution but it works for now*/}
+                       			<input className="settings-submit-placeholder" type="submit" value=" " disabled/> {/*this is a jank AF solution but it works for now*/}
                        			</form>
                        			<div className ="setting-padding"/>
                        		</div>
@@ -269,7 +269,7 @@ export default class Settings extends Component {
 										onChange = {this.handleChange}
 										disabled
 									/>
-									<input className="settings-submit" type="submit" value="Submit" disabled/>
+									<input className="settings-submit" type="submit" value=" " disabled/>
 								</form>
 								<div className = "setting-padding" />
 							</div>

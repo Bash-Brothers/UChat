@@ -22,10 +22,11 @@ export default class LoginPage extends React.Component
     {
         super(props);
         this.state = {
-            username: "default", 
-            password: "default", 
+            username: "", 
+            password: "", 
             loggedIn: false, 
-            successCode: 0};
+            successCode: 0,
+        };
     }
     async componentDidMount() 
     {                   
@@ -38,11 +39,13 @@ export default class LoginPage extends React.Component
     }
 
     handleChange = (event) => {
+        console.log("Setting state to ",{[event.target.name]: event.target.value} )
         this.setState({[event.target.name]: event.target.value});
     }
 
     handleSubmit =  async (event) => {
         event.preventDefault();
+        console.log("login state = ", this.state)
         const result = await fetch("/login", 
                   {
                     method: 'POST',
@@ -51,28 +54,23 @@ export default class LoginPage extends React.Component
                   },
                   body: JSON.stringify(this.state) /* this is the data being posted */
         })
-        console.log("before parsing");
         const res = await result.json();  /* this is the res sent by the backend */
 
-        // alert('success');
+        const loggedIn = res.successCode == 0; 
 
-        // currently, I return a successCode depending on what happened in the backend
-        // when successCode = 0, the user is logged in so we change state.isLoggedIn
-        // the successCode also has other states such as for "user not found", "incorrect pwd"
-        // so we can either getElementById or something similar to change the display according to that
-
-        event.target.reset(); // clear out form entries
-
-        const loggedIn = await isLoggedIn();   // uses the actual function isLoggedIn not the success code 
-                                               // can be modified, it's a test
-        this.setState({successCode: res.successCode})
-        // this is written out like this because we will eventually 
-        // need to set state conditionally depending on the successCode
         if(loggedIn)
         {
-            this.setState({loggedIn: true});
-            window.location.reload();
+            event.target.reset(); // clear out form entries
+            this.setState({loggedIn: true, username: "", password: "",});
+            window.location.reload();  // necessary for nav bar to reload
         }
+        else 
+        {
+            event.target.reset(); // clear out form entries
+            this.setState({loggedIn: false, successCode: res.successCode, username: "", password: "",});  
+        }
+
+
         };
 
     render()
@@ -87,8 +85,8 @@ export default class LoginPage extends React.Component
             <div className="login">
             <img src={logo} id="login-logo"/>
             <form action="/login" className="loginform" onSubmit={this.handleSubmit}>
-                <input type="text" className="loginField" placeholder="Username" name="username" value = {this.state.value} onChange = {this.handleChange} />
-                <input type="password" className="loginField" placeholder="Password" name="password" value = {this.state.value} onChange = {this.handleChange}/>
+                <input type="text" className="loginField" placeholder="Username" name="username" value = {this.state.username} onChange = {this.handleChange} />
+                <input type="password" className="loginField" placeholder="Password" name="password" value = {this.state.password} onChange = {this.handleChange}/>
                 <DisplayErrors success={this.state.successCode} />
                 <input type="submit" className="loginButton" value="Log In"/>
                 {/* <a href ="/" class="loginlink">Forgot username/password?</a> */}

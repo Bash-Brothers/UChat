@@ -10,7 +10,16 @@
     background-color: #ffffff;
 }
 
-
+.searchresult
+{
+    overflow-y: auto;
+    max-height: 60vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: solid grey 1px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
 
 .search-input {
     padding: 12px 20px;

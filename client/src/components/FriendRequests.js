@@ -40,8 +40,6 @@ export default class FriendRequests extends Component {
         }
     }
 
-
-
     async componentDidMount() //action to take as soon as enter the page
     {                   
         console.log("Inside component did mount for friend requests page");

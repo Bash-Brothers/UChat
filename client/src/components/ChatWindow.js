@@ -17,8 +17,6 @@ class MediaWidget extends React.Component {
         super(props);
     }   
 
-
-
     handleLatexSubmit = async (event) =>
     { 
         event.preventDefault();
@@ -157,10 +155,6 @@ class MediaWidget extends React.Component {
         return (null);
     }
 }
-
-
-
-
 
 export default class ChatWindow extends Component {
 
@@ -399,20 +393,7 @@ export default class ChatWindow extends Component {
         catch{
             var renderedContacts = null;
         }
-
-        // const dummyMessages0 = [{chat_id: 0, sender: "Aman", message: "you son of a bitch, I'm in", time: 97}, {chat_id: 0, sender: "Sud", message: "chat apps are easy money", time: 97}, {chat_id: 0, sender: "Aman", message: "no vaccine tracker sounds better", time: 99}, {chat_id: 0, sender: "Sud", message: "lets build a chatapp" , time: 100}];
-        // const dummyMessages1 = [];
-        // const dummyMessages2 = [{chat_id: 2, sender: "Aman", message: "...have mercy", time: 97}, {chat_id: 2, sender: "Eggert", message: "gonna sneak 10 questions on gdb on the final", time: 97}, {chat_id: 2, sender: "Aman", message: "no its not", time: 99}, {chat_id: 2, sender: "Eggert", message: "gdb is cool" , time: 100}];
-    
-        // /let currentList = `dummyMessages${twovar}`;
-        // var dummyMessages = dummyMessages0;
-
-        // switch(this.state.curChat)
-        // {
-        //     case 0: dummyMessages = dummyMessages0; break;
-        //     case 1: dummyMessages = dummyMessages1; break;
-        //     case 2: dummyMessages = dummyMessages2; break;
-        // }
+        
         const messages = this.state.messageList; 
         var renderedMessages;
         if(renderedContacts === null)

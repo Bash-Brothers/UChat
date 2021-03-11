@@ -147,7 +147,7 @@ export default class SearchPage extends Component {
             renderedcards = <div className="noresults">No users matching the search</div>
         }
         else{
-        var renderedcards = contactList.map(contactcard => (contactcard['addstatus'] === 2) ?
+            renderedcards = contactList.map(contactcard => (contactcard['addstatus'] === 2) ?
 
             <div className="contactcard-friend">
                 <div className="contactname-friend">
@@ -162,6 +162,17 @@ export default class SearchPage extends Component {
                 {this.button(contactcard['addstatus'], contactcard['user'])}
             </div>
             )
+        }
+        var finalrender;
+
+        if(renderedcards === null || renderedcards.length == 0)
+        {
+            finalrender = renderedcards;
+        }
+        else
+        {
+            console.log("CALLED")
+            finalrender = <div className="searchresult">{renderedcards}</div>
         }
         return (
             <div>
@@ -179,7 +190,7 @@ export default class SearchPage extends Component {
                     <input className="search-button" type="submit" value="" />
 
                 </form>
-                {renderedcards}
+                {finalrender}
             </div> 
             </div>
         )

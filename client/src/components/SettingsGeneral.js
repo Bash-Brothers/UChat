@@ -78,6 +78,18 @@ export default class Settings extends Component {
 		const res = await response.json();
 		const returnCode = res.returnCode;
 
+
+		var alertDiv = (!res.returnCode) ? 'alert-green' : 'alert-red';
+        var alertMessage = (!res.returnCode) ? 'Name change successful!' : 'Database error :/';
+        
+        //create an alert based on if registartion is successful or not
+        document.getElementById(alertDiv).innerHTML=alertMessage;
+        document.getElementById(alertDiv).style.width="10vw";
+        document.getElementById(alertDiv).style.visibility='visible';
+        setTimeout(function() {
+            document.getElementById(alertDiv).style.visibility='hidden';
+        }, 3000); // <-- time in milliseconds
+		
 		if (returnCode != 0)
 		{
 			// database error
@@ -153,29 +165,18 @@ export default class Settings extends Component {
 		const res = await response.json();
 		
 		const returnCode = res.returnCode;
+		
+		var alertDiv = (!returnCode) ? 'alert-green' : 'alert-red';
+		var alertMessage = (!returnCode) ? 'Password updated!' : 'Error updating password';
 
-		if (returnCode == 0)
-		{
-			console.log("Password updated");
-			document.getElementById('alert-green').innerHTML='Password updated'
-			document.getElementById('alert-green').style.width='12vw';
-			document.getElementById('alert-green').style.visibility='visible';
-    
-        	setTimeout(function() {
-            	document.getElementById('alert-green').style.visibility='hidden';
-        	}, 3000); // <-- time in milliseconds
-		}
-		else 
-		{
-			console.log("Error updating password");
-			document.getElementById('alert-red').innerHTML='Error updating password'
-			document.getElementById('alert-red').style.width='12vw';
-			document.getElementById('alert-red').style.visibility='visible';
-    
-        	setTimeout(function() {
-            	document.getElementById('alert-red').style.visibility='hidden';
-        	}, 3000); // <-- time in milliseconds
-		}
+		console.log(alertMessage);
+		document.getElementById(alertDiv).innerHTML=alertMessage;
+		document.getElementById(alertDiv).style.width='12vw';
+		document.getElementById(alertDiv).style.visibility='visible';
+
+		setTimeout(function() {
+			document.getElementById(alertDiv).style.visibility='hidden';
+		}, 3000); // <-- time in milliseconds
 
 		event.target.reset();
 

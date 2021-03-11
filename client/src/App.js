@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import './App.css';
 import SettingsGeneral from './components/SettingsGeneral.js';
 import SettingsAppearance from './components/SettingsAppearance.js';
@@ -127,9 +127,11 @@ class App extends Component {
               <Route path="/friendrequests">
                 <FriendRequests />
               </Route>
-              <Route path="/">
+              <Route exact path="/"> // needs to be exact path otherwise it becomes default
                 <LoginPage/>
               </Route>
+              <Route path="/404" component={Page404} />
+              <Redirect to="/404" />
             </Switch>
           </div>
         </Router>

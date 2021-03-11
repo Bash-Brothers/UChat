@@ -95,6 +95,7 @@ export default class Settings extends Component {
 		console.log("Inside handle password confirm ");
 		if (this.state.password == this.state.submittedCurrentPassword)
 		{
+			event.target.reset();
 			this.setState({passwordVerified: true});
 		}
 		else {

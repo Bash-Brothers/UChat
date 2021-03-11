@@ -69,7 +69,7 @@ export default class SearchPage extends Component {
         });
 
         const res = await result.json();  /* this is the res sent by the backend of find users etc */
-        document.getElementById('alert-green').innerHTML='Friend Request Sent'
+        document.getElementById('alert-green').innerHTML='Friend Request Sent!'
         document.getElementById('alert-green').style.width="10vw"
         document.getElementById('alert-green').style.visibility='visible';
         setTimeout(function() {

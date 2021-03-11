@@ -24,10 +24,10 @@ export default class SignupPage extends React.Component
     {
         super(props);
         this.state = {
-            name: "default", 
-            username: "default", 
-            password: "default", 
-            password_confirm: "defaultc", 
+            name: "", 
+            username: "", 
+            password: "", 
+            password_confirm: "", 
             isSignedUp: false,
             loggedIn: false,
             successCode: 0, 
@@ -62,13 +62,13 @@ export default class SignupPage extends React.Component
 
         const res = await result.json();  /* this is the res sent by the backend */
 
-        // currently, I return a successCode depending on what happened in the backend
-        // when successCode = 0, the user is logged in so we change state.isLoggedIn
-        // the successCode also has other states such as for "user not found", "incorrect pwd"
-        // so we can either getElementById or something similar to change the display according to that
+
         console.log("success code from handle  : ",res.successCode );
         event.target.reset(); // clear out form entries
-        this.setState({isSignedUp: !res.successCode, successCode: res.successCode});
+        this.setState({isSignedUp: !res.successCode, successCode: res.successCode, name: "", 
+            username: "", 
+            password: "", 
+            password_confirm: "", });
         };
 
     render()

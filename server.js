@@ -49,19 +49,20 @@ app.post("/signup", async function (req, res) {
     var username = req.body.username
     var password = req.body.password
     var password_confirm = req.body.password_confirm;
+    console.log("Username sent = ", username);
+    console.log("password sent = ", password);
+
 
     var successCode = 0;
     if (username.length == 0 || password.length == 0) {
         console.log("Username and Password must be non-empty");
         successCode = 2;
+        return res.json({ successCode: successCode });
     }
 
     if (password_confirm != password) {
         console.log("Passwords do not match");
         successCode = 3;
-    }
-
-    if (successCode != 0) {
         return res.json({ successCode: successCode });
     }
 
@@ -70,7 +71,7 @@ app.post("/signup", async function (req, res) {
     console.log("   username = ", username);
     console.log("   password = ", password);
 
-    successCode = await addUser(name, username, password);
+    successCode = await addUser(name, username, password);  // 1 = username taken, 4 = database errors 
     return res.json({ successCode: successCode });
 
 });
@@ -304,11 +305,13 @@ async function addUser(name, username, password) {
 
         prev_user = await user_data.findOne({ username: username });   // checks for previous user with given name
 
-        console.log("prev user = ", prev_user);
+        console.log("prev user = ", prev_user.username);
 
         if (prev_user != null) // if the prev_user is already present
         {
-            throw "username taken";
+            console.log("Username already taken")
+            returnCode = 1;     // username taken 
+            return;
         }
 
         user_data.insertOne(new_user,
@@ -320,7 +323,7 @@ async function addUser(name, username, password) {
     }
     catch (err) {
         console.log(err);
-        returnCode = 1;
+        returnCode = 4; // database errors
     }
 
     finally {

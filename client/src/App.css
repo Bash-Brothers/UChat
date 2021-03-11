@@ -65,14 +65,34 @@
   background: white;
 }
 
-#reqsent{
+
+#alert-green{
+
     width: 8vw;
     height: 20px;
     padding: 1vh 1vw 1vh 1vw;
     background: greenyellow;
     border-radius: 20px;
-    border: solid black 2px;
+    border: solid black 1px;
     color: black;
+    text-align: center;
+    position: fixed;
+    left: 45vw;
+    top: 6vh;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#alert-red{
+    width: 8vw;
+    height: 20px;
+    padding: 1vh 1vw 1vh 1vw;
+    background: red;
+    border: black 1px;
+    border-radius: 20px;
+    color: white;
     text-align: center;
     position: fixed;
     left: 45vw;

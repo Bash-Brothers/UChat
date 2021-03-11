@@ -93,7 +93,6 @@
 }
 
 
-
 /*unused*/
 #reqpas{
 	display: flex;
@@ -186,3 +185,11 @@
 	margin-left: 1vw;
 	opacity: 0;
 }
+
+.settingsError {
+    margin-top: 15vh;
+    color: red;
+    margin-bottom: 5px;
+    text-align: center;
+}
+

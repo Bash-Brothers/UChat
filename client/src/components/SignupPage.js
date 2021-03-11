@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Redirect} from "react-router-dom";
 import './style/SignupPage.css';
 import logo from '../images/logotest.png';
+import { isLoggedIn } from '../utils.js';
 
 function DisplayErrors(props) {
     const success = props.success;
@@ -28,8 +29,19 @@ export default class SignupPage extends React.Component
             password: "default", 
             password_confirm: "defaultc", 
             isSignedUp: false,
+            loggedIn: false,
             successCode: 0, 
         };
+    }
+
+    async componentDidMount() 
+    {                   
+		console.log("Inside component did mount for signup page");
+        const loggedIn = await isLoggedIn();
+        if (loggedIn)
+        {
+            this.setState({loggedIn: true});
+        }
     }
 
     handleChange = (event) => {
@@ -64,6 +76,10 @@ export default class SignupPage extends React.Component
         if (this.state.isSignedUp)
         {
             return <Redirect to="/login" />;
+        }
+        if (this.state.loggedIn)
+        {
+            return <Redirect to="/chats" />
         }
         return (
             <div className="signup">

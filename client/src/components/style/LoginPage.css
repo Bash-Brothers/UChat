@@ -30,19 +30,21 @@
 }
 
 #loginlink {
-	color: #0000EE;
+	color: black;
     text-decoration: underline;
+}
+
+#loginlink:link {
+    color: black;
 }
 
 #loginlink:hover {
-    color: rgb(56, 27, 138);
-    text-decoration: underline;
+    color: black;
 }
 
-/* #loginlink:visited {
-	color: rgb(147, 28, 245);
-    text-decoration: underline;
-} */
+#loginlink:visited {
+	color: black;
+}
 
 .loginField {
     height: 3vh;
@@ -76,11 +78,10 @@
     color: red;
 }
 
-#loginlogo{
-    height: 25vh;
-    border: solid black 3px;
-    border-radius: 20px;
+#login-logo{
+    height: 20vh;
     margin-bottom: 20px;
+    border: none;
 }
 
 #contact{

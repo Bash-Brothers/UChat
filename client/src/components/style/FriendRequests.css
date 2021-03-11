@@ -11,49 +11,18 @@
 
 .friendreqpanel{
     height: 92vh;
-    width: 40%;
-  }
-
-.searchfriendreq{
-background-color: white;
-height: 4vh;
-}
-
-.inputFieldFriendreq{
     width: 100%;
-    background-color: black;
-    color: white;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    line-height: 100%;
-  
   }
 
-.friendreqSearchbar-input {
-    padding: 10px 24px;
-    border-radius: 25px;
-    width: 6vw;
-    height: 0.6vh;
-    vertical-align: middle;
-}
 
-.friendreq-search {
-    background-image: url('../../images/icon_search.svg');
-    background-repeat: no-repeat;
-    background-color: white;
-    padding: 2vh 2vh;
-    border: black;
-    background-size: 3vh 3vh;
-    background-position: 50% 50%;
-    filter: invert(1);
-    height: 2vh;
-    width: 2vh;
-    vertical-align: middle;
-}
+
+
 
 .friendreqList{
-    background-color: #C4C4C4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
     height: 92vh;
     width: 100%;
     overflow-y: auto;
@@ -76,86 +45,94 @@ background: #888;
 background: #555; 
 }
 
-.friendreq{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: large;
-    background-color: rgb(126, 161, 177);
-    border: 1px black solid;
-    /* border-radius: 5px; */
-    /* margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;  */
-    height: 175px;
-    position: relative;
-}
+
 
 .friendrequest{
     display: flex;
+    margin-top: 3vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: large;
-    background-color: rgb(223, 223, 223);
-    border: 1px black solid;
-    border-right: none;
-    /* border-radius: 5px; */
+    background-color: white;
+    border-radius: 25px;
     /* margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 5px;
     margin-right: 5px;  */
-    height: 175px;
+    height: 14vh;
     position: relative;
+    border: 2px lightgrey solid;
+    box-shadow: 2px 2px 7px 2px #cccccc;
+    width: 35vw;
 }
 
+
+.buttonRow{
+    display: flex;
+    margin-bottom: 1vh;
+}
 .acceptButton {
     background-color: #1b3faa;
     color: white; 
-    height: 30%;
-    width: 32%;
-    border: solid black 2px;
-    border-radius: 6px;
-    position: absolute;
-    top: 60%;
-    right: 35%;
+    height: 3vh;
+    width: 12vw;
+    line-height: 3vh;
+    border: solid white 1px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: large;
+    text-align: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    transition: 0.3s;
+    font-weight: 400;
+    margin-right: 1vw;
 }
 
 .acceptButton:hover{
-    background-color: black;
+    background-color: #131f88;
+    transition: 0.3s;
 }
 
 .deleteButton {
     background-color: white;
     color: black; 
-    height: 30%;
-    width: 32%;
-    border: solid black 2px;
-    border-radius: 6px;
-    position: absolute;
-    top: 60%;
-    right: 2%;
+    height: 3vh;
+    width: 12vw;
+    line-height: 3vh;
+    border: solid grey 1px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: large;
+    text-align: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    transition: 0.3s;
+    font-weight: 400;
 }
 
 .deleteButton:hover{
-    background-color: black;
-    color: white;
+    background-color: #DDDDDD;
+    transition: 0.3s;
 }
 
 .friendname{
     font: Arial;
     font-weight: 700;
-    position: absolute;
-    height: 0%;
-    width: 0%;
-    top: 12%;
-    left: 34%;
-    border: black;
+    height: 8vh;
+    width: 8vw;
+    margin-top: 1vh;
+    font-size: 25px;
+    text-align: center;
+}
 
+#no-requests:link {
+    font-size: 20px;
+    color: black;
+}
+
+#no-requests:visited {
+    font-size: 20px;
+    color: black;
 }

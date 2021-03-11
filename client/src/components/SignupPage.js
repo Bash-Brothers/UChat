@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Redirect} from "react-router-dom";
 import './style/SignupPage.css';
-import egg from '../images/paul.jpg';
+import logo from '../images/logotest.png';
 
 function DisplayErrors(props) {
     const success = props.success;
@@ -67,7 +67,7 @@ export default class SignupPage extends React.Component
         }
         return (
             <div className="signup">
-                <img src={egg} id="loginlogo"/>
+                <img src={logo} id="signup-logo"/>
                 <form action="/signup" className="signupform" onSubmit={this.handleSubmit}>
                     <input type="text" className="signupField" placeholder="Name" name="name" value = {this.state.value} onChange = {this.handleChange}/>
                     <input type="text" className="signupField" placeholder="Username" name="username" value = {this.state.value} onChange = {this.handleChange} />
@@ -75,7 +75,7 @@ export default class SignupPage extends React.Component
                     <input type="password" className="signupField" placeholder="Re-enter password" name="password_confirm" value = {this.state.value} onChange = {this.handleChange}/>
                     <DisplayErrors success={this.state.successCode} />
                     <input type="submit" className="signupButton" value="Sign Up" />
-                    <a href="/login" id="loginlink">Don't have an account? Click here to sign up.</a>
+                    <a href="/login" id="loginlink">Already have an account? Click here to sign in.</a>
                 </form>
                 <div id="contact" className="contactlink">Need help with your account or have feedback? <a href ="/about">Contact us</a></div>
              </div> 

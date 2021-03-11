@@ -10,23 +10,7 @@
     background-color: #ffffff;
 }
 
-#reqsent{
-    width: 150px;
-    height: 20px;
-    padding: 5px;
-    background: greenyellow;
-    border-radius: 6px;
-    border: solid black 2px;
-    color: black;
-    text-align: center;
-    position: fixed;
-    left: 44%;
-    top: 1%;
-    visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .search-input {
     padding: 12px 20px;
@@ -34,6 +18,12 @@
     width: 40vw;
     height: 5vh;
     vertical-align: middle;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
+}
+
+.search-input:focus {
+    outline: none;
 }
 
 .search-button{
@@ -58,17 +48,22 @@
     transition: 0.3s;
 }
 
+.search-button:focus {
+    outline: none;
+}
+
 .noresults {
     display: flex;
     margin-top: 2vh;
     width: 20vw;
     height: 8vh;
-    border: 1px solid black;
-    border-radius: 10px;
-    background:  #1b3faa;
+    border: 2px lightgrey solid;
+    box-shadow: 2px 2px 7px 2px #cccccc;
+    border-radius: 25px;
+    background:  white;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: black;
     font-weight: bolder;
 }
 
@@ -77,10 +72,23 @@
     margin-top: 2vh;
     width: 20vw;
     height: 8vh;
-    border: 1px solid black;
-    border-radius: 10px;
-    background:  #1b3faa;
+    border-radius: 25px;
+    background:  white;
+    border: 2px lightgrey solid;
+    box-shadow: 2px 2px 7px 2px #cccccc;
 }
+
+.contactcard-friend {
+    display: flex;
+    margin-top: 2vh;
+    width: 20vw;
+    height: 8vh;
+    border-radius: 25px;
+    background:  #1b3faa;
+    border: 2px #1b3faa solid;
+    box-shadow: 2px 2px 7px 2px #cccccc;
+}
+
 
 .fullpage{
     display: flex;
@@ -96,11 +104,23 @@
     margin-left: 1vw;
     line-height: 6vh;
     align-items: center;
+    color: black;
+    font-weight: bold;
+    background:  white;
+}
+
+.contactname-friend {
+    margin-top: 1vh;
+    height: 6vh;
+    width: 14vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
+    line-height: 6vh;
+    align-items: center;
     color: white;
     font-weight: bold;
     background:  #1b3faa;
 }
-
 
 .button-add {
     height: 6vh;
@@ -112,14 +132,21 @@
     background-size: 2vh 2vh;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+    background-color: #e4c055;
     filter: invert(1);
     cursor: pointer;
+    border-radius: 15px;
+    transform: 0.3s;
+
 }
 
 .button-add:hover{
-    background-image: url('../../images/icon_add.svg');
-    border: black solid 2px;
-    border-radius: 10px;
+    background-color: #ece077;
+    transition: 0.3s
+}
+
+.button-add:focus {
+  outline:0;
 }
 
 .button-pending {
@@ -132,7 +159,7 @@
     background-size: 2vh 2vh;
     background-position: 50% 90%;
     background-repeat: no-repeat;
-    filter: invert(1);
+
 
 }
 

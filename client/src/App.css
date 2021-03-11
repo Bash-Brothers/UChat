@@ -64,3 +64,21 @@
   z-index: 2;
   background: white;
 }
+
+#reqsent{
+    width: 8vw;
+    height: 20px;
+    padding: 1vh 1vw 1vh 1vw;
+    background: greenyellow;
+    border-radius: 20px;
+    border: solid black 2px;
+    color: black;
+    text-align: center;
+    position: fixed;
+    left: 45vw;
+    top: 6vh;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

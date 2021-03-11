@@ -95,6 +95,7 @@ class App extends Component {
         <Router>
           <div>
             <Nav />
+            <div id="reqsent"> Friend request sent!</div>
             <Switch>
               <Route path="/about">
                 <About />

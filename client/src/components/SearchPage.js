@@ -147,7 +147,14 @@ export default class SearchPage extends Component {
             renderedcards = <div className="noresults">No users matching the search</div>
         }
         else{
-        var renderedcards = contactList.map(contactcard => 
+        var renderedcards = contactList.map(contactcard => (contactcard['addstatus'] === 2) ?
+
+            <div className="contactcard-friend">
+                <div className="contactname-friend">
+                    {contactcard['user']}
+                </div>
+                {this.button(contactcard['addstatus'], contactcard['user'])}
+            </div> :
             <div className="contactcard">
                 <div className="contactname">
                     {contactcard['user']}

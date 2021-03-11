@@ -41,34 +41,8 @@ export default class Settings extends Component {
 					</div>
 					<div className = "main">
 						<div className = "content">
-							<div className = "category-header">
-								General Settings
-							</div>
-							<div className = "field-text">
-								<div className = "setting-name">
-									Name
-								</div>
-								<form>
-                       				<input
-                        				type="text" 
-                	       				class="settings-input"
-            	           				placeholder="current setting"
-                       				/>
-                    			</form>
-								<div className = "setting-padding" />
-							</div>
-							<div className = "field-text">
-								<div className = "setting-name">
-									Email Address
-								</div>
-								<form>
-                       				<input
-                 	       				type="text" 
-                           				class="settings-input"
-                           				placeholder="current setting"
-                       				/>
-                    			</form>
-                				<div className = "setting-padding" />
+							<div className = "category-header" style={{opacity: 0.5}}>
+								Under Construction
 							</div>
 						</div>
 					</div>

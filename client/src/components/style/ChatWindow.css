@@ -39,15 +39,44 @@
     margin-bottom: 5px;
     margin-left: 5px;
     margin-right: 5px;  */
-    height: 50px;
-    text-indent: 30px;
-    line-height: 50px;
+    height: 6vh;
+    text-indent: 15px;
+    line-height: 6vh;
     color: white;
+    transition: 0.3s
 }
 
 .contact:hover{
     cursor: pointer;
     background-color: #133086;
+    transition: 0.3s
+}
+
+.contact-active{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    font-size: large;
+    background-color: #131f88;
+    border-bottom: 1px solid #163099;
+    border-right: none;
+    /* border-radius: 5px; */
+    /* margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;  */
+    height: 6vh;
+    text-indent: 15px;
+    line-height: 6vh;
+    color: white;
+    transition: 0.3s
+}
+
+.contact-active:hover{
+    cursor: pointer;
+    background-color: #133086;
+    transition: 0.3s
 }
 
 .curChat{
@@ -73,6 +102,7 @@
     justify-content: center;
     height: 6vh;
     line-height: 6vh;
+    margin-top: .6vh;
 }
 
 .inputField2{
@@ -96,6 +126,7 @@
     font-size: larger;
     background-color: white;
     border: none;
+    margin-top: 6vh;
 }
 
 /* the old CSS for currentChat, kept here for reference
@@ -121,8 +152,7 @@
   pointer-events   : none;
   background-color : rgb(255, 255, 255);
   width    : 88.25vw; /*very finely calculated lol */
-  height   : 7vh;
-  border-bottom: solid 3px #1b3faa;
+  height   : 6vh;
 }
 
 
@@ -153,23 +183,29 @@
 }
 
 .no-messages{
-  max-width: 80%;
-  margin-left: 10%;
-  background-color: red;
+  max-width: 40%;
+  margin-left: 30%;
+  background-color: #ff6c6c;
   color: white;
   padding: 4px;
-  border-radius: 5px;
+  border-radius: 25px;
   border: solid white 3px;
+  text-align: center;
+  height: 4vh;
+  line-height: 4vh;
 }
 
 .no-chats{
-  max-width: 80%;
-  margin-left: 10%;
+  max-width: 40%;
+  margin-left: 30%;
   background-color: #1b3faa;
   color: white;
   padding: 4px;
-  border-radius: 5px;
+  border-radius: 25px;
   border: solid white 3px;
+  text-align: center;
+  height: 4vh;
+  line-height: 4vh;
 }
 
 .searchbar-input {
@@ -231,7 +267,6 @@
 }
 
 .message-send:hover {
-  cursor: pointer;
   opacity: 1;
   transition: 0.3s;
 }
@@ -453,5 +488,17 @@
   margin-top: 10px;
   max-width: 30vw;
   height: auto;
-  filter: invert();
+}
+
+.messageLatexSent {
+  margin-top: 10px;
+  max-width: 30vw;
+  height: auto;
+  filter: invert(1);
+}
+
+.messageLatexReceived {
+  margin-top: 10px;
+  max-width: 30vw;
+  height: auto;
 }

@@ -82,7 +82,15 @@ class MediaWidget extends React.Component {
                     <div className="button-back" onClick={() => this.props.onClick(3)}/>
                 </div>
                 <form onSubmit={this.handleLatexSubmit}>
-                    <textarea className="latexInput" id="latexEditor" placeholder="enter latex..."/>
+                    <textarea className="latexInput" id="latexEditor" value="\documentclass{article}
+                    \begin{document}
+
+                    ---Insert LaTeX code here---
+
+
+
+                    \pagenumbering{gobble}
+                    \end{document}"/>
                     <input className="widgetSend" type="submit" value="Send"/>
                 </form>
             </div>
@@ -340,7 +348,11 @@ export default class ChatWindow extends Component {
         const chatsList = this.state.chatsList;
         console.log("chatsList = ", chatsList)
         try{
-            var renderedContacts = chatsList.map(chat => <div className="contact" onClick={() => this.changeChat(chat.chat_id)}>{chat.chat_name}</div>);
+            var renderedContacts = chatsList.map(chat => 
+                (chat.chat_name === this.state.curChatName) ?
+                <div className="contact-active" onClick={() => this.changeChat(chat.chat_id)}>{chat.chat_name}</div> :
+                <div className="contact" onClick={() => this.changeChat(chat.chat_id)}>{chat.chat_name}</div>
+                );
         }
         catch{
             var renderedContacts = null;
@@ -397,7 +409,7 @@ export default class ChatWindow extends Component {
                         return (
                             <div className="sent">
                                 <div className="messageText">
-                                    <img className="messageImage" src={message} />
+                                    <img className="messageLatexSent" src={message}/>
                                 </div>
                                 <div className="messageTimeSent"> 
                                     {formattedTime}
@@ -421,9 +433,9 @@ export default class ChatWindow extends Component {
                 {
                     if(type === "latex"){
                         return (
-                            <div className="sent">
+                            <div className="received">
                                 <div className="messageText">
-                                    <img className="messageImage" src={message} />
+                                    <img className="messageLatexReceived" src={message} />
                                 </div>
                                 <div className="messageTimeSent"> 
                                     {formattedTime}

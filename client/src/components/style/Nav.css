@@ -21,7 +21,7 @@
   }
 
   .page-title{
-    font-size: 2.8vh;
+    font-size: 2vh;
     text-align: center;
     width: 30vw;
     position: fixed;
@@ -73,4 +73,11 @@
     background-color: #cccccc;
     color: black;
     transition: 0.3s;
+  }
+
+  .navIcon {
+    height: 2.5vh;
+    margin-right: .2vw;
+    width: auto;
+    fill: black;
   }

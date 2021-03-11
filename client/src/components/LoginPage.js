@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Redirect} from "react-router-dom";
 import './style/LoginPage.css';
-import egg from '../images/paul.jpg';
+import logo from '../images/logotest.png';
 import { isLoggedIn } from '../utils.js';
 
 function DisplayErrors(props) {
@@ -76,7 +76,7 @@ export default class LoginPage extends React.Component
 
         return (
             <div className="login">
-            <img src={egg} id="loginlogo"/>
+            <img src={logo} id="login-logo"/>
             <form action="/login" className="loginform" onSubmit={this.handleSubmit}>
                 <input type="text" className="loginField" placeholder="Username" name="username" value = {this.state.value} onChange = {this.handleChange} />
                 <input type="password" className="loginField" placeholder="Password" name="password" value = {this.state.value} onChange = {this.handleChange}/>

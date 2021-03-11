@@ -53,10 +53,8 @@
     color: red;
 }
 
-#loginlogo{
-    height: 25vh;
-    border: solid black 3px;
-    border-radius: 20px;
+#signup-logo{
+    height: 20vh;
     margin-bottom: 20px;
 }
 

@@ -208,7 +208,7 @@ export default class FriendRequests extends Component {
         
         if(friendrequestsList === null || friendrequestsList.length == 0)
         {
-            renderedFriendRequests = <div className="friendrequest">You dont have any friend requests! Search for users <a href='search'>here</a></div>
+            renderedFriendRequests = <div className="friendrequest"> <a id="no-requests" href='search'>You don't have any friend requests! Search for users here</a></div>
         }
         else
         {
@@ -227,6 +227,7 @@ export default class FriendRequests extends Component {
                     <p className="friendname" key={friendreq_id + '.p'}>
                         {friendreq_id}
                     </p>
+                    <div className="buttonRow">
                     <div 
                         className="acceptButton" 
                         key={friendreq_id + '.acc'}
@@ -240,6 +241,7 @@ export default class FriendRequests extends Component {
                         onClick = {() => {this.handleDelete(friendreq_id)}}
                     >
                         Delete
+                    </div>
                     </div>
 
 

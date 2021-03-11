@@ -57,7 +57,7 @@ export default class Nav extends React.Component {
                             Sign Up
                         </Link>
                         <Link to="/about" className="navButton" onClick={() => this.setState({curPage: 'About'})}>
-                            <img src={IconInfo} width="30" height="30" />
+                            <img src={IconInfo} className="navIcon"/>
                         </Link>
                     </div>
                 </div>
@@ -67,20 +67,20 @@ export default class Nav extends React.Component {
                 <div className="main">
                     <div className="navigation1">
                     <div className="page-title">{this.state.curPage}</div>
-                        <Link to="/about" className="navButton" onClick={() => this.setState({curPage: 'About'})}>
-                            <img src={IconInfo} width="30" height="30" />
-                        </Link>
-                        <Link to="/settings/general" className="navButton" onClick={() => this.setState({curPage: 'Settings'})}>
-                            <img src={IconSettings} width="30" height="30" />
-                        </Link>
                         <Link to="/chats" className="navButton" onClick={() => this.setState({curPage: 'Chats'})}>
-                            <img src={IconChat} width="30" height="30" />
+                            <img src={IconChat} className="navIcon"/>
                         </Link>
                         <Link to="/friendrequests" className="navButton" onClick={() => this.setState({curPage: 'Friend Requests'})}>
-                            <img src={IconFriendReqs} width="30" height="30" />
+                            <img src={IconFriendReqs} className="navIcon"/>
                         </Link>
                         <Link to="/search" className="navButton" onClick={() => this.setState({curPage: 'Search for Users'})}>
-                            <img src={IconSearch} width="30" height="30" />
+                            <img src={IconSearch} className="navIcon"/>
+                        </Link>
+                        <Link to="/settings/general" className="navButton" onClick={() => this.setState({curPage: 'Settings'})}>
+                            <img src={IconSettings} className="navIcon"/>
+                        </Link>
+                        <Link to="/about" className="navButton" onClick={() => this.setState({curPage: 'About'})}>
+                            <img src={IconInfo} className="navIcon"/>
                         </Link>
                     </div>
                 </div>

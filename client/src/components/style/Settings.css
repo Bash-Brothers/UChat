@@ -14,12 +14,12 @@
 
 .menu-button {
 	display: flex;
-	height: 50px;
+	height: 6vh;
 	width: 100%;
 	text-align: left;
 	background-color: #1b3faa;
-	text-indent: 30px;
-	line-height: 50px;
+	text-indent: 15px;
+	line-height: 6vh;
 	text-decoration: none;
 	color: white;
 	border-bottom: 1px solid #163099;
@@ -28,12 +28,12 @@
 
 .menu-button-active {
 	display: flex;
-	height: 50px;
+	height: 6vh;
 	width: 100%;
 	text-align: left;
 	background-color: #131f88;
-	text-indent: 30px;
-	line-height: 50px;
+	text-indent: 15px;
+	line-height: 6vh;
 	text-decoration: none;
 	color: white;
 	border-bottom: 1px solid #163099;
@@ -77,11 +77,24 @@
 
 .field-text {
 	display: flex;
+	background: white;
 	flex-direction: row;
 	justify-content: space-around;
 	height: 55px;
 }
 
+.field-text-disabled {
+	display: flex;
+	background: white;
+	flex-direction: row;
+	justify-content: space-around;
+	height: 55px;
+	opacity: 0.4;
+}
+
+
+
+/*unused*/
 #reqpas{
 	display: flex;
 	flex-direction: row;
@@ -98,6 +111,7 @@
 	line-height: 35px;
 	height: 35px;
 	width: 200px;
+	background: white;
 }
 
 .setting-padding {
@@ -106,6 +120,7 @@
 	line-height: 55px;
 	height: 55px;
 	width: 200px;
+	background: white;
 }
 
 .settings-input {
@@ -116,6 +131,7 @@
   	background-size: 20px 20px;
   	background-position: 98% 50%;
   	background-repeat: no-repeat;
+  	height: 2vh;
 }
 
 .settings-input:hover {
@@ -131,4 +147,22 @@
 .logout-button:hover {
 	background: #DDDDDD;
 	cursor: pointer;
+}
+.settings-wrapper {
+	display: flex;
+	direction: column;
+}
+
+.settings-submit {
+	height: 55px;
+	width: 55px;
+	margin-left: 2vw;
+	border-radius: 15px;
+}
+
+.settings-submit-placeholder {
+	height: 55px;
+	width: 55px;
+	margin-left: 2vw;
+	opacity: 0;
 }

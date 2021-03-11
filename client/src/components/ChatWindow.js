@@ -65,6 +65,48 @@ class MediaWidget extends React.Component {
         
     }
 
+    handleImageSubmit = async (event) => {
+        event.preventDefault();
+        var formData = new FormData();
+        const fileInput = document.getElementById('imageUpload');
+        const file = fileInput.files[0];
+        formData.append('image', file)
+
+        console.log(formData)
+
+        const uploadResult = await fetch('https://api.imgur.com/3/image', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Client-ID 0c9e599528444e7',
+            },
+            body: formData
+        })
+        const uploadReturn = await uploadResult.json();
+        const fetchurl = "/sendchat/"+this.props.curChat;
+        console.log("inside handleLatexSubmit, fetchurl = ", fetchurl);
+        const newMessage = {chat_id: this.props.curChat, sender: this.props.curUser, message: uploadReturn.data.link, time: this.props.getCurrentTime(), type: "image"};
+        const result = await fetch("/sendchat/"+this.props.curChat, 
+                  {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': "application/json; charset=utf-8",
+                  },
+                  body: JSON.stringify(newMessage)
+        })
+
+        const res = await result.json();  /* {returnCode} */
+
+        const returnCode = await res.returnCode;
+
+        if (returnCode != 0)
+        {
+            console.log("error sending chat");
+            return null;
+        }
+
+        event.target.reset();
+    }
+
     render() {
         const status = this.props.status;
         if (status === 1) {
@@ -102,7 +144,7 @@ class MediaWidget extends React.Component {
                     <div className="widgetHeader">
                     <div className="button-back" onClick={() => this.props.onClick(3)}/>
                 </div>
-                <form>
+                <form onSubmit={this.handleImageSubmit}>
                     <input type="file" id="imageUpload" name="imagename" hidden/>
                     <label for="imageUpload">
                         <div className="placeholderImage"/>
@@ -416,6 +458,17 @@ export default class ChatWindow extends Component {
                                 </div> 
                         </div>
                             )
+                    } else if (type ==="image") {
+                        return (
+                            <div className="sent">
+                                <div className="messageText">
+                                    <img className="messageImage" src={message} />
+                                </div>
+                                <div className="messageTimeSent"> 
+                                    {formattedTime}
+                                </div> 
+                        </div>
+                            )
                     }
                      
                     return (
@@ -436,6 +489,17 @@ export default class ChatWindow extends Component {
                             <div className="received">
                                 <div className="messageText">
                                     <img className="messageLatexReceived" src={message} />
+                                </div>
+                                <div className="messageTimeSent"> 
+                                    {formattedTime}
+                                </div> 
+                        </div>
+                            )
+                    } else if (type ==="image") {
+                        return (
+                            <div className="received">
+                                <div className="messageText">
+                                    <img className="messageImage" src={message} />
                                 </div>
                                 <div className="messageTimeSent"> 
                                     {formattedTime}

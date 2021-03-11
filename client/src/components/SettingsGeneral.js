@@ -55,8 +55,13 @@ export default class Settings extends Component {
 		if (this.state.submittedName== null)
 		{
 			console.log("Error: name field cannot be empty");
-			// Note to frontend, let's have some code here that throws up this message
-			// Use code 2 
+			document.getElementById('alert-red').innerHTML='Name field cannot be empty'
+			document.getElementById('alert-red').style.width='12vw';
+			document.getElementById('alert-red').style.visibility='visible';
+    
+        	setTimeout(function() {
+            	document.getElementById('alert-red').style.visibility='hidden';
+        	}, 3000); // <-- time in milliseconds
 			return; 
 		}
 
@@ -92,6 +97,15 @@ export default class Settings extends Component {
 		{
 			this.setState({passwordVerified: true});
 		}
+		else {
+			document.getElementById('alert-red').innerHTML='Incorrect password'
+			document.getElementById('alert-red').style.width='12vw';
+			document.getElementById('alert-red').style.visibility='visible';
+    
+        	setTimeout(function() {
+            	document.getElementById('alert-red').style.visibility='hidden';
+        	}, 3000); // <-- time in milliseconds
+		}
 	}
 
 	handleNewPasswordSubmit = async (event) =>
@@ -102,12 +116,26 @@ export default class Settings extends Component {
 		if (this.state.newPassword != this.state.newPasswordConfirm)
 		{
 			console.log("Passwords do not match");
+			document.getElementById('alert-red').innerHTML='Passwords do not match'
+			document.getElementById('alert-red').style.width='12vw';
+			document.getElementById('alert-red').style.visibility='visible';
+    
+        	setTimeout(function() {
+            	document.getElementById('alert-red').style.visibility='hidden';
+        	}, 3000); // <-- time in milliseconds
 			return;
 			// Frontend display message
 		}
 		if (this.state.newPassword == undefined)
 		{
 			console.log("Password cannot be null");
+			document.getElementById('alert-red').innerHTML='Password field cannot be empty'
+			document.getElementById('alert-red').style.width='20vw';
+			document.getElementById('alert-red').style.visibility='visible';
+    
+        	setTimeout(function() {
+            	document.getElementById('alert-red').style.visibility='hidden';
+        	}, 3000); // <-- time in milliseconds
 			return;
 			// Frontend display message
 		}
@@ -129,12 +157,24 @@ export default class Settings extends Component {
 		if (returnCode == 0)
 		{
 			console.log("Password updated");
-			// Frontend display message
+			document.getElementById('alert-green').innerHTML='Password updated'
+			document.getElementById('alert-green').style.width='12vw';
+			document.getElementById('alert-green').style.visibility='visible';
+    
+        	setTimeout(function() {
+            	document.getElementById('alert-green').style.visibility='hidden';
+        	}, 3000); // <-- time in milliseconds
 		}
 		else 
 		{
 			console.log("Error updating password");
-			// Frontend display message
+			document.getElementById('alert-red').innerHTML='Error updating password'
+			document.getElementById('alert-red').style.width='12vw';
+			document.getElementById('alert-red').style.visibility='visible';
+    
+        	setTimeout(function() {
+            	document.getElementById('alert-red').style.visibility='hidden';
+        	}, 3000); // <-- time in milliseconds
 		}
 
 		event.target.reset();

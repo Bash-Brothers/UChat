@@ -69,11 +69,11 @@ export default class SearchPage extends Component {
         });
 
         const res = await result.json();  /* this is the res sent by the backend of find users etc */
-        
-        document.getElementById('reqsent').style.visibility='visible';
-    
+        document.getElementById('alert-green').innerHTML='Friend Request Sent'
+        document.getElementById('alert-green').style.width="10vw"
+        document.getElementById('alert-green').style.visibility='visible';
         setTimeout(function() {
-            document.getElementById('reqsent').style.visibility='hidden';
+            document.getElementById('alert-green').style.visibility='hidden';
         }, 3000); // <-- time in milliseconds
         
         var list = this.state.curUserList;
@@ -165,7 +165,6 @@ export default class SearchPage extends Component {
         }
         return (
             <div>
-            <div id="reqsent"> Friend request sent!</div>
             <div className="searchpage">
 
                 <form action="/search" onSubmit={this.handleSubmit}>

@@ -107,6 +107,9 @@ class App extends Component {
               <Route path="/login">
                 <LoginPage />
               </Route>
+              <Route path="/chatapp">
+                <LoginPage />
+              </Route>
               <Route path="/chats">
                 <ChatWindow />
               </Route>

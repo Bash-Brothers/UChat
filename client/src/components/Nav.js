@@ -36,7 +36,7 @@ export default class Nav extends React.Component {
             case '/friendrequests': page = 'Friend requests'; break;
             case '/signup': page = 'Sign Up'; break;
             case '/login': page = 'Log In'; break;
-            default: page = 'Add a specific case for this url on nav.js'; break;
+            default: page = ''; break;
         }
         isLoggedIn().then(loggedIn => this.setState({loggedIn: loggedIn, curPage: page}));
 

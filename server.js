@@ -388,7 +388,7 @@ app.get("/info/:username", async (req, res) => {
 
 
     if (info.returnCode != 0) {
-        res.send({ returnCode: returnCode, info: null });
+        res.send({ returnCode: info.returnCode, info: null });
     }
 
     info = await info.info;

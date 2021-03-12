@@ -18,10 +18,31 @@ Now enter this command to install all our node dependencies:
 npm install
 ```
 
-Once it's done running, simply run the following command to run our app!
+Change directory into the client directory, using the command:
 ```
-npm start
+cd client
 ```
+
+Install all our node dependencies in the client directory using:
+```
+npm install
+```
+
+Change back into the main chatapp directory, using the command:
+```
+cd ..
+```
+
+Ensure that the Requests HTTP library for Python is installed on your computer.
+Instructions on how to install Requests will depend on the device.
+https://requests.readthedocs.io/en/master/
+
+
+To run the app, in the main chatapp directory, use the command:
+```
+yarn dev
+```
+
 
 Created by:  
 Yan Hauw  

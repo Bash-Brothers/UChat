@@ -33,8 +33,8 @@ Change back into the main chatapp directory, using the command:
 cd ..
 ```
 
-Ensure that the Requests HTTP library for Python is installed on your computer.
-Instructions on how to install Requests will depend on the device.
+Ensure that the Requests HTTP library for Python is installed on your computer.<br />
+Instructions on how to install Requests will depend on the device.<br />
 https://requests.readthedocs.io/en/master/
 
 

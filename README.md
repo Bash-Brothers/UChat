@@ -32,17 +32,17 @@ Change back into the main chatapp directory, using the command:
 ```
 cd ..
 ```
-
+<br />
 Ensure that the Requests HTTP library for Python is installed on your computer.<br />
 Instructions on how to install Requests will depend on the device.<br />
 https://requests.readthedocs.io/en/master/
 
-
+<br />
 To run the app, in the main chatapp directory, use the command:
 ```
 yarn dev
 ```
-
+<br />
 
 Created by:  
 Yan Hauw  

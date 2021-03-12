@@ -23,7 +23,14 @@ export default class Settings extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-
+	handleSubmit = () => {
+		document.getElementById('alert-green').innerHTML='Signed out!';
+		document.getElementById('alert-green').style.width="10vw";
+		document.getElementById('alert-green').style.visibility='visible';
+		setTimeout(function() {
+			document.getElementById('alert-green').style.visibility='hidden';
+		}, 5000); // <-- time in milliseconds
+	}
 
 
 	render() {
@@ -51,7 +58,7 @@ export default class Settings extends Component {
 								Signout
 							</div>
 							<div className = "field-text">
-								<form method="post" action="/settings/signout">
+								<form method="post" action="/settings/signout" onSubmit={this.handleSubmit}>
                        				<input
                         				type="submit" 
                         				className="logout-button"

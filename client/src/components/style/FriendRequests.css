@@ -65,6 +65,8 @@ background: #555;
     border: 2px lightgrey solid;
     box-shadow: 2px 2px 7px 2px #cccccc;
     width: 35vw;
+    padding-left: 10px;
+     padding-right: 10px;
 }
 
 

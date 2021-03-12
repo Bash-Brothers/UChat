@@ -40,6 +40,8 @@ export default class FriendRequests extends Component {
         }
     }
 
+
+
     async componentDidMount() //action to take as soon as enter the page
     {                   
         console.log("Inside component did mount for friend requests page");
@@ -206,7 +208,7 @@ export default class FriendRequests extends Component {
         
         if(friendrequestsList === null || friendrequestsList.length == 0)
         {
-            renderedFriendRequests = <div className="friendrequest"> You don't have any friend requests! <p>Search for users <a id="no-requests" href='search'>here</a></p></div>
+            renderedFriendRequests = <div className="friendrequest"> <a id="no-requests" href='search'>You don't have any friend requests! Search for users here</a></div>
         }
         else
         {

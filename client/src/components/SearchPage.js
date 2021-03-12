@@ -69,7 +69,7 @@ export default class SearchPage extends Component {
         });
 
         const res = await result.json();  /* this is the res sent by the backend of find users etc */
-        document.getElementById('alert-green').innerHTML='Friend Request Sent!'
+        document.getElementById('alert-green').innerHTML='Friend Request Sent'
         document.getElementById('alert-green').style.width="10vw"
         document.getElementById('alert-green').style.visibility='visible';
         setTimeout(function() {
@@ -147,7 +147,7 @@ export default class SearchPage extends Component {
             renderedcards = <div className="noresults">No users matching the search</div>
         }
         else{
-            renderedcards = contactList.map(contactcard => (contactcard['addstatus'] === 2) ?
+        var renderedcards = contactList.map(contactcard => (contactcard['addstatus'] === 2) ?
 
             <div className="contactcard-friend">
                 <div className="contactname-friend">
@@ -162,17 +162,6 @@ export default class SearchPage extends Component {
                 {this.button(contactcard['addstatus'], contactcard['user'])}
             </div>
             )
-        }
-        var finalrender;
-
-        if(renderedcards === null || renderedcards.length == 0)
-        {
-            finalrender = renderedcards;
-        }
-        else
-        {
-            console.log("CALLED")
-            finalrender = <div className="searchresult">{renderedcards}</div>
         }
         return (
             <div>
@@ -190,7 +179,7 @@ export default class SearchPage extends Component {
                     <input className="search-button" type="submit" value="" />
 
                 </form>
-                {finalrender}
+                {renderedcards}
             </div> 
             </div>
         )

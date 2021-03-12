@@ -8,7 +8,6 @@
 .sidebar{
   height: 96vh;
   width: 13vw;
-  border-right: 2px solid black;
 }
 
 .searchorcreate{
@@ -125,7 +124,7 @@
     display: flex;
     flex-direction: column-reverse;
     font-size: larger;
-    background-color: #f8f9fb;
+    background-color: white;
     border: none;
     margin-top: 6vh;
 }
@@ -151,38 +150,45 @@
   z-index  : 1;
   top   : 4.2vh;
   pointer-events   : none;
-  background-color : white;
+  background-color : rgb(255, 255, 255);
   width    : 88.25vw; /*very finely calculated lol */
   height   : 6vh;
 }
 
+
+
 .received{
+    padding: 4px;
     margin-bottom: 10px;
+    margin-left: 5%;
     background-color: #cccccc;
     max-width: 60%;
     border-radius: 5px;
     padding-left: 20px;
-    padding-right: 5px;
+    padding-right: 20px;
     padding-bottom: 3px;
     border: solid #e5e5e5 1px;
-    margin-left: 1vw;
+    margin-left: 1%;
     margin-right: auto;
     overflow-wrap: normal;
     /*display: inline-block;*/
 }
 
 .sent{
+    margin-left: 35%;
     margin-bottom: 10px;
     background-color: #1b3faa;
+    max-width: 60%;
+    padding: 4px;
     border-radius: 5px;
     border: 1px solid #163099;
     padding-left: 20px;
-    padding-right: 5px;
+    padding-right: 20px;
     padding-bottom: 3px;
     overflow-wrap: normal;
     max-width: 60%;
     color: white;
-    margin-right: 1vw;
+    margin-right: 0;
     margin-left: auto;
 
 }
@@ -249,7 +255,6 @@
     width: 60vw;
     height: 2vh;
     vertical-align: middle;
-    border: 1px solid black;
 }
 
 .message-input:focus {
@@ -332,7 +337,24 @@
   transition: 0.3s;
 }
 
-.placeholderImage {
+#preview{
+  max-width: 90%;
+  height: auto;
+}
+
+#imageform
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#imgform
+{
+  margin-top: 15%;
+}
+
+#placeholderImage {
   background-image: url('../../images/icon_image.svg');
   background-repeat: no-repeat;
   background-size: 20vh 20vh;
@@ -374,17 +396,15 @@
   margin-right: 1vw;
   position: absolute;
   flex-direction: column;
-  justify-content: space-between;
   text-align: center;
   align-items: center;
   height: 35vh;
-  width: 20vw;
+  max-width: 40vh;
+  min-width: 20vh;
   z-index: 1;
   border-radius: 15px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
-
-
 
 .mediaLatex {
   background-image: url('../../images/icon_latex.svg');
@@ -405,7 +425,9 @@
 }
 
 .widgetHeader {
-  width: 20vw;
+  position: relative;
+  top: 0;
+  width: 100%;
   height: 6vh;
   border-radius: 15px;
 }
@@ -430,6 +452,7 @@
   margin-bottom: 0.8vh;
   margin-top: 0.8vh;
   line-height: 4vh;
+  border: none;
 }
 
 .button-back {
@@ -476,18 +499,16 @@
 
 .messageText {
   margin-top: 10px;
-  font-size: 2vh;
-  padding-right: 15px;
+  font-size: 20px;
 }
 
 .messageTimeSent {
-  font-size: 1vh;
+  font-size: 10px;
   text-align: right;
-  margin-top: 5px;
 }
 
 .messageTimeReceived {
-  font-size: 1vh;
+  font-size: 10px;
   margin-top: 5px;
   text-align: right;
 }
@@ -495,7 +516,7 @@
 .messageImage {
   border-radius: 10px;
   margin-top: 10px;
-  max-width: 52vw;
+  max-width: 53vw;
   height: auto;
 }
 

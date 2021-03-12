@@ -45,6 +45,8 @@ background: #888;
 background: #555; 
 }
 
+
+
 .friendrequest{
     display: flex;
     margin-top: 3vh;
@@ -63,8 +65,6 @@ background: #555;
     border: 2px lightgrey solid;
     box-shadow: 2px 2px 7px 2px #cccccc;
     width: 35vw;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 

@@ -28,9 +28,11 @@ class MediaWidget extends React.Component {
         event.preventDefault();
         console.log("Inside handleLatexSubmit");
         var latex = document.getElementById("latexEditor").value
+
         latex = latex.replace(/\n/g, '');
         latex = "\\documentclass{article}\\begin{document}" + latex + "\\pagenumbering{gobble}\\end{document}"
         const latexJSON = JSON.stringify({ latex: latex })
+
 
         const latexResult = await fetch("/latexRequest",
             {

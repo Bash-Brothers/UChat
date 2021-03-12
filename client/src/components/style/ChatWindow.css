@@ -8,7 +8,6 @@
 .sidebar{
   height: 96vh;
   width: 13vw;
-  border-right: 2px solid black;
 }
 
 .searchorcreate{
@@ -125,7 +124,7 @@
     display: flex;
     flex-direction: column-reverse;
     font-size: larger;
-    background-color: #f8f9fb;
+    background-color: white;
     border: none;
     margin-top: 6vh;
 }
@@ -151,7 +150,7 @@
   z-index  : 1;
   top   : 4.2vh;
   pointer-events   : none;
-  background-color : white;
+  background-color : rgb(255, 255, 255);
   width    : 88.25vw; /*very finely calculated lol */
   height   : 6vh;
 }
@@ -162,10 +161,10 @@
     max-width: 60%;
     border-radius: 5px;
     padding-left: 20px;
-    padding-right: 5px;
+    padding-right: 20px;
     padding-bottom: 3px;
     border: solid #e5e5e5 1px;
-    margin-left: 1vw;
+    margin-left: 1%;
     margin-right: auto;
     overflow-wrap: normal;
     /*display: inline-block;*/
@@ -177,12 +176,12 @@
     border-radius: 5px;
     border: 1px solid #163099;
     padding-left: 20px;
-    padding-right: 5px;
+    padding-right: 20px;
     padding-bottom: 3px;
     overflow-wrap: normal;
     max-width: 60%;
     color: white;
-    margin-right: 1vw;
+    margin-right: 0;
     margin-left: auto;
 
 }
@@ -249,7 +248,6 @@
     width: 60vw;
     height: 2vh;
     vertical-align: middle;
-    border: 1px solid black;
 }
 
 .message-input:focus {
@@ -494,18 +492,17 @@
 
 .messageText {
   margin-top: 10px;
-  font-size: 2vh;
-  padding-right: 15px;
+  font-size: 20px;
 }
 
 .messageTimeSent {
-  font-size: 1vh;
+  font-size: 10px;
   text-align: right;
   margin-top: 5px;
 }
 
 .messageTimeReceived {
-  font-size: 1vh;
+  font-size: 10px;
   margin-top: 5px;
   text-align: right;
 }
@@ -513,7 +510,7 @@
 .messageImage {
   border-radius: 10px;
   margin-top: 10px;
-  max-width: 52vw;
+  max-width: 53vw;
   height: auto;
 }
 

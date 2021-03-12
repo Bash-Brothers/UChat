@@ -77,7 +77,8 @@
 
   .navIcon {
     height: 2.5vh;
-    margin-right: .2vw;
+    margin-right: .25vw;
+    margin-left: .25vw;
     width: auto;
     fill: black;
   }

@@ -18,7 +18,7 @@ class MediaWidget extends React.Component {
         super(props);
         this.state = {
             img: defImg,
-            status: 1,
+            display: 1,
         }
         this.generatePreview = this.generatePreview.bind(this);
         this.backClick = this.backClick.bind(this);
@@ -132,12 +132,13 @@ class MediaWidget extends React.Component {
         if (i == 3) {
             this.setState({ img: defImg })
         }
-        this.setState({ status: i })
+        this.setState({ display: i })
     }
 
     render() {
-        const status = this.state.status;
-        if (status === 1) {
+        const status = this.props.status;
+        if(status) {
+            if (this.state.display === 1) {
             return (
                 <div className="mediaWidget">
                     <div className="mediaLatex" onClick={() => this.backClick(2)} />
@@ -145,7 +146,7 @@ class MediaWidget extends React.Component {
                 </div>
             )
         }
-        else if (status === 2) {  //render the latex widget on latex button click
+        else if (this.state.display === 2) {  //render the latex widget on latex button click
             return (
                 <div className="latexWidget">
                     <div className="widgetHeader">
@@ -158,7 +159,7 @@ class MediaWidget extends React.Component {
                 </div>
             )
         }
-        else if (status === 3) { //render the image input widget
+        else if (this.state.display === 3) { //render the image input widget
             return (
                 <div className="imageWidget">
                     <div className="widgetHeader">
@@ -173,6 +174,7 @@ class MediaWidget extends React.Component {
                     </form>
                 </div>
             )
+            }
         }
         return (null);
     }
@@ -281,7 +283,7 @@ export default class ChatWindow extends Component {
             }
 
             // get updated list of messages every 5 seconds
-            this.intervalID = setInterval(this.getData.bind(this), 5000)
+            this.intervalID = setInterval(this.getData.bind(this), 3000)
 
             this.setState({
                 loggedIn: loggedIn, curUser: curUser, curChat: curChat,
@@ -291,7 +293,7 @@ export default class ChatWindow extends Component {
         }
         else {
             // get updated list of messages every 5 seconds
-            this.intervalID = setInterval(this.getData.bind(this), 5000)
+            this.intervalID = setInterval(this.getData.bind(this), 3000)
             this.setState({ loggedIn: loggedIn, curUser: curUser, });
         }
 
@@ -363,25 +365,8 @@ export default class ChatWindow extends Component {
 
     }
     //handle clicks on the media button
-    handleMediaClick(i) {
-        switch (i) {
-            case 0: // media button clicked
-                if (this.state.mediaState === 0)
-                    this.setState({ mediaState: 1, })
-                else
-                    this.setState({ mediaState: 0, })
-                break;
-            case 1: // latex button clicked
-                this.setState({ mediaState: 2, })
-                break;
-            case 2: // image button clicked
-                this.setState({ mediaState: 3, })
-                break;
-            case 3: // back button clicked
-                this.setState({ mediaState: 1, })
-                break;
-
-        }
+    handleMediaClick() {
+        this.setState({mediaState: !(this.state.mediaState)})
 
     }
 
@@ -549,7 +534,7 @@ export default class ChatWindow extends Component {
                 </div>
                 <div className="curChat">
                     <div className="inputField">
-                        <div className="button-media" onClick={() => this.handleMediaClick(0)} />
+                        <div className="button-media" onClick={() => this.handleMediaClick()} />
                         <form onSubmit={this.handleSubmit}>
                             <input
                                 type="text"

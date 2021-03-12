@@ -77,7 +77,15 @@
 
   .navIcon {
     height: 2.5vh;
-    margin-right: .2vw;
+    margin-right: .25vw;
+    margin-left: .25vw;
     width: auto;
     fill: black;
+  }
+
+  .navbarLogo {
+    height: 2.5vh;
+    width: auto;
+    left: 0.5%;
+    position: absolute;
   }

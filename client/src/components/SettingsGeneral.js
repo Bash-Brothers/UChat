@@ -78,6 +78,18 @@ export default class Settings extends Component {
 		const res = await response.json();
 		const returnCode = res.returnCode;
 
+		var alertDiv = (!res.returnCode) ? 'alert-green' : 'alert-red';
+		var alertMessage = (!res.returnCode) ? 'Name change successful!' : 'Database error :/';
+
+		//create an alert based on if registartion is successful or not
+		document.getElementById(alertDiv).innerHTML=alertMessage;
+		document.getElementById(alertDiv).style.width="10vw";
+		document.getElementById(alertDiv).style.visibility='visible';
+		setTimeout(function() {
+			document.getElementById(alertDiv).style.visibility='hidden';
+		}, 3000); // <-- time in milliseconds
+
+
 		if (returnCode != 0)
 		{
 			// database error

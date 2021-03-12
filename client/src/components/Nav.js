@@ -11,6 +11,7 @@ import IconContactUs from '../images/icon_contactus.svg';
 import IconSearch from '../images/icon_search.svg';
 import IconNotif from '../images/icon_notif.svg';
 import IconFriendReqs from '../images/friend_requests.svg';
+import Logo from '../images/logotest.png';
 
 export default class Nav extends React.Component {
     constructor(props) {
@@ -66,6 +67,7 @@ export default class Nav extends React.Component {
         return (
                 <div className="main">
                     <div className="navigation1">
+                    <img src={Logo} className="navbarLogo"/>
                     <div className="page-title">{this.state.curPage}</div>
                         <Link to="/chats" className="navButton" onClick={() => this.setState({curPage: 'Chats'})}>
                             <img src={IconChat} className="navIcon"/>

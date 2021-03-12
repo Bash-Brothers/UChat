@@ -23,6 +23,7 @@ class MediaWidget extends React.Component {
         console.log("Inside handleLatexSubmit");
         var latex = document.getElementById("latexEditor").value
         latex = latex.replace(/\n/g,'');
+        latex = "\\documentclass{article}\\begin{document}" + latex + "\\pagenumbering{gobble}\\end{document}"
         const latexJSON = JSON.stringify({latex: latex})
 
         const latexResult = await fetch("/latexRequest", 
@@ -122,15 +123,7 @@ class MediaWidget extends React.Component {
                     <div className="button-back" onClick={() => this.props.onClick(3)}/>
                 </div>
                 <form onSubmit={this.handleLatexSubmit}>
-                    <textarea className="latexInput" id="latexEditor" value="\documentclass{article}
-                    \begin{document}
-
-                    ---Insert LaTeX code here---
-
-
-
-                    \pagenumbering{gobble}
-                    \end{document}"/>
+                    <textarea className="latexInput" id="latexEditor" placeholder="Enter LaTeX code..."/>
                     <input className="widgetSend" type="submit" value="Send"/>
                 </form>
             </div>

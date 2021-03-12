@@ -1,5 +1,5 @@
 edit: https://www.flaticon.com/free-icon/edit_1159633?term=edit&page=1&position=3&page=1&position=3&related_id=1159633&origin=search
-chat: https://www.flaticon.com/free-icon/speech-bubble_2462844?term=chat&page=1&position=38&page=1&position=38&related_id=2462844&origin=search
+chat: https://www.flaticon.com/free-icon/chat_876170?term=message&page=1&position=22&page=1&position=22&related_id=876170&origin=search
 info: https://www.flaticon.com/free-icon/rounded-info-button_61053?term=info&page=3&position=21&page=3&position=21&related_id=61053&origin=search
 login: https://www.flaticon.com/free-icon/enter_1828391?term=login&page=1&position=3&page=1&position=3&related_id=1828391&origin=search
 register: https://www.flaticon.com/free-icon/add_992651?term=add&page=1&position=2&page=1&position=2&related_id=992651&origin=search
@@ -8,7 +8,7 @@ search: https://www.flaticon.com/free-icon/search_56936?term=search&page=1&posit
 searchbarbutton: https://www.flaticon.com/free-icon/search_149852?term=search&page=1&position=4&page=1&position=4&related_id=149852&origin=search&origin=tag
 send: https://www.flaticon.com/free-icon/send_736212?term=send&page=1&position=4&page=1&position=4&related_id=736212&origin=search
 notification: https://www.flaticon.com/free-icon/notification_633816?term=notifications&page=1&position=5&page=1&position=5&related_id=633816&origin=search
-friendrequests: https://www.flaticon.com/free-icon/friends_880594?term=friend&page=1&position=5&page=1&position=5&related_id=880594&origin=search
+friendrequests: https://www.flaticon.com/free-icon/contact_1239336?term=add%20contacts&page=1&position=6&page=1&position=6&related_id=1239336&origin=search
 pendingicon: https://www.flaticon.com/free-icon/more_512142?term=three%20dots&page=1&position=3&page=1&position=3&related_id=512142&origin=search
 addicon: https://www.flaticon.com/free-icon/add_1237946?term=plus&page=1&position=1&page=1&position=1&related_id=1237946&origin=search
 check icon: https://www.flaticon.com/free-icon/tick_447147?term=checkmark&page=1&position=1&page=1&position=1&related_id=447147&origin=search

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import './style/About.css'; 	
-import egg from '../images/paul.jpg';
+import logo from '../images/logotest.png';
 
 export default function About(props) {
         return (
             <div className="about">
-                <img src={egg} id="loginlogo"/>
+                <img src={logo} id="about-logo"/>
                 <div className="info-content">
                     Welcome to UChat created by the Bash Brothers! UChat is an application where users can share and send messages like any other app along with LaTeX equations and images!
                     <p>Aman Oberoi</p>

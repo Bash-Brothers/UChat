@@ -25,3 +25,9 @@
     box-shadow: 2px 3px 6px 4px #cccccc;
     width: 60vh;
 }
+
+#about-logo{
+    height: 20vh;
+    margin-bottom: 20px;
+    border: none;
+}

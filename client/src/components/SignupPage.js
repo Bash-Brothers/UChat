@@ -65,6 +65,17 @@ export default class SignupPage extends React.Component
 
 
         console.log("success code from handle  : ",res.successCode );
+        var alertDiv = (!res.successCode) ? 'alert-green' : 'alert-red';
+        var alertMessage = (!res.successCode) ? 'Registration successful!' : 'Registration unsuccessful!';
+        
+        //create an alert based on if registartion is successful or not
+        document.getElementById(alertDiv).innerHTML=alertMessage;
+        document.getElementById(alertDiv).style.width="10vw";
+        document.getElementById(alertDiv).style.visibility='visible';
+        setTimeout(function() {
+            document.getElementById(alertDiv).style.visibility='hidden';
+        }, 3000); // <-- time in milliseconds
+
         event.target.reset(); // clear out form entries
         this.setState({isSignedUp: !res.successCode, successCode: res.successCode, name: "", 
             username: "", 

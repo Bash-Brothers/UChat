@@ -155,31 +155,35 @@
   height   : 6vh;
 }
 
-
-
 .received{
-    padding: 4px;
     margin-bottom: 10px;
-    margin-left: 5%;
     background-color: #cccccc;
     max-width: 60%;
     border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 3px;
     border: solid #e5e5e5 1px;
-    text-indent: 20px;
+    margin-left: 1%;
+    margin-right: auto;
+    overflow-wrap: normal;
     /*display: inline-block;*/
 }
 
 .sent{
-    margin-left: 35%;
     margin-bottom: 10px;
     background-color: #1b3faa;
-    max-width: 60%;
-    padding: 4px;
     border-radius: 5px;
     border: 1px solid #163099;
-    text-indent: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 3px;
+    overflow-wrap: normal;
+    max-width: 60%;
     color: white;
-    /*display: inline-block;*/
+    margin-right: 0;
+    margin-left: auto;
+
 }
 
 .no-messages{
@@ -476,17 +480,19 @@
 .messageTimeSent {
   font-size: 10px;
   text-align: right;
+  margin-top: 5px;
 }
 
 .messageTimeReceived {
   font-size: 10px;
+  margin-top: 5px;
   text-align: right;
 }
 
 .messageImage {
   border-radius: 10px;
   margin-top: 10px;
-  max-width: 30vw;
+  max-width: 53vw;
   height: auto;
 }
 

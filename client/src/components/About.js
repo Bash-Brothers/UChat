@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import './style/About.css'; 	
 import logo from '../images/logotest.png';
 
+
+//just an about page describing our app
 export default function About(props) {
         return (
             <div className="about">

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {Redirect} from "react-router-dom";
 import './style/SignupPage.css';
 import logo from '../images/logotest.png';
@@ -82,11 +82,11 @@ export default class SignupPage extends React.Component
 
     render()
     {
-        if (this.state.isSignedUp)
+        if (this.state.isSignedUp) //once signup is complete
         {
             return <Redirect to="/login" />;
         }
-        if (this.state.loggedIn)
+        if (this.state.loggedIn) //if you're already logged in
         {
             return <Redirect to="/chats" />
         }

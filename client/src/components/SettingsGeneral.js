@@ -18,7 +18,7 @@ export default class Settings extends Component {
 		this.handleNameSubmit = this.handleNameSubmit.bind(this);
 
 	}
-
+	//get current username and password
 	getCurrentSettings = async() =>
 	{
 		const user = await getUserInfo();

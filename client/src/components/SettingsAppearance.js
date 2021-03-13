@@ -4,7 +4,7 @@ import './style/Settings.css';
 import {isLoggedIn} from '../utils.js';
 
 
-
+//This page isnt read to be deployed - it should enable users in the future to customize the colors of their app
 export default class Settings extends Component {
 	constructor(props) {
 		super(props);

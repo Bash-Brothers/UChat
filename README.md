@@ -1,4 +1,4 @@
-# Bash Brothers - CS 97 Project - Chat app for students and academia
+# UChat - Chat app for students and academia
 
 <h2> Steps to run the app on your computer </h2>
 

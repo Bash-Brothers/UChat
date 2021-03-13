@@ -14,7 +14,6 @@ import Test from './components/Test.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
 import {isLoggedIn} from './utils.js';
-import {storage} from './firebase-config.js';
 
 
 //changed App from a function a class 

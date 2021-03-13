@@ -5,8 +5,7 @@ import { isLoggedIn, getUserInfo } from '../utils.js';
 import defImg from '../images/icon_image.svg';
 
 
-//display media widget if the media button is clicked, handle clicks within the widget
-
+// display media widget if the media button is clicked, handle clicks within the widget
 
 class MediaWidget extends React.Component {
     constructor(props) {
@@ -19,15 +18,18 @@ class MediaWidget extends React.Component {
         this.backClick = this.backClick.bind(this);
     }
 
-    handleLatexSubmit = async (event) => {
+
+
+    handleLatexSubmit = async (event) => { //sends LaTeX input to renderer, posts returned URL to chat
         event.preventDefault();
         var latex = document.getElementById("latexEditor").value
 
         latex = latex.replace(/\n/g, '');
         latex = "\\documentclass{article}\\begin{document}" + latex + "\\pagenumbering{gobble}\\end{document}"
+        // append document and page number tags
         const latexJSON = JSON.stringify({ latex: latex })
 
-
+        // perform POST to backend to receive rendered LaTeX URL
         const latexResult = await fetch("/latexRequest",
             {
                 method: 'POST',
@@ -37,7 +39,9 @@ class MediaWidget extends React.Component {
                 body: latexJSON
             })
         const latexReturn = await latexResult.json()
-        const filename = await latexReturn.filename;    //supposed to get filename from latexRequest
+        const filename = await latexReturn.filename;
+
+        // perform POST to backend to send message payload
 
         const fetchurl = "/sendchat/" + this.props.curChat;
         const newMessage = { chat_id: this.props.curChat, sender: this.props.curUser, message: filename, time: this.props.getCurrentTime(), type: "latex" };
@@ -63,13 +67,13 @@ class MediaWidget extends React.Component {
 
     }
 
-    handleImageSubmit = async (event) => {
+    handleImageSubmit = async (event) => { // sends uploaded image to imgur, posts returned URL to chat
         event.preventDefault();
         var formData = new FormData();
         const fileInput = document.getElementById('imageUpload');
         if (fileInput.files.length == 0 || fileInput.files[0] == defImg) {
             console.log("no files selected");
-            //create an alert based on if registartion is successful or not
+            //create an alert based on if registration is successful or not
             document.getElementById('alert-red').innerHTML = 'No image attached!';
             document.getElementById('alert-red').style.width = "10vw";
             document.getElementById('alert-red').style.visibility = 'visible';
@@ -81,7 +85,7 @@ class MediaWidget extends React.Component {
         const file = fileInput.files[0];
         formData.append('image', file);
         
-        const uploadResult = await fetch('https://api.imgur.com/3/image', {
+        const uploadResult = await fetch('https://api.imgur.com/3/image', { //perform post to imgur API
             method: 'POST',
             headers: {
                 'Authorization': 'Client-ID 0c9e599528444e7',
@@ -89,6 +93,9 @@ class MediaWidget extends React.Component {
             body: formData
         })
         const uploadReturn = await uploadResult.json();
+
+        // perform POST to backend to send message payload
+
         const fetchurl = "/sendchat/" + this.props.curChat;
         const newMessage = { chat_id: this.props.curChat, sender: this.props.curUser, message: uploadReturn.data.link, time: this.props.getCurrentTime(), type: "image" };
         const result = await fetch("/sendchat/" + this.props.curChat,
@@ -123,45 +130,45 @@ class MediaWidget extends React.Component {
         this.setState({ display: i })
     }
 
-    render() {
-        const status = this.props.status;
+    render() { //render the media widget 
+        const status = this.props.status; //used to determine whether to display the media widget at all
         if(status) {
-            if (this.state.display === 1) {
-            return (
-                <div className="mediaWidget">
-                    <div className="mediaLatex" onClick={() => this.backClick(2)} />
-                    <div className="mediaUploadImage" onClick={() => this.backClick(3)} />
-                </div>
-            )
-        }
-        else if (this.state.display === 2) {  //render the latex widget on latex button click
-            return (
-                <div className="latexWidget">
-                    <div className="widgetHeader">
-                        <div className="button-back" onClick={() => this.backClick(1)} />
+            if (this.state.display === 1) { //render the default view on media button click or back click
+                return (
+                    <div className="mediaWidget">
+                        <div className="mediaLatex" onClick={() => this.backClick(2)} />
+                        <div className="mediaUploadImage" onClick={() => this.backClick(3)} />
                     </div>
-                    <form onSubmit={this.handleLatexSubmit}>
-                        <textarea className="latexInput" id="latexEditor" placeholder="Enter LaTeX code..." />
-                        <input className="widgetSend" type="submit" value="Send" />
-                    </form>
-                </div>
-            )
-        }
-        else if (this.state.display === 3) { //render the image input widget
-            return (
-                <div className="imageWidget">
-                    <div className="widgetHeader">
-                        <div className="button-back" onClick={() => this.backClick(1)} />
-                    </div>
-                    <form id='imgform' onSubmit={this.handleImageSubmit}>
-                        <input type="file" id="imageUpload" name="imagename" onChange={this.generatePreview} hidden />
-                        <label for="imageUpload">
-                            <div><img src={this.state.img} id="preview" /></div>
+                )
+            }
+            else if (this.state.display === 2) {  //render the latex widget on latex button click
+                return (
+                    <div className="latexWidget">
+                        <div className="widgetHeader">
+                            <div className="button-back" onClick={() => this.backClick(1)} />
+                        </div>
+                        <form onSubmit={this.handleLatexSubmit}>
+                            <textarea className="latexInput" id="latexEditor" placeholder="Enter LaTeX code..." />
                             <input className="widgetSend" type="submit" value="Send" />
-                        </label>
-                    </form>
-                </div>
-            )
+                        </form>
+                    </div>
+                )
+            }
+            else if (this.state.display === 3) { //render the image input widget
+                return (
+                    <div className="imageWidget">
+                        <div className="widgetHeader">
+                            <div className="button-back" onClick={() => this.backClick(1)} />
+                        </div>
+                        <form id='imgform' onSubmit={this.handleImageSubmit}>
+                            <input type="file" id="imageUpload" name="imagename" onChange={this.generatePreview} hidden />
+                            <label for="imageUpload">
+                                <div><img src={this.state.img} id="preview" /></div>
+                                <input className="widgetSend" type="submit" value="Send" />
+                            </label>
+                        </form>
+                    </div>
+                )
             }
         }
         return (null);
@@ -170,7 +177,7 @@ class MediaWidget extends React.Component {
 
 
 
-
+// main page class
 
 export default class ChatWindow extends Component {
 
@@ -181,11 +188,11 @@ export default class ChatWindow extends Component {
             curUser: null, // stores the username of the person logged in
             curChat: null, //stores the chatId of current chat
             curChatName: null,  // person(s) usr is chatting w/
-            chatsList: null,
-            messageList: null,
-            curMessage: null,
-            intervalID: null,
-            mediaState: 0,  //0 for not showing, 1 for menu, 2 for latex input, 3 for image input
+            chatsList: null, // list of chats the user has 
+            messageList: null, // list of messages in the current chat
+            curMessage: null, // current message to be sent
+            intervalID: null, // interval for message refresh
+            mediaState: 0,  // 0 for not showing, 1 for showing
 
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -385,6 +392,8 @@ export default class ChatWindow extends Component {
                 let message = messageObj['message'];
                 let time = messageObj['time'];
                 let type = messageObj['type'];    
+
+                // extract the timestamp from the message data
                 var timePatternHours = /([0-9]|[0-9][0-9]):(?=(([0-9]|[0-9][0-9]):))/g
                 var timePatternMinutes = /(?<=([0-9]|[0-9][0-9]):)([0-9]|[0-9][0-9])(?=:)/g
                 let formattedTime = time.match(timePatternHours)

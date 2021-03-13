@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import './style/FriendRequests.css';
-import IconSend from '../images/icon_send.svg';
 import {Redirect} from "react-router-dom";
 import {isLoggedIn, getUserInfo} from '../utils.js';
 
@@ -14,15 +13,14 @@ export default class FriendRequests extends Component {
 
             loggedIn: true,
             curUser: null, // stores the username of the person logged in
-            friendrequestsList: null,
+            friendrequestsList: null, // current list of friend requests
             curfriendreq: null, //stores the friendrequestId of current friend request
-            intervalID: null,
+            intervalID: null, // sets update interval
             response: false, // will later be updated to accept or delete
 
         };
         this.handleAccept = this.handleAccept.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
@@ -32,7 +30,6 @@ export default class FriendRequests extends Component {
         try{
             const userInfo = await getUserInfo();
             const Notifs  = userInfo.notifs; 
-            // Note on making sure it is right to call this function using .bind(this)
             this.setState({friendrequestsList: Notifs });
         }
         catch{
@@ -59,7 +56,6 @@ export default class FriendRequests extends Component {
         if(Notifs.length > 0){
 
             // get updated list of friend requests every 5 seconds
-            // Not sure whether it is right to call this function using .bind(this)
             this.intervalID = setInterval(this.getUpdatedFriendrequestsList.bind(this), 5000)
 
             this.setState({loggedIn: loggedIn,  curUser: curUser, friendrequestsList: Notifs,  });
@@ -87,15 +83,6 @@ export default class FriendRequests extends Component {
         clearInterval(this.intervalID);
     }
 
-
-
-    // handleClick = friendreq_id => async (event) =>
-
-    // For understanding of what is done here, look in to the concept of currying functions
-    // https://stackoverflow.com/questions/32782922/what-do-multiple-arrow-functions-mean-in-javascript
-    // https://stackoverflow.com/questions/60027202/how-do-i-pass-props-and-other-parameters-to-function-using-react-hooks
-    // https://stackoverflow.com/questions/42299594/await-is-a-reserved-word-error-inside-async-function
-
     handleAccept = async (friendreq_id) =>
     {
       
@@ -122,8 +109,6 @@ export default class FriendRequests extends Component {
            alert('error sending chat')
             return null;
         }
-
-        // event.target.reset();
 
         //Process the friend request
         this.updateandFetch(friendreq_id);
@@ -156,8 +141,6 @@ export default class FriendRequests extends Component {
        console.log('return code was not 0 from server.js')
     }
 
-    // event.target.reset();
-
         //Process the friend request
         this.updateandFetch(friendreq_id);
 
@@ -166,7 +149,6 @@ export default class FriendRequests extends Component {
 
    updateandFetch = async (friendreq_id) =>
    {
-        // alert('success');
 
         // Removing friend request from UI display
         var arraylength = this.state.friendrequestsList.length;
@@ -182,8 +164,6 @@ export default class FriendRequests extends Component {
                 break;
             }
         }
-
-        // console.log(array);
 
         this.setState({friendrequestsList: array, });
 
@@ -215,15 +195,7 @@ export default class FriendRequests extends Component {
             // reverse() to display the most recently made friend requests first
             renderedFriendRequests = friendrequestsList.slice(0).reverse().map(friendreq_id => 
 
-                // Note: I spent a hell of a long time searching this up,
-                // In a complex react component that contains many elements,
-                // and there is a changing array involved
-                // ALL the children and elements each have to have a key
-                // https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js
-
-
                 <div className="friendrequest" key={friendreq_id + '.div'}>
-                    {/* https://stackoverflow.com/questions/42597602/react-onclick-pass-event-with-parameter */}
                     <p className="friendname" key={friendreq_id + '.p'}>
                         {friendreq_id}
                     </p>
@@ -247,7 +219,6 @@ export default class FriendRequests extends Component {
 
                 </div>
 
-                // this.renderFriendrequest(friendreq_id)
                 )
         }
 
@@ -255,23 +226,6 @@ export default class FriendRequests extends Component {
         return (
             <div className="friendreqPage">
                 <div className="friendreqpanel">
-                    {/* <div className="searchfriendreq">
-                        <div className="inputFieldFriendreq">
-                            <form>
-                                
-                                <input
-                                    type="text"
-                                    className="friendreqSearchbar-input"
-                                    placeholder="Search friend requests..."
-                                />
-                                <input
-                                    type="submit"
-                                    className="friendreq-search"
-                                    value=""
-                                />
-                            </form>
-                        </div>
-                    </div> */}
                     <div className="friendreqList">
                         {renderedFriendRequests}
                     </div>

@@ -3,6 +3,7 @@ import './style/ChatWindow.css';
 import { Redirect } from "react-router-dom";
 import { isLoggedIn, getUserInfo } from '../utils.js';
 import defImg from '../images/icon_image.svg';
+import imgurID from '../imgurID.json';
 
 
 // display media widget if the media button is clicked, handle clicks within the widget
@@ -68,6 +69,7 @@ class MediaWidget extends React.Component {
     }
 
     handleImageSubmit = async (event) => { // sends uploaded image to imgur, posts returned URL to chat
+        const clientID = 'Client-ID ' + imgurID.IMGUR_ID
         event.preventDefault();
         var formData = new FormData();
         const fileInput = document.getElementById('imageUpload');
@@ -88,7 +90,7 @@ class MediaWidget extends React.Component {
         const uploadResult = await fetch('https://api.imgur.com/3/image', { //perform post to imgur API
             method: 'POST',
             headers: {
-                'Authorization': 'Client-ID 0c9e599528444e7',
+                'Authorization': clientID,
             },
             body: formData
         })

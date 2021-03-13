@@ -55,7 +55,12 @@ cd ..
 
 <br />
 
-(Optional) If you eant to be able to send LaTeX code, ensure that the Requests HTTP library for Python is installed on your computer.<br />
+(**Important**) We expect that you have a MongoDB cluster already set up (we're not going to give you ours!). Go into server.js/Line: 39 and set
+ ```js
+const uri = (your connection string to the cluster) 
+```
+
+(Optional) If you want to be able to send LaTeX code, ensure that the Requests HTTP library for Python is installed on your computer.<br />
 Instructions on how to install Requests will depend on the device but usually just require the latest version of pip (Python's package installer).<br />
 https://requests.readthedocs.io/en/master/user/install/
 

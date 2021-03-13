@@ -27,13 +27,21 @@ var express = require("express"),
     cookieSession = require('cookie-session'),
     path = require('path'),
     { v4: uuidv4 } = require('uuid');
+const { exit } = require("process");
 
 
 /*=========================================================================== 
 Database access information 
 ===========================================================================*/ 
-// the link to the database along with username and password for the db - can be copied off Mongo's connection page 
-const uri = "mongodb+srv://sudhanshu:aQDJZTTc6CO5Htrb@cluster0.xkm5f.mongodb.net/test_db?retryWrites=true&w=majority";
+/* ENTER INFORMATION HERE */
+// the connection string to your Mongo Atlas Cluster along with username and password 
+// this can be copied off the connection page for the cluster
+const uri = null;
+if (uri == null)
+{
+    console.log("\n\n\n\n ERROR: No MongoDB cluster provided \n\n\n\n");
+    exit(1)
+}
 // create instance of mongo client 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 console.log("- Client created")

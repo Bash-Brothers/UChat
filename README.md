@@ -60,4 +60,6 @@ Milo Kearney
 Kevin Huang  
 Aman Oberoi  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>Technology Stack</h2>
+
+This project was bootstrapped with [React](https://github.com/facebook/create-react-app), and we used [Express](https://expressjs.com/en/guide/routing.html) to set up end points and methods that received stimulus from our React components and conveyed and retrieved information from our [MongoDB](http://mongodb.com) collections. We used [Imgur's API](https://api.imgur.com) to store and fetch images sent in chats, and [rTeX](https://rtex.probablyaweb.site) along with Python's [requests library](https://requests.readthedocs.io/en/master/) to convert LaTeX code into images.

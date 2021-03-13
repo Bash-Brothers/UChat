@@ -30,7 +30,6 @@ export default class LoginPage extends React.Component
     }
     async componentDidMount() 
     {                   
-		console.log("Inside component did mount for login page");
         const loggedIn = await isLoggedIn();
         if (loggedIn)
         {
@@ -39,7 +38,6 @@ export default class LoginPage extends React.Component
     }
 
     handleChange = (event) => {
-        console.log("Setting state to ",{[event.target.name]: event.target.value} )
         this.setState({[event.target.name]: event.target.value});
     }
 
@@ -50,7 +48,7 @@ export default class LoginPage extends React.Component
                   {
                     method: 'POST',
                     headers: {
-                      'Content-Type': "application/json; charset=utf-8",
+                        'Content-Type': "application/json; charset=utf-8",
                   },
                   body: JSON.stringify(this.state) /* this is the data being posted */
         })
@@ -75,7 +73,6 @@ export default class LoginPage extends React.Component
 
     render()
     {
-        console.log("rendering login");
         if(this.state.loggedIn)
         {
             return <Redirect to='/chats' />;
@@ -89,7 +86,6 @@ export default class LoginPage extends React.Component
                 <input type="password" className="loginField" placeholder="Password" name="password" value = {this.state.password} onChange = {this.handleChange}/>
                 <DisplayErrors success={this.state.successCode} />
                 <input type="submit" className="loginButton" value="Log In"/>
-                {/* <a href ="/" class="loginlink">Forgot username/password?</a> */}
                 <a href="/signup" id="loginlink">Don't have an account? Click here to sign up.</a>
             </form>
             <div id="contact" className="contactlink">Need help with your account or have feedback? <a href ="/about">Contact us</a></div>

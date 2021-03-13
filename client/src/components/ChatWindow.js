@@ -94,8 +94,19 @@ class MediaWidget extends React.Component {
             },
             body: formData
         })
-        const uploadReturn = await uploadResult.json();
 
+        const uploadReturn = await uploadResult.json();
+        if (!(uploadReturn.success))
+        {
+            console.log("Failed to Upload");
+            document.getElementById('alert-red').innerHTML='Failed to Upload'
+            document.getElementById('alert-red').style.width='12vw';
+            document.getElementById('alert-red').style.visibility='visible';
+            setTimeout(function() {
+                document.getElementById('alert-red').style.visibility='hidden';
+            }, 3000); // <-- time in milliseconds
+            return; 
+        }
         // perform POST to backend to send message payload
 
         const fetchurl = "/sendchat/" + this.props.curChat;

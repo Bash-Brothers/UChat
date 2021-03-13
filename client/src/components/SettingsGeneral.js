@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from 'react-router-dom';
 import './style/Settings.css';
-import icon_edit from '../images/icon_edit.svg';
 import {isLoggedIn, getUserInfo} from '../utils.js';
 
 
@@ -49,6 +48,7 @@ export default class Settings extends Component {
 
 	handleNameSubmit = async (event) =>
 	{
+		// handle username changes
 		event.preventDefault();
 		console.log("Inside handle name submit");
 
@@ -103,6 +103,7 @@ export default class Settings extends Component {
 
 	handleCurrentPassword = async (event) =>
 	{
+		// check the user's current password
 		event.preventDefault();
 		console.log("Inside handle password confirm ");
 		if (this.state.password == this.state.submittedCurrentPassword)
@@ -123,6 +124,8 @@ export default class Settings extends Component {
 
 	handleNewPasswordSubmit = async (event) =>
 	{
+		// handle password changes
+
 		event.preventDefault();
 		console.log("Inside handle new password submit");
 
@@ -137,7 +140,6 @@ export default class Settings extends Component {
             	document.getElementById('alert-red').style.visibility='hidden';
         	}, 3000); // <-- time in milliseconds
 			return;
-			// Frontend display message
 		}
 		if (this.state.newPassword == undefined)
 		{
@@ -150,7 +152,6 @@ export default class Settings extends Component {
             	document.getElementById('alert-red').style.visibility='hidden';
         	}, 3000); // <-- time in milliseconds
 			return;
-			// Frontend display message
 		}
 		console.log(this.state.newPassword)
 
@@ -254,78 +255,80 @@ export default class Settings extends Component {
                     			</form>
                 				<div className = "setting-padding" />
 							</div>
+
+						{/* conditionally render password change fields*/}
 							{this.state.passwordVerified ? 
-							<div>
-							<form id="changePW" onSubmit = {this.handleNewPasswordSubmit}/>
-							<div className = "field-text">  {/* conditonally render new password fields  */}
-								<div className = "setting-name">
-									New Password
-								</div>
 								<div>
-                       			<input
-                       				form="changePW"
-                        			type="password" 
-                	       			className="settings-input"
-									name="newPassword"
-									onChange = {this.handleChange}
-                       			/>
-                       			<input className="settings-submit-placeholder" type="submit" value=" " disabled/> {/*this is a jank AF solution but it works for now*/}
+									<form id="changePW" onSubmit = {this.handleNewPasswordSubmit}/>
+									<div className = "field-text"> 
+										<div className = "setting-name">
+											New Password
+										</div>
+										<div>
+                       						<input
+                       							form="changePW"
+                        						type="password" 
+                	       						className="settings-input"
+												name="newPassword"
+												onChange = {this.handleChange}
+                       						/>
+                       						<input className="settings-submit-placeholder" type="submit" value=" " disabled/>
+                       					</div>
+                       					<div className ="setting-padding"/>
+                       				</div>
+                       				<div className="field-text">
+										<div className = "setting-name">
+											Confirm Password
+										</div>
+										<div>
+											<input
+												form="changePW"
+												type = "password"
+												className ="settings-input"
+												name="newPasswordConfirm"
+												onChange = {this.handleChange}
+											/>
+											<input form="changePW" className="settings-submit" type="submit" value=" " />
+										</div>
+										<div className = "setting-padding" />
+									</div>
+								</div>
+							: 
+							<div>
+								<div className = "field-text-disabled">  
+									<div className = "setting-name">
+										New Password
+									</div>
+									<form>
+                       					<input
+                       						form="changePW"
+                        					type="password" 
+                	       					className="settings-input"
+											name="newPassword"
+											onChange = {this.handleChange}
+											disabled
+                       					/>
+                       					<input className="settings-submit-placeholder" type="submit" value=" " disabled/> 
+                       				</form>
+                       				<div className ="setting-padding"/>
                        			</div>
-                       			<div className ="setting-padding"/>
-                       		</div>
-                       		<div className="field-text">
-								<div className = "setting-name">
-									Confirm Password
+                       			<div className="field-text-disabled">
+									<div className = "setting-name">
+										Confirm Password
+									</div>
+									<form>
+										<input
+											form="changePW"
+											type = "password"
+											className ="settings-input"
+											name="newPasswordConfirm"
+											onChange = {this.handleChange}
+											disabled
+										/>
+										<input className="settings-submit" type="submit" value=" " disabled/>
+									</form>
+									<div className = "setting-padding" />
 								</div>
-								<div>
-									<input
-										form="changePW"
-										type = "password"
-										className ="settings-input"
-										name="newPasswordConfirm"
-										onChange = {this.handleChange}
-									/>
-									<input form="changePW" className="settings-submit" type="submit" value=" " />
-								</div>
-								<div className = "setting-padding" />
-							</div>
-							</div>
-							:
-							<div>
-							<div className = "field-text-disabled">  {/* conditonally render new password fields  */}
-								<div className = "setting-name">
-									New Password
-								</div>
-								<form>
-                       			<input
-                       				form="changePW"
-                        			type="password" 
-                	       			className="settings-input"
-									name="newPassword"
-									onChange = {this.handleChange}
-									disabled
-                       			/>
-                       			<input className="settings-submit-placeholder" type="submit" value=" " disabled/> {/*this is a jank AF solution but it works for now*/}
-                       			</form>
-                       			<div className ="setting-padding"/>
-                       		</div>
-                       		<div className="field-text-disabled">
-								<div className = "setting-name">
-									Confirm Password
-								</div>
-								<form>
-									<input
-										form="changePW"
-										type = "password"
-										className ="settings-input"
-										name="newPasswordConfirm"
-										onChange = {this.handleChange}
-										disabled
-									/>
-									<input className="settings-submit" type="submit" value=" " disabled/>
-								</form>
-								<div className = "setting-padding" />
-							</div>
 							</div>} {/* end of conditional rendering  */}
 						</div>
 					</div>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from 'react-router-dom';
 import './style/Settings.css';
-import icon_edit from '../images/icon_edit.svg';
 import {isLoggedIn} from '../utils.js';
 
 

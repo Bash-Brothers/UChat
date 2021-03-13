@@ -32,7 +32,6 @@ export default class SearchPage extends Component {
         const searchWord = event.target.value
         console.log("Inside handleChange of search page, searched keyword is: ", searchWord)
         this.setState({search: searchWord})
-        //this.setState({[event.target.name]: event.target.value});
     }
 
     handleSubmit =  async (event) => {
@@ -86,29 +85,10 @@ export default class SearchPage extends Component {
         }
         this.setState({curUserList: list});
 
-        //function showDiv(){
-        //    document.getElementById('request-sent').style.visibility="visible";
-        //}
-    
-        //function hideDiv(){
-        //    document.getElementById('request-sent').style.visibility="hidden";
-        //}
-
-        //setTimeout("showDiv()", 1000);
-        //setTimeout("hideDiv()", 5000);
-
-        //const successCode = await res.successCode;
-        //const users = await res.users;
-
-        //event.target.reset(); // clear out form entries
-        //this.setState({successCode: successCode, curUserList: users, hasSearched: true})
-
-        // call sendFriendRequest(curUser, Paul)
-        //change addstatus, send update to backend (call add friend)
-
     }
 
-    button(status, user) {
+    button(status, user) { 
+        // render the button depending on the user's status
         switch (status) {
             case 0:
                 return(<div className="button-add" onClick={() => this.handleClick(user)}/>)
@@ -147,6 +127,7 @@ export default class SearchPage extends Component {
             renderedcards = <div className="noresults">No users matching the search</div>
         }
         else{
+            // generate the contact cards to be rendered
             renderedcards = contactList.map(contactcard => (contactcard['addstatus'] === 2) ?
 
             <div className="contactcard-friend">
@@ -164,6 +145,7 @@ export default class SearchPage extends Component {
             )
         }
 
+        // check if no cards are to be rendered
         var finalrender;
 
         if(renderedcards === null || renderedcards.length == 0)

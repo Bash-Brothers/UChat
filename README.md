@@ -31,9 +31,18 @@ Install all our node dependencies in the client directory using:
 npm install
 ```
 
+Change directory into the src directory, using the command: 
+```
+cd src
+```
+Modify imgurID.json, replacing "REPLACE_YOUR_ID_HERE" with your Imgur Client-ID <br />
+Instructions on how to acquire an Imgur Client-ID can be found here: <br />
+https://apidocs.imgur.com/
+
+
 Change back into the main chatapp directory, using the command:
 ```
-cd ..
+cd ../..
 ```
 
 <br />

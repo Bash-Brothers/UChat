@@ -54,11 +54,11 @@ Yarn takes a while to start the dev server. Do not use the localhost url that th
 ![Screen Shot 2021-03-11 at 11 55 41 PM](https://user-images.githubusercontent.com/40956188/111013756-7860ca00-8355-11eb-8684-685ea0bab06f.jpg)
 
 <h2>Creators</h2>
-Yan Hauw  
-Sudhanshu Agrawal  
-Milo Kearney  
-Kevin Huang  
-Aman Oberoi  
+[Yan Hauw](https://github.com/YanHauw)\
+[Sudhanshu Agrawal](https://github.com/SudhanshuAgrawal27)\
+[Milo Kearney](https://github.com/milo-ucla)\
+[Kevin Huang](https://github.com/Monko2k)\
+[Aman Oberoi](https://github.com/TheDarkLord247)\
 
 <h2>Technology Stack</h2>
 

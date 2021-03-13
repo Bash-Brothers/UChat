@@ -1,5 +1,8 @@
 # UChat - Chat app for students and academia
 
+<img src='https://user-images.githubusercontent.com/40956188/111014909-f07dbe80-835a-11eb-8cbc-0babee730fd1.png' width='310' height='185'/>
+<br/>
+
 <h2> Steps to run the app on your computer </h2>
 
 To run this repository on your local computer, open the terminal/command line and navigate to the directory you wish to download the repository to.

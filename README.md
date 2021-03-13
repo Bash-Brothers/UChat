@@ -31,6 +31,7 @@ Install all our node dependencies in the client directory using:
 npm install
 ```
 
+If you want to be able to send images, you will need an Imgur client ID. Follow the steps below (optional).
 Change directory into the src directory, using the command: 
 ```
 cd src
@@ -40,9 +41,13 @@ Instructions on how to acquire an Imgur Client-ID can be found here: <br />
 https://apidocs.imgur.com/
 
 
-Change back into the main chatapp directory, using the command:
+If you went into the src folder, change back into the main chatapp directory, using the command:
 ```
 cd ../..
+```
+Otherwise, if you stayed in the client folder, change back into the main chatapp directory using the command:
+```
+cd ..
 ```
 
 <br />

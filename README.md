@@ -1,6 +1,6 @@
 # Bash Brothers - CS 97 Project - Chat app for students and academia
 
-The app is deployed at http://amanoberoi.com/chatapp/
+<h2> Steps to run the app on your computer </h2>
 
 To run this repository on your local computer, open the terminal/command line and navigate to the directory you wish to download the repository to.
 Then type this into your terminal or command line:
@@ -48,6 +48,9 @@ yarn dev
 ```
 
 <br />
+
+Do not use the localhost url that this command opens. Instead copy the url provided next to "On Your Network" and paste it in the browser to run the app. (We do not use the default localhost url because our application uses Imgur's API to store and fetch images but Imgur blocks post requests from localhost.)
+![Screen Shot 2021-03-11 at 11 55 41 PM](https://user-images.githubusercontent.com/40956188/111013756-7860ca00-8355-11eb-8684-685ea0bab06f.jpg)
 
 Created by:  
 Yan Hauw  

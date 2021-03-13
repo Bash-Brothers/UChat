@@ -57,7 +57,7 @@ cd ..
 
 (**Important**) We expect that you have a MongoDB cluster already set up (we're not going to give you ours!). Go into server.js/Line: 39 and set
  ```js
-uri = (your connection string to the cluster) 
+const uri = (your connection string to the cluster) 
 ```
 
 (Optional) If you want to be able to send LaTeX code, ensure that the Requests HTTP library for Python is installed on your computer.<br />

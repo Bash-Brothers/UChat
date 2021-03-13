@@ -26,7 +26,6 @@ class MediaWidget extends React.Component {
 
     handleLatexSubmit = async (event) => {
         event.preventDefault();
-        console.log("Inside handleLatexSubmit");
         var latex = document.getElementById("latexEditor").value
 
         latex = latex.replace(/\n/g, '');
@@ -46,9 +45,7 @@ class MediaWidget extends React.Component {
         const filename = await latexReturn.filename;    //supposed to get filename from latexRequest
 
         const fetchurl = "/sendchat/" + this.props.curChat;
-        console.log("inside handleLatexSubmit, fetchurl = ", fetchurl);
         const newMessage = { chat_id: this.props.curChat, sender: this.props.curUser, message: filename, time: this.props.getCurrentTime(), type: "latex" };
-        console.log(newMessage)
         const result = await fetch("/sendchat/" + this.props.curChat,
             {
                 method: 'POST',
@@ -88,10 +85,7 @@ class MediaWidget extends React.Component {
         }
         const file = fileInput.files[0];
         formData.append('image', file);
-        //document.getElementById('placeholderImage').style.backgroundImage = this.state.img;
-
-        console.log(formData)
-
+        
         const uploadResult = await fetch('https://api.imgur.com/3/image', {
             method: 'POST',
             headers: {
@@ -101,7 +95,6 @@ class MediaWidget extends React.Component {
         })
         const uploadReturn = await uploadResult.json();
         const fetchurl = "/sendchat/" + this.props.curChat;
-        console.log("inside handleLatexSubmit, fetchurl = ", fetchurl);
         const newMessage = { chat_id: this.props.curChat, sender: this.props.curUser, message: uploadReturn.data.link, time: this.props.getCurrentTime(), type: "image" };
         const result = await fetch("/sendchat/" + this.props.curChat,
             {
@@ -229,12 +222,8 @@ export default class ChatWindow extends Component {
     }
 
     // gets the updated list of messages and sets state.
-    // called every 5 seconds
-
-    //TO DO, replace with faster implementation
+    // called every 3 seconds
     async getData() {
-        // console.log(window.location['pathname']);
-        //console.log("Getting data");
         try {
             const curChatInfo = await this.getChat(this.state.curChat);
             const messageList = curChatInfo.messages;
@@ -247,7 +236,6 @@ export default class ChatWindow extends Component {
 
     async componentDidMount() //action to take as soon as enter the page
     {
-        //console.log("Inside component did mount for chat window");
         const loggedIn = await isLoggedIn();
         if (!loggedIn) {
             this.setState({ loggedIn: false });
@@ -261,14 +249,11 @@ export default class ChatWindow extends Component {
             const curChat = userInfo.chats[0].chat_id;  // most recent chat is displayed by default
             const curChatInfo = await this.getChat(curChat);
 
-            //console.log("curChatInfo = ", curChatInfo);
-
             var chatParticipants = [];
             try {
                 chatParticipants = curChatInfo.participants;
             }
             catch {
-                alert('curchatinfo is null')
                 chatParticipants = [];
             }
 
@@ -282,7 +267,7 @@ export default class ChatWindow extends Component {
                 messageList = []
             }
 
-            // get updated list of messages every 5 seconds
+            // get updated list of messages every 3 seconds
             this.intervalID = setInterval(this.getData.bind(this), 3000)
 
             this.setState({
@@ -292,7 +277,7 @@ export default class ChatWindow extends Component {
             });
         }
         else {
-            // get updated list of messages every 5 seconds
+            // get updated list of messages every 3 seconds
             this.intervalID = setInterval(this.getData.bind(this), 3000)
             this.setState({ loggedIn: loggedIn, curUser: curUser, });
         }
@@ -301,7 +286,6 @@ export default class ChatWindow extends Component {
 
     componentWillUnmount() {
         // stop interval once we exit this page
-        //console.log("Inside will unmount , intervalID = ", this.intervalID);
         clearInterval(this.intervalID);
     }
 
@@ -331,17 +315,13 @@ export default class ChatWindow extends Component {
     }
 
     handleChange = (event) => {
-        //console.log("Inside handleChange");
         const newMessage = { chat_id: this.state.curChat, sender: this.state.curUser, message: event.target.value, time: this.getCurrentTime(), type: "text" };
-        //console.log("Inside handleChange, newMessage = ", newMessage);
         this.setState({ curMessage: newMessage });
     }
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        //console.log("Inside handleSubmit");
         const fetchurl = "/sendchat/" + this.state.curChat;
-        //console.log("inside handleSubmit, fetchurl = ", fetchurl);
         const result = await fetch("/sendchat/" + this.state.curChat,
             {
                 method: 'POST',
@@ -361,7 +341,6 @@ export default class ChatWindow extends Component {
         }
 
         event.target.reset();
-        // this.setState({msg_value: ""}); // clear form entry
 
     }
     //handle clicks on the media button
@@ -374,18 +353,16 @@ export default class ChatWindow extends Component {
 
     render() {
         if (this.state.loggedIn == false) {
-            //alert('Log in to view chats!');
             return <Redirect to='/login' />;
         }
         if (this.state.curUser == null) {
             return (<div> Loading </div>);
         }
 
-        //contactList should be something that is received from the server
-        // const contactList = [{user: 'Sud', chatId: 0}, {user: 'Eggert', chatId: 2},  {user: 'Musk', chatId: 1}]
+        //chatsList (which is the list of contacts) is received from the server
 
         const chatsList = this.state.chatsList;
-        //console.log("chatsList = ", chatsList)
+        console.log("chatsList = ", chatsList)
         try {
             var renderedContacts = chatsList.map(chat =>
                 (chat.chat_name === this.state.curChatName) ?
@@ -412,11 +389,7 @@ export default class ChatWindow extends Component {
                 let sender = messageObj['sender'];
                 let message = messageObj['message'];
                 let time = messageObj['time'];
-                let type = messageObj['type'];    //get message type from backend (temporarily using type 0 = text, type 1 = image)
-                /*This timestamp extraction code may be inefficient
-                It also only uses 24 hour time, and doesn't extract dates
-                (we'll probably need to use some other logic for displaying dates anyways, since usually dates are only displayed once per day)
-                */
+                let type = messageObj['type'];    
                 var timePatternHours = /([0-9]|[0-9][0-9]):(?=(([0-9]|[0-9][0-9]):))/g
                 var timePatternMinutes = /(?<=([0-9]|[0-9][0-9]):)([0-9]|[0-9][0-9])(?=:)/g
                 let formattedTime = time.match(timePatternHours)
@@ -502,32 +475,9 @@ export default class ChatWindow extends Component {
             })
         }
 
-        //console.log("inside chatwindow");
         return (
             <div className="chatWindow">
                 <div className="sidebar">
-                    {/*
-                        ===========================================================
-                        TODO: implement chat page search bar functionality
-                        For now, hide because it looks ugly and doesn't do anything
-                        ===========================================================
-                    <div className="searchorcreate">
-                        <div className="inputField2">
-                            <form>
-                                <input
-                                    type="text"
-                                    class="searchbar-input"
-                                    placeholder="Search friends..."
-                                />
-                                <input
-                                    type="submit"
-                                    class="searchbar-send"
-                                    value=""
-                                />
-                            </form>
-                        </div>
-                    </div>
-                    */}
                     <div className="contactsList">
                         {renderedContacts}
                     </div>

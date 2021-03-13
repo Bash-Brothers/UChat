@@ -30,8 +30,10 @@ Install all our node dependencies in the client directory using:
 ```
 npm install
 ```
+Note: if you skip the following optional steps, you will still be able to view images and LaTeX. The following steps enable you to send them as well.
+<br/>
 
-If you want to be able to send images, you will need an Imgur client ID. Follow the steps below (optional).
+(Optional) If you want to be able to send images, you will need an Imgur client ID. Follow the steps below.
 <br/>
 Change directory into the src directory, using the command: 
 ```
@@ -53,14 +55,13 @@ cd ..
 
 <br />
 
-Ensure that the Requests HTTP library for Python is installed on your computer.<br />
-Instructions on how to install Requests will depend on the device.<br />
-https://requests.readthedocs.io/en/master/
-
+(Optional) If you eant to be able to send LaTeX code, ensure that the Requests HTTP library for Python is installed on your computer.<br />
+Instructions on how to install Requests will depend on the device but usually just require the latest version of pip (Python's package installer).<br />
+https://requests.readthedocs.io/en/master/user/install/
 
 <br />
 
-To run the app, in the main chatapp directory, use the command:
+Now, to run the app, in the main chatapp directory (where you should currently be, use the command:
 ```
 yarn dev
 ```

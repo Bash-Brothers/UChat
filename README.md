@@ -53,7 +53,7 @@ Yarn takes a while to start the dev server. Do not use the localhost url that th
 <br />
 ![Screen Shot 2021-03-11 at 11 55 41 PM](https://user-images.githubusercontent.com/40956188/111013756-7860ca00-8355-11eb-8684-685ea0bab06f.jpg)
 
-Created by:  
+<h2>Creators</h2>
 Yan Hauw  
 Sudhanshu Agrawal  
 Milo Kearney  

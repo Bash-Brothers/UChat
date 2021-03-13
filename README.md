@@ -32,6 +32,7 @@ npm install
 ```
 
 If you want to be able to send images, you will need an Imgur client ID. Follow the steps below (optional).
+<br/>
 Change directory into the src directory, using the command: 
 ```
 cd src

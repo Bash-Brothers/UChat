@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import './App.css';
 import SettingsGeneral from './components/SettingsGeneral.js';
 import SettingsAppearance from './components/SettingsAppearance.js';
@@ -10,11 +10,8 @@ import About from './components/About.js';
 import SignupPage from './components/SignupPage.js';
 import SearchPage from './components/SearchPage.js';
 import FriendRequests from './components/FriendRequests.js';
-import Test from './components/Test.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
-import {isLoggedIn} from './utils.js';
-
 
 //changed App from a function a class 
 class App extends Component {
@@ -26,8 +23,8 @@ class App extends Component {
         <Router>
           <div>
             <Nav />
-            <div id="alert-green"/>
-            <div id="alert-red"/>
+            <div id="alert-green" />
+            <div id="alert-red" />
             <Switch>
               <Route path="/about">
                 <About />
@@ -63,7 +60,7 @@ class App extends Component {
                 <FriendRequests />
               </Route>
               <Route exact path="/"> {/* needs to be exact path otherwise it becomes default */}
-                <LoginPage/>
+                <LoginPage />
               </Route>
               <Route path="/404" component={Page404} />
               <Redirect to="/404" />

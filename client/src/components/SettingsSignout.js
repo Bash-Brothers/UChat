@@ -3,7 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import './style/Settings.css';
 import {isLoggedIn} from '../utils.js';
 
-
 export default class Settings extends Component {
 	constructor(props) {
 		super(props);
@@ -23,6 +22,7 @@ export default class Settings extends Component {
     }
 
 	handleSubmit = () => {
+		//generate a green div alert that gives a signed out message
 		document.getElementById('alert-green').innerHTML='Signed out!';
 		document.getElementById('alert-green').style.width="10vw";
 		document.getElementById('alert-green').style.visibility='visible';

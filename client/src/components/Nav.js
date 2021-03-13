@@ -20,6 +20,7 @@ export default class Nav extends React.Component {
     componentDidMount() //we need to make sure we are actually logged in
     {                   
         var page = '';
+        //checks what path we're currently on and appropriately generates a title on the navbar
         switch(window.location['pathname'])
         {
             case '/chats': page = 'Chats'; break;
@@ -41,6 +42,7 @@ export default class Nav extends React.Component {
     render() {
         if(this.state.loggedIn == false)
         {
+            //navbar that is rendered if the user isnt logged in
             return (
                 <div className="main">
                     <div className="navigation1">
@@ -59,6 +61,7 @@ export default class Nav extends React.Component {
                 </div>
             );
         }
+        //navbar that is rendered if the user is logged in
         return (
                 <div className="main">
                     <div className="navigation1">

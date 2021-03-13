@@ -51,7 +51,8 @@ yarn dev
 
 Yarn takes a while to start the dev server. Do not use the localhost url that this command opens. Instead copy the url provided next to "On Your Network" (shown in the screenshot below)and paste it in the browser to run the app. (We do not use the default localhost url because our application uses Imgur's API to store and fetch images but Imgur blocks post requests from localhost.)
 <br />
-<img src='https://user-images.githubusercontent.com/40956188/111013756-7860ca00-8355-11eb-8684-685ea0bab06f.jpg' border='2px white solid'/>
+<br />
+<img src='https://user-images.githubusercontent.com/40956188/111013756-7860ca00-8355-11eb-8684-685ea0bab06f.jpg'/>
 
 <h2>Technology Stack</h2>
 

@@ -55,7 +55,8 @@ Yarn takes a while to start the dev server. Do not use the localhost url that th
 
 <h2>Creators</h2>
 <ul>
-  <li>[Yan Hauw](https://github.com/YanHauw)</li>
+  <li href='https://github.com/YanHauw'>Yan Hauw</li>
+  <li>[YanHauw](https://github.com/YanHauw) </li>
   <li>[Sudhanshu Agrawal](https://github.com/SudhanshuAgrawal27)</li>
   <li>[Milo Kearney](https://github.com/milo-ucla)</li>
   <li>[Kevin Huang](https://github.com/Monko2k)</li>

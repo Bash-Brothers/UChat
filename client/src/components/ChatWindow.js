@@ -1,10 +1,5 @@
 import React, { Component } from "react";
 import './style/ChatWindow.css';
-import IconSend from '../images/icon_send.svg';
-import IconLatex from '../images/icon_latex.svg';
-import IconImage from '../images/icon_image.svg';
-import IconBack from '../images/icon_back.svg';
-import IconSearch from '../images/icon_search.svg';
 import { Redirect } from "react-router-dom";
 import { isLoggedIn, getUserInfo } from '../utils.js';
 import defImg from '../images/icon_image.svg';

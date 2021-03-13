@@ -2,14 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './style/Nav.css';
 import {isLoggedIn} from '../utils.js';
-import IconLogin from '../images/icon_login.svg';
 import IconSettings from '../images/icon_settings.svg';
 import IconInfo from '../images/icon_info.svg';
-import IconSignup from '../images/icon_register.svg';
 import IconChat from '../images/icon_chat.svg';
-import IconContactUs from '../images/icon_contactus.svg';
 import IconSearch from '../images/icon_search.svg';
-import IconNotif from '../images/icon_notif.svg';
 import IconFriendReqs from '../images/friend_requests.svg';
 import Logo from '../images/logotest.png';
 
@@ -23,7 +19,6 @@ export default class Nav extends React.Component {
     }
     componentDidMount() //we need to make sure we are actually logged in
     {                   
-        console.log("Inside component did mount for navbar");
         var page = '';
         switch(window.location['pathname'])
         {

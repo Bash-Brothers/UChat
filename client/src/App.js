@@ -10,6 +10,7 @@ import About from './components/About.js';
 import SignupPage from './components/SignupPage.js';
 import SearchPage from './components/SearchPage.js';
 import FriendRequests from './components/FriendRequests.js';
+import CreateGroupPage from './components/CreateGroupPage.js';
 import Nav from './components/Nav.js';
 import Page404 from './components/Page404.js';
 
@@ -58,6 +59,9 @@ class App extends Component {
               </Route>
               <Route path="/friendrequests">
                 <FriendRequests />
+              </Route>
+              <Route path="/makegroups">
+                <CreateGroupPage />
               </Route>
               <Route exact path="/"> {/* needs to be exact path otherwise it becomes default */}
                 <LoginPage />

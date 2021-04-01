@@ -106,7 +106,7 @@ export default class FriendRequests extends Component {
         
         if (returnCode != 0)
         {
-           alert('error sending chat')
+           alert('error accepting friend request')
             return null;
         }
 
@@ -118,28 +118,28 @@ export default class FriendRequests extends Component {
 
    handleDelete = async (friendreq_id) =>
    {
-    const id = friendreq_id;
+        const id = friendreq_id;
 
-    // Fetching from server.js
-    const result = await fetch("/handlefriendrequest", 
-    {
-        method: 'POST',
-        headers: 
-            {
-                'Content-Type': "application/json; charset=utf-8",
-            },
-        // This is the data being posted
-        body: JSON.stringify({curUser: this.state.curUser, curfriendreq:id, response:false}) // + JSON.stringify(this.state.response)
-    })
+        // Fetching from server.js
+        const result = await fetch("/handlefriendrequest", 
+        {
+            method: 'POST',
+            headers: 
+                {
+                    'Content-Type': "application/json; charset=utf-8",
+                },
+            // This is the data being posted
+            body: JSON.stringify({curUser: this.state.curUser, curfriendreq:id, response:false}) // + JSON.stringify(this.state.response)
+        })
 
-    const res = await result.json();
+        const res = await result.json();
 
-    const returnCode = await res.successCode;
-    
-    if (returnCode != 0)
-    {
-       console.log('return code was not 0 from server.js')
-    }
+        const returnCode = await res.successCode;
+        
+        if (returnCode != 0)
+        {
+        console.log('error deleting friend request')
+        }
 
         //Process the friend request
         this.updateandFetch(friendreq_id);

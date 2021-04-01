@@ -36,7 +36,7 @@ Database access information
 /* ENTER INFORMATION HERE */
 // the connection string to your Mongo Atlas Cluster along with username and password 
 // this can be copied off the connection page for the cluster
-const uri = null;
+const uri = "mongodb+srv://yanhauw:bubb1711@cluster0.mej5y.mongodb.net/databaseyan?retryWrites=true&w=majority";
 if (uri == null)
 {
     console.log("\n\n\n\n ERROR: No MongoDB cluster provided \n\n\n\n");
@@ -209,6 +209,46 @@ app.post("/sendfriendrequest", async (req, res) => {
     return res.json({ successCode: successCode });
 })
 
+/*=========================================================================== 
+POST: /makegroups
+Create a group chat 
+This function was never tested. Failed to get fetch API working
+===========================================================================*/
+app.post("/makegroups", async (req, res) => {
+
+    console.log(req.session.username, " created a group");
+
+    var username = req.body.username; // user sending the request
+    var friendname1 = req.body.friendname1;   // name of first friend
+    var friendname2 = req.body.friendname2;   // name of second friend
+
+    console.log(username, "is creating a group with ", friendname1, friendname2);
+
+    //Should not just immediately invoke createNewChat
+    // Need to have another helper function to check if a group chat of the
+    // members has already been created before
+
+    let checkpassed = false; // variable to check whether group chat already exists
+
+    groupStatus = checkGroupChats(username, friendname1, friendname2);
+
+    // successcode remains as 1 if groupchat already exists
+    let successCode = 1;
+
+    if (groupStatus === 0)
+    {
+        checkpassed = true;
+    }
+
+    if (checkpassed == true)
+    {
+        successCode = await createNewChat(username, friendname1, friendname2);
+        // If createNewChat succeeds, successCode becomes 0
+        // If createNewChat fails, successCode becomes -1
+    }
+
+    return res.json({ successCode: successCode });
+})
 
 /*=========================================================================== 
 POST: /handlefriendrequest
@@ -234,7 +274,13 @@ app.post("/handlefriendrequest", async (req, res) => {
         console.log("Friend request accepted", username);
         successCode = await confirmFriend(username, friendname);
     }
-    await removeFriendRequest(username, friendname);
+
+    successcode2 = await removeFriendRequest(username, friendname);
+
+    if (successCode != 0 || successcode2 != 0)
+    {
+        successCode = 1;
+    }
 
     return res.json({ successCode: successCode });
 })
@@ -690,6 +736,54 @@ async function findUsers(substring) {
     }
 }
 
+/*=========================================================================== 
+FUNCTION: checkGroupChats(name, username, password)
+adds a new user to the database
+called by POST: /signup
+===========================================================================*/
+async function checkGroupChats(username1, username2, username3)
+{
+    console.log("Inside check group chats");
+    var returnCode = 0;
+    try {
+        db = await MongoClient.connect(uri);
+        console.log("- Connected to Database for checking group chats")
+
+        var dbo = db.db("test_db");
+        chat_data = dbo.collection("user_data");
+
+        user1status = await user_data.findOne({ username: username1 }, { chats: 1 });
+        console.log("Code does not get beyond findOne function")
+
+        // Using the method of transforming the chats array to
+        // a new array containing only the chat names
+        const user1chatnames = user1status.chats.map(chat => chat.chat_name);
+
+        // Check handleClick and friendsToAdd array (in react component state)
+        // in CreateGroupPage.js to see that array is sorted so chat names
+        // are in alphabetical order
+        stringToCheck = username2 + " and " + username3;
+
+        if(user1chatnames.includes(stringToCheck))
+        {
+            console.log("Group chat already exists")
+            returnCode = 1;     // Group chat exists
+        }
+
+    }
+    catch (err) {
+        console.log("failed to check if group chats exist");
+        returnCode = 4; // database errors
+    }
+    finally {
+        db.close();
+        console.log("Database closed");
+        console.log("Return code = ", returnCode);
+        return returnCode;
+    }
+
+}
+
 
 /*=========================================================================== 
 FUNCTION: friendStatus(username1, username2)
@@ -803,7 +897,7 @@ called by POST: /handlefriendrequest
 ===========================================================================*/
 async function removeFriendRequest(username, friendname) {
 
-    let returnCode;
+    let returnCode = 0;
     try {
         db = await MongoClient.connect(uri);
         console.log("- Connected to Database to remove a friend request")
@@ -854,13 +948,16 @@ async function removeFriendRequest(username, friendname) {
 }
 
 /*=========================================================================== 
-FUNCTION: createNewChat(username1, username2)
-creates an entry in the chat database for a chat between two new friends 
-called by confirmFriend() 
+FUNCTION: createNewChat(username1, username2, username3)
+Creates a new chat of variable size depending on where this function
+is called.
+If called by confirmFriend(), this function creates a one-to-one chat
+If called by the /makegroups post method route, this function creates 
+a group chat between 3 friends
 ===========================================================================*/
 // creates an entry in the chat database for a chat between two new friends 
-async function createNewChat(username1, username2) {
-    let returnCode;
+async function createNewChat(username1, username2, username3) {
+    let returnCode = 0;
     try {
         db = await MongoClient.connect(uri);
         console.log("Connected to database for new chat creation");
@@ -869,10 +966,54 @@ async function createNewChat(username1, username2) {
         chat_data = dbo.collection("chat_data");
 
         var uniqueChatID = uuidv4(); // universally unique identifier for the chat id 
-        new_chat = {
-            chat_id: uniqueChatID,
-            messages: [],
-            participants: [username1, username2]
+
+        // If this function was invoked by the automatic functionality
+        // where a one-to-one chat is created after accepting a friend request
+        if (username3 == null) 
+        {
+            new_chat = {
+                chat_id: uniqueChatID,
+                messages: [],
+                participants: [username1, username2]
+            }
+        }
+        else // case where we are creating a group chat
+        {
+            // A group chat was created, hence having 3 participants
+            // rather than 2
+            console.log("Group chat created!");
+            new_chat = {
+                chat_id: uniqueChatID,
+                messages: [],
+                participants: [username1, username2, username3]
+            }
+            
+            const filter1 = { username: username1 };
+            //push a new chat the first user's chats list
+            const updateDocument1 = {
+                $push: {
+                    chats: { chat_id: uniqueChatID, chat_name: username2 + " and " + username3 },
+                },
+            };
+            const result1 = await user_data.updateOne(filter1, updateDocument1);
+
+            const filter2 = { username: username2 };
+            //push a new chat the second user's chats list
+            const updateDocument2 = {
+                $push: {
+                    chats: { chat_id: uniqueChatID, chat_name: username1 + " and " + username3 },
+                },
+            };
+            const result2 = await user_data.updateOne(filter2, updateDocument2);
+
+            const filter3 = { username: username3 };
+            //push a new chat the third user's chats list
+            const updateDocument3 = {
+                $push: {
+                    chats: { chat_id: uniqueChatID, chat_name: username1 + " and " + username2 },
+                },
+            };
+            const result3 = await user_data.updateOne(filter3, updateDocument3);
         }
 
         chat_data.insertOne(new_chat,
@@ -904,6 +1045,7 @@ called by POST: /handlefriendrequest
 async function confirmFriend(username1, username2) {
     //remove Friend request
     matchingUserName = "";
+    let returnCode;
     try {
         db = await MongoClient.connect(uri);
         console.log("Connected to Database for lookup")
@@ -911,7 +1053,7 @@ async function confirmFriend(username1, username2) {
         var dbo = db.db("test_db");
         user_data = dbo.collection("user_data");
         //create new chat here
-        chatID = await createNewChat(username1, username2);
+        chatID = await createNewChat(username1, username2, null);
         const filter1 = { username: username1 };
         //push a new value to their notifcations friends
         const updateDocument1 = {
@@ -934,12 +1076,12 @@ async function confirmFriend(username1, username2) {
     }
     catch (err) {
         console.log(err);
-        returnCode = 0;
+        returnCode = 1;
     }
     finally {
         db.close();
         console.log("Database closed");
-        var returnCode = 0
+        returnCode = 0
         console.log("Return code = ", returnCode);
         return returnCode;
     }

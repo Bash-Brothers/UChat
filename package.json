@@ -32,5 +32,11 @@
   "bugs": {
     "url": "https://github.com/TheDarkLord247/chatapp/issues"
   },
-  "homepage": "https://github.com/TheDarkLord247/chatapp#readme"
+  "homepage": "https://github.com/TheDarkLord247/chatapp#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.15.0"
+  }
 }

@@ -36,7 +36,8 @@ Database access information
 /* ENTER INFORMATION HERE */
 // the connection string to your Mongo Atlas Cluster along with username and password 
 // this can be copied off the connection page for the cluster
-const uri = null;
+const URIFile = require('./mongoURI');
+const uri = URIFile.mongoURI;
 if (uri == null)
 {
     console.log("\n\n\n\n ERROR: No MongoDB cluster provided \n\n\n\n");
@@ -303,7 +304,7 @@ app.get("/chat/:chat_id", async (req, res) => {
         db = await MongoClient.connect(uri);
         console.log("- Connected to database for chat retrieval");
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         chat_data = dbo.collection("chat_data");
 
 
@@ -355,7 +356,7 @@ app.post("/sendchat/:chat_id", async (req, res) => {
         db = await MongoClient.connect(uri);
         console.log("- Connected to database for chat submission");
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         chat_data = dbo.collection("chat_data");
 
 
@@ -417,7 +418,7 @@ app.post('/change/name/:username', async (req, res) => {
         db = await MongoClient.connect(uri);
         console.log("- Connected to database for name change");
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
 
@@ -467,7 +468,7 @@ app.post('/change/password/:username', async (req, res) => {
         db = await MongoClient.connect(uri);
         console.log("- Connected to database for password change");
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
 
@@ -534,7 +535,7 @@ async function loginUser(username, password) {
         db = await MongoClient.connect(uri)
         console.log("- Connected to database for user login")
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
         user = await user_data.findOne({ username: username });
@@ -578,7 +579,7 @@ async function addUser(name, username, password) {
         db = await MongoClient.connect(uri);
         console.log("- Connected to Database for user creation")
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
         var new_user = { name: name, username: username, password: password, chats: [], friends: [], notifs: [], pendingfr: [] };
@@ -628,7 +629,7 @@ async function userInfo(username) {
         db = await MongoClient.connect(uri);
         console.log("- Connected to Database for user info lookup")
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
         user = await user_data.findOne({ username: username }, { name: true, username: false, password: false, friends: true, notifs: true, pendingfr: true });
@@ -670,7 +671,7 @@ async function findUsers(substring) {
         db = await MongoClient.connect(uri);
         console.log("Connected to Database for lookup of substring", substring)
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
         matchingUsers = await user_data.find({ username: { $regex: substring } });
@@ -706,7 +707,7 @@ async function friendStatus(username1, username2) {
         db = await MongoClient.connect(uri);
         console.log("Connected to Database for lookup")
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
         user1status = await user_data.findOne({ username: username1 }, { notifs: 1, friends: 1 });
@@ -760,7 +761,7 @@ async function sendFriendRequest(username1, username2) {
         db = await MongoClient.connect(uri);
         console.log("Connected to Database for lookup")
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
         const filter1 = { username: username1 };
@@ -808,7 +809,7 @@ async function removeFriendRequest(username, friendname) {
         db = await MongoClient.connect(uri);
         console.log("- Connected to Database to remove a friend request")
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
 
         // Remove the friend request notification from the user
@@ -865,7 +866,7 @@ async function createNewChat(username1, username2) {
         db = await MongoClient.connect(uri);
         console.log("Connected to database for new chat creation");
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         chat_data = dbo.collection("chat_data");
 
         var uniqueChatID = uuidv4(); // universally unique identifier for the chat id 
@@ -908,7 +909,7 @@ async function confirmFriend(username1, username2) {
         db = await MongoClient.connect(uri);
         console.log("Connected to Database for lookup")
 
-        var dbo = db.db("test_db");
+        var dbo = db.db("UChatDB");
         user_data = dbo.collection("user_data");
         //create new chat here
         chatID = await createNewChat(username1, username2);

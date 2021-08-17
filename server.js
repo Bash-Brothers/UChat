@@ -36,8 +36,11 @@ Database access information
 /* ENTER INFORMATION HERE */
 // the connection string to your Mongo Atlas Cluster along with username and password 
 // this can be copied off the connection page for the cluster
-const secrets = require('./secrets');
-const uri = secrets.mongoURI;
+// const secrets = require('./secrets');
+// const uri = secrets.mongoURI;
+require('dotenv').config();
+const uri = process.env.mongoURI;
+console.log(uri);
 if (uri == null)
 {
     console.log("\n\n\n\n ERROR: No MongoDB cluster provided \n\n\n\n");

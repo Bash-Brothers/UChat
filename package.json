@@ -7,9 +7,10 @@
     "body-parser": "^1.19.0",
     "concurrently": "^6.0.0",
     "cookie-session": "^1.4.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "mongodb": "^3.6.4",
+    "mongodb": "^3.6.11",
     "nodemon": "^2.0.7",
     "npm": "^7.6.0",
     "react-router-dom": "^5.2.0",
@@ -32,5 +33,11 @@
   "bugs": {
     "url": "https://github.com/TheDarkLord247/chatapp/issues"
   },
-  "homepage": "https://github.com/TheDarkLord247/chatapp#readme"
+  "homepage": "https://github.com/TheDarkLord247/chatapp#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.15.0"
+  }
 }

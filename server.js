@@ -947,21 +947,33 @@ async function confirmFriend(username1, username2) {
     }
 }
 
+console.log("here");
+console.log(__dirname);
+// //app.use('/static', express.static(path.join(`${__dirname}/client/build`)));
+// app.use(express.static('client/build'));   
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '/client/build'))
+// })
 
-app.use('/static', express.static(path.join(`${__dirname}/client/build`)));
-    
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, '/cl ient/build'))
+//   });
+
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, '/client/build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    })
+} else {
+    app.get('/', (req, res) => {
+        res.send("Api running");
+    })
+}
 const port = process.env.PORT || 5000;
 app.listen(port, function () {
     console.log("Server Has Started at port", port);
 });
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build'))
-})
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build'))
-  });
 /*=========================================================================== 
 =========================== server.js END ===================================
 ===========================================================================*/

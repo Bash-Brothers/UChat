@@ -39,7 +39,6 @@ Database access information
 
 require('dotenv').config();
 const uri = process.env.MONGO_URI;
-console.log(uri);
 if (uri == null)
 {
     console.log("\n\n\n\n ERROR: No MongoDB cluster provided \n\n\n\n");
@@ -949,22 +948,20 @@ async function confirmFriend(username1, username2) {
 }
 
 
-// start server
-function main() {
+app.use('/static', express.static(path.join(`${__dirname}/client/build`)));
     
-    if(process.env.NODE_ENV === 'production') {
-        app.use(express.static('client/build'));
-    }
-    const port = process.env.PORT || 5000;
-    app.listen(port, function () {
-        console.log("Server Has Started!");
-    });
+const port = process.env.PORT || 5000;
+app.listen(port, function () {
+    console.log("Server Has Started at port", port);
+});
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build', 'index.html'))
+})
 
-}
-main();
-
-
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build', 'index.html'))
+  });
 /*=========================================================================== 
 =========================== server.js END ===================================
 ===========================================================================*/

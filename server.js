@@ -36,10 +36,9 @@ Database access information
 /* ENTER INFORMATION HERE */
 // the connection string to your Mongo Atlas Cluster along with username and password 
 // this can be copied off the connection page for the cluster
-// const secrets = require('./secrets');
-// const uri = secrets.mongoURI;
+
 require('dotenv').config();
-const uri = process.env.mongoURI;
+const uri = process.env.MONGO_URI;
 console.log(uri);
 if (uri == null)
 {
@@ -952,10 +951,15 @@ async function confirmFriend(username1, username2) {
 
 // start server
 function main() {
-    var port = process.env.PORT || 5000;
+    
+    if(process.env.NODE_ENV === 'production') {
+        app.use(express.static('client/build'));
+    }
+    const port = process.env.PORT || 5000;
     app.listen(port, function () {
         console.log("Server Has Started!");
     });
+
 
 }
 main();
